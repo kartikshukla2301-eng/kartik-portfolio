@@ -1,7 +1,0 @@
-﻿chrome.exe : 266633 bytes written to file C:\Users\Kartik Shukla\.gemini\antigravity\scratch\portfolio\screenshot.png
-At line:1 char:74
-+ ... lyContinue; & "C:\Program Files\Google\Chrome\Application\chrome.exe" ...
-+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (266633 bytes wr...\screenshot.png:String) [], RemoteException
-    + FullyQualifiedErrorId : NativeCommandError
- 
