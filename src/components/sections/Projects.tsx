@@ -103,37 +103,37 @@ function ProjectCard({
       <div
         className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl"
         style={{
-          background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(124, 92, 255, 0.1), transparent 60%)`,
+          background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(124, 92, 255, 0.08), transparent 60%)`,
         }}
       />
 
       <div className="relative z-10">
         {/* Project number & title */}
-        <div className="mb-4 flex items-start justify-between">
+        <div className="mb-5 flex items-start justify-between">
           <div>
-            <span className="mb-2 block font-display text-xs font-bold tracking-widest text-accent-violet/60">
-              PROJECT {String(index + 1).padStart(2, "0")}
+            <span className="mb-3 block font-display text-[10px] font-bold tracking-[0.2em] text-accent-violet/50 uppercase">
+              Project {String(index + 1).padStart(2, "0")}
             </span>
             <h3
-              className="text-2xl font-bold text-white transition-all group-hover:text-gradient"
+              className="text-2xl font-bold tracking-tight text-white transition-all group-hover:text-gradient sm:text-[1.65rem]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {project.title}
             </h3>
           </div>
           <ArrowUpRight
-            size={20}
-            className="shrink-0 text-white/20 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent-violet"
+            size={18}
+            className="mt-1 shrink-0 text-white/15 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent-violet"
           />
         </div>
 
         {/* Description */}
-        <p className="mb-6 text-sm leading-relaxed text-white/50">
+        <p className="mb-6 text-sm leading-[1.7] text-white/45">
           {project.description}
         </p>
 
         {/* Tags */}
-        <div className="mb-6 flex flex-wrap gap-2">
+        <div className="mb-7 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <Badge key={tag} variant="outline" className="text-[11px]">
               {tag}
@@ -147,9 +147,9 @@ function ProjectCard({
             href={project.repo}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white/70 transition-all duration-300 hover:border-accent-violet/30 hover:text-accent-violet"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-xs font-medium text-white/60 transition-all duration-300 hover:border-accent-violet/30 hover:bg-white/[0.06] hover:text-accent-violet"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
           >
             <GithubIcon width={14} height={14} />
             Code
@@ -159,9 +159,9 @@ function ProjectCard({
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full bg-accent-violet px-4 py-2 text-xs font-medium text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(124,92,255,0.4)]"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 rounded-full bg-accent-violet px-5 py-2.5 text-xs font-medium text-white shadow-[0_0_20px_rgba(124,92,255,0.2)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,92,255,0.35)]"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
             >
               <ExternalLink size={14} />
               Live Demo

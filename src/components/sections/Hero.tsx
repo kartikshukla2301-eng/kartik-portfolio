@@ -71,15 +71,15 @@ export function Hero() {
           animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{ y: portraitY, scale: portraitScale, opacity: portraitOpacity }}
-          className="mb-10 flex justify-center"
+          className="mb-8 flex justify-center sm:mb-10"
         >
           <div className="portrait-frame group relative">
             {/* Outer glow rings */}
-            <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-[rgba(124,92,255,0.15)] via-[rgba(34,211,238,0.1)] to-[rgba(124,92,255,0.15)] opacity-0 blur-xl transition-all duration-700 group-hover:opacity-100" />
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-[rgba(124,92,255,0.12)] via-[rgba(34,211,238,0.08)] to-[rgba(124,92,255,0.12)] blur-2xl transition-all duration-700 group-hover:from-[rgba(124,92,255,0.2)] group-hover:via-[rgba(34,211,238,0.12)] group-hover:to-[rgba(124,92,255,0.2)]" />
             <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-accent-violet/40 via-accent-cyan/30 to-accent-violet/40 opacity-60" />
 
             {/* Main image container */}
-            <div className="relative h-40 w-40 overflow-hidden rounded-full sm:h-48 sm:w-48 md:h-56 md:w-56">
+            <div className="relative h-36 w-36 overflow-hidden rounded-full sm:h-44 sm:w-44 md:h-52 md:w-52 lg:h-60 lg:w-60">
               {/* Glassmorphism ring */}
               <div className="absolute inset-0 rounded-full border-2 border-white/10 shadow-[0_0_40px_rgba(124,92,255,0.2),0_0_80px_rgba(34,211,238,0.1)]" />
 
@@ -126,7 +126,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
           <Badge variant="accent" pulse>
             Available for Internships & Projects
@@ -138,11 +138,11 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="mb-6"
+          className="mb-5 sm:mb-6"
           style={{ y: contentY }}
         >
           <h1
-            className="text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
+            className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-[5.5rem]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             <span className="text-gradient">
@@ -160,7 +160,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mx-auto mb-10 max-w-2xl text-lg text-[rgba(255,255,255,0.6)] sm:text-xl"
+          className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-[rgba(255,255,255,0.5)] sm:mb-10 sm:max-w-2xl sm:text-lg"
         >
           AI Engineer & Full Stack Developer — I build intelligent AI-powered
           products and design scalable, performance-driven web applications that
@@ -172,7 +172,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="mb-8 flex flex-wrap items-center justify-center gap-4"
+          className="mb-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
         >
           <MagneticButton href="#projects" variant="primary">
             <ExternalLink size={16} />
@@ -189,7 +189,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-16 flex items-center justify-center gap-4"
+          className="mb-14 flex items-center justify-center gap-3 sm:mb-16 sm:gap-4"
         >
           {[
             { icon: GithubIcon, href: siteConfig.github, label: "GitHub" },
@@ -202,11 +202,11 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="glass flex h-11 w-11 items-center justify-center rounded-full text-[rgba(255,255,255,0.6)] transition-all duration-300 hover:border-accent-violet/30 hover:text-accent-violet hover:shadow-[0_0_20px_rgba(124,92,255,0.2)]"
+              className="glass flex h-10 w-10 items-center justify-center rounded-full text-[rgba(255,255,255,0.5)] transition-all duration-300 hover:border-accent-violet/30 hover:text-accent-violet hover:shadow-[0_0_20px_rgba(124,92,255,0.2)] sm:h-11 sm:w-11"
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Icon size={18} />
+              <Icon size={17} />
             </motion.a>
           ))}
         </motion.div>
@@ -216,7 +216,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="mb-16 flex flex-wrap items-center justify-center gap-2"
+          className="mb-14 flex flex-wrap items-center justify-center gap-2 sm:mb-16"
         >
           {tagCloud.map((tag) => (
             <Badge key={tag} variant="outline" className="text-[11px]">

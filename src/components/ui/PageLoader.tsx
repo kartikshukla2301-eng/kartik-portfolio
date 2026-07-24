@@ -139,9 +139,9 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 + nameChars.length * 0.05 + 0.6 }}
-              className="w-48 overflow-hidden"
+              className="w-56 overflow-hidden sm:w-64"
             >
-              <div className="h-px w-full bg-white/10">
+              <div className="h-px w-full bg-white/[0.06]">
                 <motion.div
                   initial={{ x: "-100%" }}
                   animate={{ x: "0%" }}

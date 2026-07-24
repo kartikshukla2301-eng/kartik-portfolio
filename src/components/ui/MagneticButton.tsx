@@ -58,8 +58,8 @@ export function MagneticButton({
 
   const baseClass =
     variant === "primary"
-      ? "bg-accent-violet text-white hover:shadow-[0_0_30px_rgba(124,92,255,0.4)]"
-      : "glass text-white glass-hover";
+      ? "bg-accent-violet text-white shadow-[0_0_20px_rgba(124,92,255,0.25),inset_0_1px_0_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(124,92,255,0.4),inset_0_1px_0_rgba(255,255,255,0.2)]"
+      : "glass text-white glass-hover shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]";
 
   const Tag = href ? "a" : "button";
   const extraProps = href ? { href } : { onClick: handleClick };
