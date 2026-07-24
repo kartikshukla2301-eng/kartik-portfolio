@@ -234,35 +234,6 @@ export const timeline = [
   },
 ];
 
-export const githubStats = {
-  handle: "kartikshukla2301-eng",
-  totalContributions: 1482,
-  longestStreak: 48,
-  streakPeriod: "Apr–May 2026",
-  primaryLanguage: "TypeScript",
-  secondaryLanguage: "Python",
-  repos: [
-    {
-      name: "ai-study-assistant",
-      language: "TypeScript",
-      stars: 32,
-      forks: 8,
-    },
-    {
-      name: "Hairdrama-Task-Manager",
-      language: "JavaScript",
-      stars: 28,
-      forks: 5,
-    },
-    {
-      name: "UltraAi-Chatbot",
-      language: "TypeScript",
-      stars: 19,
-      forks: 3,
-    },
-  ],
-};
-
 export const developerAI = {
   name: "Developer AI",
   description:
