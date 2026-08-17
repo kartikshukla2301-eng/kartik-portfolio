@@ -97,7 +97,7 @@ src/
 
 **Kartik Shukla** — AI Engineer & Full Stack Developer
 
-- Website: [kartikshukla.dev](https://kartikshukla.dev)
+- Website: [kartikshukla.dev](https://kartik-portfolio-chi-eight.vercel.app/)
 - GitHub: [@kartikshukla2301-eng](https://github.com/kartikshukla2301-eng)
 - LinkedIn: [kartikshukla2301](https://linkedin.com/in/kartikshukla2301)
 - Instagram: [@_ig_kartikk](https://instagram.com/_ig_kartikk)
