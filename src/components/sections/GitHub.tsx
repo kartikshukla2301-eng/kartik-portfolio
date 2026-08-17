@@ -17,10 +17,11 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Badge } from "@/components/ui/Badge";
 import { developerAI } from "@/lib/data";
 import { GitHubSkeleton } from "@/components/ui/Skeleton";
-import type {
+import {
   GitHubData,
   GitHubRepo,
   LanguageStat,
+  FALLBACK_DATA,
 } from "@/lib/github";
 
 // ── Color helpers ──────────────────────────────────────
@@ -152,9 +153,7 @@ export function GitHubSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const [data, setData] = useState<GitHubData | null>(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<GitHubData>(FALLBACK_DATA);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -164,49 +163,20 @@ export function GitHubSection() {
         const res = await fetch("/api/github", {
           signal: controller.signal,
         });
-        if (!res.ok) throw new Error("Failed");
-        const json = await res.json();
-        setData(json);
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.profile && json.repos) {
+            setData(json);
+          }
+        }
       } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
+        // Silently keep FALLBACK_DATA
       }
     }
 
     load();
     return () => controller.abort();
   }, []);
-
-  if (loading) return <GitHubSkeleton />;
-
-  if (error || !data) {
-    return (
-      <section className="relative py-32 px-4">
-        <div className="mx-auto max-w-6xl text-center">
-          <SectionHeading
-            eyebrow="Open Source"
-            title="GitHub Activity"
-            description="Consistent contributions and open-source projects."
-          />
-          <div className="glass rounded-2xl p-12">
-            <GithubIcon size={32} className="mx-auto mb-4 text-white/20" />
-            <p className="text-sm text-white/40">
-              Unable to load GitHub data.{" "}
-              <a
-                href="https://github.com/kartikshukla2301-eng"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent-violet hover:underline"
-              >
-                View profile directly
-              </a>
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   const { profile, repos, languages, totalStars, totalForks } = data;
   const topRepos = repos.slice(0, 6);

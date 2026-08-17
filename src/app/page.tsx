@@ -18,8 +18,9 @@ import { useWelcomeVoice, WelcomeVoiceControls } from "@/components/ui/WelcomeVo
 import { PageLoader } from "@/components/ui/PageLoader";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { SectionReveal } from "@/components/ui/SectionReveal";
-import { AuroraCanvas } from "@/components/background/AuroraCanvas";
-import { FloatingShapes } from "@/components/background/FloatingShapes";
+import { NebulaGlow } from "@/components/background/NebulaGlow";
+import { CyberGrid } from "@/components/background/CyberGrid";
+import { ConstellationCanvas } from "@/components/background/ConstellationCanvas";
 import { NoiseOverlay } from "@/components/background/NoiseOverlay";
 
 const LenisProvider = dynamic(
@@ -49,9 +50,10 @@ export default function Home() {
       {/* Welcome voice controls (mute/replay) */}
       <WelcomeVoiceControls />
 
-      {/* Background layers */}
-      <AuroraCanvas />
-      <FloatingShapes />
+      {/* Premium Multi-Layered Background */}
+      <NebulaGlow />
+      <CyberGrid />
+      <ConstellationCanvas />
       <NoiseOverlay />
 
       {/* Content */}

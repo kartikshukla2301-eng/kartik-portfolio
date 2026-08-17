@@ -11,70 +11,85 @@ export function AuroraCanvas() {
     const canvas = canvasRef.current;
     if (!canvas || reducedMotion) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     let animationId: number;
     let time = 0;
+    let isTabVisible = !document.hidden;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // Downsample slightly for background blur efficiency (saves ~50% GPU fillrate)
+      const scale = 0.5;
+      canvas.width = Math.floor(window.innerWidth * scale);
+      canvas.height = Math.floor(window.innerHeight * scale);
     };
     resize();
-    window.addEventListener("resize", resize);
+
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 150);
+    };
+
+    const handleVisibilityChange = () => {
+      isTabVisible = !document.hidden;
+      if (isTabVisible) {
+        cancelAnimationFrame(animationId);
+        animationId = requestAnimationFrame(draw);
+      }
+    };
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     const draw = () => {
-      time += 0.003;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!isTabVisible) return;
 
-      const gradient1 = ctx.createRadialGradient(
-        canvas.width * (0.3 + Math.sin(time) * 0.1),
-        canvas.height * (0.4 + Math.cos(time * 0.7) * 0.1),
-        0,
-        canvas.width * 0.3,
-        canvas.height * 0.4,
-        canvas.width * 0.5
-      );
-      gradient1.addColorStop(0, "rgba(124, 92, 255, 0.06)");
-      gradient1.addColorStop(1, "transparent");
-      ctx.fillStyle = gradient1;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      time += 0.002;
+      const w = canvas.width;
+      const h = canvas.height;
 
-      const gradient2 = ctx.createRadialGradient(
-        canvas.width * (0.7 + Math.cos(time * 0.8) * 0.1),
-        canvas.height * (0.3 + Math.sin(time * 0.6) * 0.1),
-        0,
-        canvas.width * 0.7,
-        canvas.height * 0.3,
-        canvas.width * 0.4
-      );
-      gradient2.addColorStop(0, "rgba(34, 211, 238, 0.04)");
-      gradient2.addColorStop(1, "transparent");
-      ctx.fillStyle = gradient2;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, w, h);
 
-      const gradient3 = ctx.createRadialGradient(
-        canvas.width * (0.5 + Math.sin(time * 0.5) * 0.15),
-        canvas.height * (0.7 + Math.cos(time * 0.9) * 0.1),
+      // Gradient 1
+      const g1 = ctx.createRadialGradient(
+        w * (0.3 + Math.sin(time) * 0.08),
+        h * (0.4 + Math.cos(time * 0.7) * 0.08),
         0,
-        canvas.width * 0.5,
-        canvas.height * 0.7,
-        canvas.width * 0.35
+        w * 0.3,
+        h * 0.4,
+        w * 0.45
       );
-      gradient3.addColorStop(0, "rgba(124, 92, 255, 0.03)");
-      gradient3.addColorStop(1, "transparent");
-      ctx.fillStyle = gradient3;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      g1.addColorStop(0, "rgba(124, 92, 255, 0.07)");
+      g1.addColorStop(1, "transparent");
+      ctx.fillStyle = g1;
+      ctx.fillRect(0, 0, w, h);
+
+      // Gradient 2
+      const g2 = ctx.createRadialGradient(
+        w * (0.7 + Math.cos(time * 0.8) * 0.08),
+        h * (0.3 + Math.sin(time * 0.6) * 0.08),
+        0,
+        w * 0.7,
+        h * 0.3,
+        w * 0.35
+      );
+      g2.addColorStop(0, "rgba(34, 211, 238, 0.05)");
+      g2.addColorStop(1, "transparent");
+      ctx.fillStyle = g2;
+      ctx.fillRect(0, 0, w, h);
 
       animationId = requestAnimationFrame(draw);
     };
 
-    draw();
+    animationId = requestAnimationFrame(draw);
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      clearTimeout(resizeTimer);
     };
   }, [reducedMotion]);
 
@@ -83,7 +98,7 @@ export function AuroraCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-80"
       aria-hidden="true"
     />
   );

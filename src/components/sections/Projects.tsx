@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useCallback } from "react";
 import { ExternalLink, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -79,31 +79,31 @@ function ProjectCard({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
-    setMousePos({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    });
-  };
+    const posX = ((e.clientX - rect.left) / rect.width) * 100;
+    const posY = ((e.clientY - rect.top) / rect.height) * 100;
+    ref.current.style.setProperty("--mouse-x", `${posX}%`);
+    ref.current.style.setProperty("--mouse-y", `${posY}%`);
+  }, []);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
+      transition={{ duration: 0.5, delay: index * 0.12 }}
       onMouseMove={handleMouseMove}
-      className="premium-card glass group relative overflow-hidden rounded-2xl p-8 transition-all duration-500"
+      className="premium-card glass group relative overflow-hidden rounded-2xl p-8 transition-all duration-300"
     >
-      {/* Hover glow */}
+      {/* Hover glow via CSS variable */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl"
+        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-2xl"
         style={{
-          background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(124, 92, 255, 0.08), transparent 60%)`,
+          background:
+            "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 92, 255, 0.08), transparent 60%)",
         }}
       />
 

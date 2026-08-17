@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useCallback } from "react";
 import {
   Monitor,
   Server,
@@ -53,36 +53,33 @@ function SkillPanel({
   icon: React.ComponentType<{ size?: number; className?: string }>;
   skill: (typeof skills)[number];
 }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  const ref = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    setMousePos({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    });
-  };
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const posX = ((e.clientX - rect.left) / rect.width) * 100;
+    const posY = ((e.clientY - rect.top) / rect.height) * 100;
+    cardRef.current.style.setProperty("--mouse-x", `${posX}%`);
+    cardRef.current.style.setProperty("--mouse-y", `${posY}%`);
+  }, []);
 
   return (
     <motion.div
-      ref={ref}
-      className="premium-card glass group relative overflow-hidden rounded-2xl p-8 transition-all duration-500"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      ref={cardRef}
+      className="premium-card glass group relative overflow-hidden rounded-2xl p-8 transition-all duration-300"
       onMouseMove={handleMouseMove}
       whileHover={{
-        scale: 1.02,
-        boxShadow: "0 0 40px rgba(124, 92, 255, 0.1)",
+        scale: 1.01,
+        boxShadow: "0 0 30px rgba(124, 92, 255, 0.1)",
       }}
     >
-      {/* Dynamic glow following cursor */}
+      {/* Dynamic glow following cursor via CSS variable */}
       <div
-        className="pointer-events-none absolute -inset-1 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-1 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(124, 92, 255, 0.08), transparent 60%)`,
+          background:
+            "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 92, 255, 0.08), transparent 60%)",
         }}
       />
 
@@ -100,20 +97,13 @@ function SkillPanel({
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {skill.items.map((item, j) => (
-            <motion.span
+          {skill.items.map((item) => (
+            <span
               key={item}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                isHovered
-                  ? { opacity: 1, scale: 1 }
-                  : { opacity: 0.7, scale: 1 }
-              }
-              transition={{ duration: 0.3, delay: j * 0.03 }}
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/70 transition-all duration-300 hover:border-accent-violet/30 hover:bg-accent-violet/10 hover:text-accent-violet hover:shadow-[0_0_10px_rgba(124,92,255,0.15)]"
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/70 transition-all duration-200 hover:border-accent-violet/30 hover:bg-accent-violet/10 hover:text-accent-violet hover:shadow-[0_0_10px_rgba(124,92,255,0.15)]"
             >
               {item}
-            </motion.span>
+            </span>
           ))}
         </div>
       </div>

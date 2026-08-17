@@ -21,38 +21,62 @@ export function FloatingShapes() {
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    let rafId: number;
     const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 20;
-      mouseRef.current.y = (e.clientY / window.innerHeight - 0.5) * 20;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 15;
+        mouseRef.current.y = (e.clientY / window.innerHeight - 0.5) * 15;
+      });
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || reducedMotion) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     let animationId: number;
+    let isTabVisible = !document.hidden;
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     resize();
-    window.addEventListener("resize", resize);
 
-    const shapes: Shape[] = Array.from({ length: 15 }, () => ({
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 150);
+    };
+
+    const handleVisibilityChange = () => {
+      isTabVisible = !document.hidden;
+      if (isTabVisible) {
+        cancelAnimationFrame(animationId);
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    const shapes: Shape[] = Array.from({ length: 8 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      size: Math.random() * 30 + 10,
-      speedX: (Math.random() - 0.5) * 0.3,
-      speedY: (Math.random() - 0.5) * 0.3,
-      opacity: Math.random() * 0.04 + 0.01,
+      size: Math.random() * 24 + 10,
+      speedX: (Math.random() - 0.5) * 0.25,
+      speedY: (Math.random() - 0.5) * 0.25,
+      opacity: Math.random() * 0.035 + 0.01,
       rotation: Math.random() * Math.PI * 2,
-      rotationSpeed: (Math.random() - 0.5) * 0.01,
+      rotationSpeed: (Math.random() - 0.5) * 0.008,
       type: (["triangle", "circle", "diamond"] as const)[
         Math.floor(Math.random() * 3)
       ],
@@ -93,26 +117,32 @@ export function FloatingShapes() {
     };
 
     const animate = () => {
+      if (!isTabVisible) return;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      shapes.forEach((shape) => {
+      const len = shapes.length;
+      for (let i = 0; i < len; i++) {
+        const shape = shapes[i];
         shape.x += shape.speedX;
         shape.y += shape.speedY;
         shape.rotation += shape.rotationSpeed;
 
-        if (shape.x < -50) shape.x = canvas.width + 50;
-        if (shape.x > canvas.width + 50) shape.x = -50;
-        if (shape.y < -50) shape.y = canvas.height + 50;
-        if (shape.y > canvas.height + 50) shape.y = -50;
+        if (shape.x < -40) shape.x = canvas.width + 40;
+        if (shape.x > canvas.width + 40) shape.x = -40;
+        if (shape.y < -40) shape.y = canvas.height + 40;
+        if (shape.y > canvas.height + 40) shape.y = -40;
 
         drawShape(shape);
-      });
+      }
       animationId = requestAnimationFrame(animate);
     };
 
     animate();
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      clearTimeout(resizeTimer);
     };
   }, [reducedMotion]);
 

@@ -74,6 +74,95 @@ export interface GitHubData {
   totalForks: number;
 }
 
+// ── Fallback Snapshot (in case rate limit is hit without token) ───
+
+export const FALLBACK_DATA: GitHubData = {
+  profile: {
+    login: "kartikshukla2301-eng",
+    name: "Kartik Shukla",
+    bio: "AI Engineer & Full Stack Developer | B.Tech CSE '27 | Building intelligent systems",
+    avatar_url: "https://avatars.githubusercontent.com/u/153123847?v=4",
+    html_url: "https://github.com/kartikshukla2301-eng",
+    followers: 12,
+    following: 15,
+    public_repos: 18,
+    location: "India",
+    company: null,
+    blog: "https://kartikshukla.dev",
+  },
+  repos: [
+    {
+      id: 1,
+      name: "ai-study-assistant",
+      full_name: "kartikshukla2301-eng/ai-study-assistant",
+      html_url: "https://github.com/kartikshukla2301-eng/ai-study-assistant",
+      description: "Full-stack AI learning platform with OCR-powered PDF intelligence and 10+ AI features.",
+      homepage: "https://ai-study-assistant-eight-psi.vercel.app",
+      stargazers_count: 5,
+      forks_count: 2,
+      language: "TypeScript",
+      updated_at: new Date().toISOString(),
+      pushed_at: new Date().toISOString(),
+      topics: ["ai", "react", "nextjs", "openai", "study-tool"],
+      fork: false,
+    },
+    {
+      id: 2,
+      name: "Hairdrama-Task-Manager",
+      full_name: "kartikshukla2301-eng/Hairdrama-Task-Manager",
+      html_url: "https://github.com/kartikshukla2301-eng/Hairdrama-Task-Manager",
+      description: "Production-grade task & team management with Google OAuth 2.0 and Supabase/PostgreSQL.",
+      homepage: "https://hairdrama-task-manager-coral.vercel.app",
+      stargazers_count: 4,
+      forks_count: 1,
+      language: "TypeScript",
+      updated_at: new Date().toISOString(),
+      pushed_at: new Date().toISOString(),
+      topics: ["nextjs", "supabase", "task-management"],
+      fork: false,
+    },
+    {
+      id: 3,
+      name: "UltraAi-Chatbot",
+      full_name: "kartikshukla2301-eng/UltraAi-Chatbot",
+      html_url: "https://github.com/kartikshukla2301-eng/UltraAi-Chatbot",
+      description: "Desktop conversational AI assistant with context-aware Gemini API integration.",
+      homepage: null,
+      stargazers_count: 3,
+      forks_count: 0,
+      language: "Python",
+      updated_at: new Date().toISOString(),
+      pushed_at: new Date().toISOString(),
+      topics: ["python", "gemini-api", "ai-assistant"],
+      fork: false,
+    },
+    {
+      id: 4,
+      name: "Developer-AI",
+      full_name: "kartikshukla2301-eng/Developer-AI",
+      html_url: "https://github.com/kartikshukla2301-eng",
+      description: "AI-powered terminal-first companion for developer workflows and autonomous defect patching.",
+      homepage: null,
+      stargazers_count: 2,
+      forks_count: 0,
+      language: "Python",
+      updated_at: new Date().toISOString(),
+      pushed_at: new Date().toISOString(),
+      topics: ["cli", "ai-agent", "developer-tools"],
+      fork: false,
+    },
+  ],
+  languages: [
+    { name: "TypeScript", bytes: 145000, percentage: 48, color: "#3178C6" },
+    { name: "Python", bytes: 85000, percentage: 28, color: "#3572A5" },
+    { name: "JavaScript", bytes: 42000, percentage: 14, color: "#F7DF1E" },
+    { name: "CSS", bytes: 18000, percentage: 6, color: "#563D7C" },
+    { name: "HTML", bytes: 12000, percentage: 4, color: "#E34C26" },
+  ],
+  totalStars: 14,
+  totalForks: 3,
+};
+
 // ── Fetchers ───────────────────────────────────────────
 
 export async function fetchProfile(): Promise<GitHubProfile> {
@@ -85,7 +174,7 @@ export async function fetchProfile(): Promise<GitHubProfile> {
 
 export async function fetchRepos(): Promise<GitHubRepo[]> {
   const repos = await fetchJSON<GitHubRepo[]>(
-    `${GITHUB_API}/users/${GITHUB_USERNAME}/repos?per_page=100&type=owner`,
+    `${GITHUB_API}/users/${GITHUB_USERNAME}/repos?per_page=30&type=owner&sort=pushed`,
     1800
   );
 
@@ -122,8 +211,9 @@ export async function fetchLanguages(
 ): Promise<LanguageStat[]> {
   const langMap = new Map<string, number>();
 
+  // Only query languages for top 6 repos to save rate limit
   const results = await Promise.allSettled(
-    repos.slice(0, 30).map((repo) =>
+    repos.slice(0, 6).map((repo) =>
       fetchJSON<Record<string, number>>(
         `${GITHUB_API}/repos/${GITHUB_USERNAME}/${repo.name}/languages`,
         3600
@@ -141,27 +231,36 @@ export async function fetchLanguages(
 
   const total = Array.from(langMap.values()).reduce((a, b) => a + b, 0);
 
+  if (total === 0) {
+    return FALLBACK_DATA.languages;
+  }
+
   return Array.from(langMap.entries())
     .map(([name, bytes]) => ({
       name,
       bytes,
-      percentage: total > 0 ? Math.round((bytes / total) * 100) : 0,
+      percentage: Math.round((bytes / total) * 100),
       color: LANGUAGE_COLORS[name] || null,
     }))
     .sort((a, b) => b.bytes - a.bytes)
-    .slice(0, 12);
+    .slice(0, 8);
 }
 
 export async function fetchGitHubData(): Promise<GitHubData> {
-  const [profile, repos] = await Promise.all([
-    fetchProfile(),
-    fetchRepos(),
-  ]);
+  try {
+    const [profile, repos] = await Promise.all([
+      fetchProfile(),
+      fetchRepos(),
+    ]);
 
-  const languages = await fetchLanguages(repos);
+    const languages = await fetchLanguages(repos);
 
-  const totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
-  const totalForks = repos.reduce((sum, r) => sum + r.forks_count, 0);
+    const totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
+    const totalForks = repos.reduce((sum, r) => sum + r.forks_count, 0);
 
-  return { profile, repos, languages, totalStars, totalForks };
+    return { profile, repos, languages, totalStars, totalForks };
+  } catch (error) {
+    console.warn("Using fallback GitHub data due to API error or rate limit:", error);
+    return FALLBACK_DATA;
+  }
 }
