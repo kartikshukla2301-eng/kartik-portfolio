@@ -116,7 +116,7 @@ export default function RootLayout({
         email: "kartikshukla2301@gmail.com",
         sameAs: [
           "https://github.com/kartikshukla2301-eng",
-          "https://linkedin.com/in/kartikshukla2301",
+          "https://www.linkedin.com/in/kartik-shukla-cse/",
           "https://instagram.com/_ig_kartikk",
         ],
         alumniOf: {

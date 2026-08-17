@@ -6,7 +6,7 @@ export const siteConfig = {
   url: "https://kartikshukla.dev",
   email: "kartikshukla2301@gmail.com",
   github: "https://github.com/kartikshukla2301-eng",
-  linkedin: "https://linkedin.com/in/kartikshukla2301",
+  linkedin: "https://www.linkedin.com/in/kartik-shukla-cse/",
   instagram: "https://instagram.com/_ig_kartikk",
   resumeUrl: "/resume.pdf",
   portrait: {

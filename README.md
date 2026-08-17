@@ -99,7 +99,7 @@ src/
 
 - Website: [kartikshukla.dev](https://kartik-portfolio-chi-eight.vercel.app/)
 - GitHub: [@kartikshukla2301-eng](https://github.com/kartikshukla2301-eng)
-- LinkedIn: [kartikshukla2301](https://linkedin.com/in/kartikshukla2301)
+- LinkedIn: [kartik-shukla-cse](https://www.linkedin.com/in/kartik-shukla-cse/)
 - Instagram: [@_ig_kartikk](https://instagram.com/_ig_kartikk)
 - Email: [kartikshukla2301@gmail.com](mailto:kartikshukla2301@gmail.com)
 
