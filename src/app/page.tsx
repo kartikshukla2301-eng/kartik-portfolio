@@ -22,6 +22,7 @@ import { NebulaGlow } from "@/components/background/NebulaGlow";
 import { CyberGrid } from "@/components/background/CyberGrid";
 import { ConstellationCanvas } from "@/components/background/ConstellationCanvas";
 import { NoiseOverlay } from "@/components/background/NoiseOverlay";
+import { AdSenseBanner } from "@/components/ui/AdSenseBanner";
 
 const LenisProvider = dynamic(
   () => import("@/components/providers/LenisProvider").then((m) => m.LenisProvider),
@@ -72,6 +73,7 @@ export default function Home() {
         <SectionReveal id="projects" direction="up" glow>
           <Projects />
         </SectionReveal>
+        <AdSenseBanner slot="7237825718" />
         <SectionReveal id="certifications" direction="scale">
           <Certifications />
         </SectionReveal>
@@ -84,6 +86,7 @@ export default function Home() {
         <SectionReveal direction="up" glow>
           <RecruiterDashboard />
         </SectionReveal>
+        <AdSenseBanner slot="7237825718" />
         <SectionReveal id="contact" direction="up">
           <Contact />
         </SectionReveal>
