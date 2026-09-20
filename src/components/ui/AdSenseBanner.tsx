@@ -32,11 +32,18 @@ export function AdSenseBanner({
   }, []);
 
   return (
-    <div className={`w-full max-w-5xl mx-auto px-4 py-4 overflow-hidden flex justify-center items-center ${className}`}>
+    <div
+      className={`w-full max-w-5xl mx-auto px-4 py-4 overflow-hidden flex justify-center items-center min-h-[90px] ${className}`}
+    >
       <ins
         ref={adRef}
         className="adsbygoogle"
-        style={{ display: "block", width: "100%", textAlign: "center" }}
+        style={{
+          display: "block",
+          width: "100%",
+          minHeight: "90px",
+          textAlign: "center",
+        }}
         data-ad-client="ca-pub-3587427941344024"
         data-ad-slot={slot}
         data-ad-format={format}
