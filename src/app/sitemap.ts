@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://kartikshukla.dev";
+  const baseUrl = "https://kartik-portfolio-chi-eight.vercel.app";
   const currentDate = new Date().toISOString();
 
   return [
@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/#experience`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/#projects`,
       lastModified: currentDate,
       changeFrequency: "weekly",
@@ -33,13 +39,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/#certifications`,
       lastModified: currentDate,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/#resume`,
+      url: `${baseUrl}/#timeline`,
       lastModified: currentDate,
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/#contact`,

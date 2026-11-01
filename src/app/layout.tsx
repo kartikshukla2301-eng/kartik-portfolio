@@ -14,42 +14,44 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const CANONICAL_URL = "https://kartik-portfolio-chi-eight.vercel.app";
+
 export const viewport: Viewport = {
-  themeColor: "#030303",
-  colorScheme: "dark",
+  themeColor: "#F7F9FC",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kartikshukla.dev"),
+  metadataBase: new URL(CANONICAL_URL),
   title: {
-    default: "Kartik Shukla — AI Engineer & Full Stack Developer",
+    default: "Kartik Shukla | Full Stack Developer & AI Engineer",
     template: "%s | Kartik Shukla",
   },
   description:
-    "AI Engineer & Full Stack Developer building intelligent AI-powered products, autonomous developer agents, and scalable web applications. B.Tech CSE (2023–2027).",
+    "Portfolio of Kartik Shukla, Full Stack Developer and AI Engineer. Explore projects, production development experience, technical skills and AI-powered applications.",
   keywords: [
     "Kartik Shukla",
-    "AI Engineer",
     "Full Stack Developer",
+    "AI Engineer",
     "Next.js Developer",
     "React 19",
     "TypeScript",
-    "Python AI",
-    "OpenAI API",
-    "Developer AI",
-    "MERN Stack",
-    "Software Engineer Portfolio",
-    "Machine Learning",
-    "Web Development",
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "MongoDB",
+    "AWS",
+    "Docker",
+    "Healthcare Information System",
     "AKTU CSE",
   ],
-  authors: [{ name: "Kartik Shukla", url: "https://kartikshukla.dev" }],
+  authors: [{ name: "Kartik Shukla", url: CANONICAL_URL }],
   creator: "Kartik Shukla",
   publisher: "Kartik Shukla",
   alternates: {
-    canonical: "https://kartikshukla.dev",
+    canonical: CANONICAL_URL,
   },
   openGraph: {
     type: "profile",
@@ -58,25 +60,25 @@ export const metadata: Metadata = {
     username: "kartikshukla2301-eng",
     gender: "male",
     locale: "en_US",
-    url: "https://kartikshukla.dev",
-    title: "Kartik Shukla — AI Engineer & Full Stack Developer",
+    url: CANONICAL_URL,
+    title: "Kartik Shukla | Full Stack Developer & AI Engineer",
     description:
-      "AI Engineer & Full Stack Developer building intelligent AI-powered products and high-performance web applications.",
+      "Portfolio of Kartik Shukla, Full Stack Developer and AI Engineer. Explore projects, production development experience, technical skills and AI-powered applications.",
     siteName: "Kartik Shukla Portfolio",
     images: [
       {
         url: "/images/kartik-shukla.png",
         width: 800,
         height: 1000,
-        alt: "Kartik Shukla — AI Engineer & Full Stack Developer",
+        alt: "Kartik Shukla — Full Stack Developer & AI Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kartik Shukla — AI Engineer & Full Stack Developer",
+    title: "Kartik Shukla | Full Stack Developer & AI Engineer",
     description:
-      "AI Engineer & Full Stack Developer building intelligent AI-powered products and high-performance web applications.",
+      "Portfolio of Kartik Shukla, Full Stack Developer and AI Engineer. Explore projects, production development experience, technical skills and AI-powered applications.",
     images: ["/images/kartik-shukla.png"],
     creator: "@_ig_kartikk",
   },
@@ -106,60 +108,63 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://kartikshukla.dev/#person",
+        "@id": `${CANONICAL_URL}/#person`,
         name: "Kartik Shukla",
-        jobTitle: "AI Engineer & Full Stack Developer",
+        jobTitle: "Full Stack Developer | AI Engineer",
         description:
-          "AI Engineer & Full Stack Developer building intelligent AI-powered products, LLM agents, and scalable web applications.",
-        url: "https://kartikshukla.dev",
-        image: "https://kartikshukla.dev/images/kartik-shukla.png",
+          "Full Stack Developer and AI Engineer with hands-on experience building production-oriented healthcare systems, scalable web applications, REST APIs and AI-powered applications.",
+        url: CANONICAL_URL,
+        image: `${CANONICAL_URL}/images/kartik-shukla.png`,
         email: "kartikshukla2301@gmail.com",
         sameAs: [
           "https://github.com/kartikshukla2301-eng",
-          "https://www.linkedin.com/in/kartik-shukla-cse/",
-          "https://instagram.com/_ig_kartikk",
+          "https://www.linkedin.com/in/kartik-shukla-cse",
+          "https://leetcode.com/u/cdlPAR9B41/",
+          "https://www.geeksforgeeks.org/profile/kartikshum7i0",
+          "https://www.instagram.com/_ig_kartikk/",
         ],
         alumniOf: {
           "@type": "CollegeOrUniversity",
-          name: "Dr. APJ Abdul Kalam Technical University",
+          name: "Dr. APJ Abdul Kalam Technical University (AKTU)",
           url: "https://aktu.ac.in",
         },
         knowsAbout: [
-          "Artificial Intelligence",
-          "Large Language Models",
           "Full Stack Development",
+          "Artificial Intelligence",
           "Next.js",
           "React",
           "TypeScript",
           "Python",
-          "Node.js",
-          "MongoDB",
-          "PostgreSQL",
           "FastAPI",
-          "Tailwind CSS",
+          "Node.js",
+          "Express.js",
+          "PostgreSQL",
+          "MongoDB",
+          "AWS",
+          "Docker",
         ],
       },
       {
         "@type": "WebSite",
-        "@id": "https://kartikshukla.dev/#website",
-        url: "https://kartikshukla.dev",
+        "@id": `${CANONICAL_URL}/#website`,
+        url: CANONICAL_URL,
         name: "Kartik Shukla Portfolio",
-        description: "Official Portfolio of Kartik Shukla — AI Engineer & Full Stack Developer",
+        description: "Official Portfolio of Kartik Shukla — Full Stack Developer & AI Engineer",
         publisher: {
-          "@id": "https://kartikshukla.dev/#person",
+          "@id": `${CANONICAL_URL}/#person`,
         },
         inLanguage: "en-US",
       },
       {
         "@type": "ProfilePage",
-        "@id": "https://kartikshukla.dev/#profilepage",
-        url: "https://kartikshukla.dev",
-        name: "Kartik Shukla — AI Engineer & Full Stack Developer",
+        "@id": `${CANONICAL_URL}/#profilepage`,
+        url: CANONICAL_URL,
+        name: "Kartik Shukla | Full Stack Developer & AI Engineer",
         isPartOf: {
-          "@id": "https://kartikshukla.dev/#website",
+          "@id": `${CANONICAL_URL}/#website`,
         },
         mainEntity: {
-          "@id": "https://kartikshukla.dev/#person",
+          "@id": `${CANONICAL_URL}/#person`,
         },
       },
     ],
@@ -178,7 +183,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#030303] text-[#e8e8e8]">
+      <body className="min-h-screen bg-[#F7F9FC] text-[#172033]">
         {children}
       </body>
     </html>

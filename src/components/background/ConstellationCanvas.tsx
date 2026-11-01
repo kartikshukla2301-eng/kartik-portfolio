@@ -29,7 +29,7 @@ export function ConstellationCanvas() {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    let mouse = { x: -1000, y: -1000, active: false };
+    const mouse = { x: -1000, y: -1000, active: false };
     let isTabVisible = !document.hidden;
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -60,7 +60,7 @@ export function ConstellationCanvas() {
     window.addEventListener("resize", handleResize, { passive: true });
     document.addEventListener("visibilitychange", handleVisibility);
 
-    const colors = ["#7C5CFF", "#22D3EE", "#FFB86B", "#ffffff"];
+    const colors = ["#6651CC", "#0891B2", "#D97706", "#94A3B8"];
     const count = Math.min(50, Math.floor((width * height) / 25000));
 
     const particles: Particle[] = Array.from({ length: count }, () => {
@@ -127,11 +127,11 @@ export function ConstellationCanvas() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDist) {
-            const lineAlpha = (1 - dist / maxDist) * 0.12;
+            const lineAlpha = (1 - dist / maxDist) * 0.16;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = "#7C5CFF";
+            ctx.strokeStyle = "#6651CC";
             ctx.globalAlpha = lineAlpha;
             ctx.lineWidth = 0.75;
             ctx.stroke();

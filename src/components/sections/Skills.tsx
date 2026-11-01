@@ -7,11 +7,26 @@ import {
   Server,
   Sparkles,
   Terminal,
+  Layers,
+  Shield,
+  Cloud,
+  Database,
+  Cpu,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { skills } from "@/lib/data";
 
-const iconMap = { Monitor, Server, Sparkles, Terminal };
+const iconMap = {
+  Monitor,
+  Server,
+  Sparkles,
+  Terminal,
+  Layers,
+  Shield,
+  Cloud,
+  Database,
+  Cpu,
+};
 
 export function Skills() {
   const ref = useRef<HTMLDivElement>(null);

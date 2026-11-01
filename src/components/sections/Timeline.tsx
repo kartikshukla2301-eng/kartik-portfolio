@@ -35,17 +35,17 @@ export function Timeline() {
   }, [reducedMotion]);
 
   return (
-    <section id="resume" className="relative py-32 px-4">
+    <section id="timeline" className="relative py-32 px-4">
       <div className="mx-auto max-w-4xl" ref={containerRef}>
         <SectionHeading
           eyebrow="Journey"
           title="Development Timeline"
-          description="A trajectory from fundamentals to AI engineering."
+          description="A verifiable trajectory from computer science fundamentals to production healthcare software and AI engineering."
         />
 
         <div className="relative">
           {/* Animated vertical line */}
-          <div className="absolute left-6 top-0 h-full w-px bg-white/10 md:left-1/2 md:-translate-x-px">
+          <div className="absolute left-6 top-0 h-full w-px bg-[var(--borders)] md:left-1/2 md:-translate-x-px">
             <div
               ref={lineRef}
               className="w-full origin-top bg-gradient-to-b from-accent-violet via-accent-cyan to-accent-violet"
@@ -56,7 +56,7 @@ export function Timeline() {
           {/* Timeline items */}
           <div className="space-y-12">
             {timeline.map((item, i) => (
-              <TimelineItem key={item.year} item={item} index={i} />
+              <TimelineItem key={item.year + item.title} item={item} index={i} />
             ))}
           </div>
         </div>
@@ -90,7 +90,7 @@ function TimelineItem({
         transition={{ duration: 0.4, delay: 0.1 }}
         className="absolute left-6 z-10 -translate-x-1/2 md:left-1/2"
       >
-        <div className="h-3 w-3 rounded-full border-2 border-accent-violet bg-background">
+        <div className="h-3.5 w-3.5 rounded-full border-2 border-accent-violet bg-white shadow-sm">
           <div className="absolute inset-0 animate-ping rounded-full bg-accent-violet/30" />
         </div>
       </motion.div>
@@ -106,17 +106,19 @@ function TimelineItem({
             : "md:w-[calc(50%-2rem)] md:pl-12 md:ml-auto"
         }`}
       >
-        <div className="premium-card glass rounded-xl p-6 transition-all duration-300">
+        <div className="premium-card glass rounded-2xl p-6 transition-all duration-300 border border-[var(--borders)] shadow-xs hover:shadow-md bg-white">
           <span className="mb-2 inline-block rounded-full bg-accent-violet/10 px-3 py-1 font-display text-xs font-bold text-accent-violet">
             {item.year}
           </span>
           <h3
-            className="mb-1 text-lg font-bold text-white"
+            className="mb-1 text-lg font-bold text-[var(--foreground)]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {item.title}
           </h3>
-          <p className="text-sm text-white/50">{item.description}</p>
+          <p className="text-xs leading-relaxed text-[var(--secondary-text)]">
+            {item.description}
+          </p>
         </div>
       </motion.div>
     </div>

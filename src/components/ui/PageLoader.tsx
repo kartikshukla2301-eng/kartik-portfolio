@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback, useMemo } from "react";
+import { siteConfig } from "@/lib/data";
 
 interface PageLoaderProps {
   onEnter: () => void;
@@ -15,7 +16,7 @@ function FloatingParticle({ index }: { index: number }) {
       top: `${(seed * 11.7) % 100}%`,
       width: `${2 + (seed % 3)}px`,
       height: `${2 + (seed % 3)}px`,
-      animationDelay: `${(seed % 5)}s`,
+      animationDelay: `${seed % 5}s`,
       animationDuration: `${6 + (seed % 8)}s`,
     };
   }, [index]);
@@ -31,7 +32,7 @@ function FloatingParticle({ index }: { index: number }) {
 export function PageLoader({ onEnter }: PageLoaderProps) {
   const [visible, setVisible] = useState(true);
   const [exiting, setExiting] = useState(false);
-  const name = "Kartik Shukla";
+  const name = siteConfig.name;
   const nameChars = name.split("");
 
   const handleEnter = useCallback(() => {
@@ -49,9 +50,13 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
           key="intro-screen"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          animate={exiting ? { opacity: 0, scale: 1.05, filter: "blur(16px)" } : { opacity: 1, scale: 1, filter: "blur(0px)" }}
+          animate={
+            exiting
+              ? { opacity: 0, scale: 1.04, filter: "blur(14px)" }
+              : { opacity: 1, scale: 1, filter: "blur(0px)" }
+          }
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-[#030303]"
+          className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-[#F7F9FC]"
         >
           {/* Aurora background */}
           <div className="intro-aurora absolute inset-0 pointer-events-none">
@@ -67,24 +72,15 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
             ))}
           </div>
 
-          {/* Noise overlay */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.03]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-              backgroundRepeat: "repeat",
-            }}
-          />
-
           {/* Grid lines */}
           <div className="intro-grid pointer-events-none absolute inset-0" />
 
           {/* Main content */}
-          <div className="relative z-10 flex flex-col items-center gap-8 px-4">
+          <div className="relative z-10 flex flex-col items-center gap-8 px-4 text-center">
             {/* Name — letter by letter */}
             <div className="overflow-hidden">
               <h1
-                className="text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
+                className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-[#172033]"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {nameChars.map((char, i) => (
@@ -109,13 +105,16 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 + nameChars.length * 0.04 + 0.15 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.15 + nameChars.length * 0.04 + 0.15,
+              }}
               className="text-center"
             >
-              <p className="text-lg text-white/50 sm:text-xl md:text-2xl">
-                <span className="intro-role-line font-medium">AI Engineer</span>
-                <span className="mx-3 text-accent-violet/50">&</span>
-                <span className="intro-role-line font-medium">Full Stack Developer</span>
+              <p className="text-base sm:text-lg md:text-xl font-medium text-[#64748B]">
+                <span className="font-semibold text-accent-violet">Full Stack Developer</span>
+                <span className="mx-3 text-[#CBD5E1]">&bull;</span>
+                <span className="font-semibold text-accent-cyan">AI Engineer</span>
               </p>
             </motion.div>
 
@@ -123,19 +122,19 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.15 + nameChars.length * 0.04 + 0.4 }}
+              transition={{ delay: 0.15 + nameChars.length * 0.04 + 0.35 }}
               className="w-56 overflow-hidden sm:w-64"
             >
-              <div className="h-px w-full bg-white/[0.06]">
+              <div className="h-1 w-full rounded-full bg-[#E2E8F0]">
                 <motion.div
                   initial={{ x: "-100%" }}
                   animate={{ x: "0%" }}
                   transition={{
-                    duration: 1.2,
-                    delay: 0.15 + nameChars.length * 0.04 + 0.5,
+                    duration: 1.1,
+                    delay: 0.15 + nameChars.length * 0.04 + 0.45,
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
-                  className="h-full bg-gradient-to-r from-accent-violet via-accent-cyan to-accent-violet"
+                  className="h-full rounded-full bg-gradient-to-r from-accent-violet via-accent-cyan to-accent-violet"
                 />
               </div>
             </motion.div>
@@ -146,20 +145,18 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
                 duration: 0.5,
-                delay: 0.15 + nameChars.length * 0.04 + 0.9,
+                delay: 0.15 + nameChars.length * 0.04 + 0.85,
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
               onClick={handleEnter}
-              className="intro-enter-btn group relative overflow-hidden rounded-full border border-white/10 bg-white/[0.03] px-10 py-4 text-sm font-medium tracking-wide text-white/80 backdrop-blur-xl transition-all duration-300 hover:border-accent-violet/40 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_40px_rgba(124,92,255,0.25)] active:scale-95 cursor-pointer"
+              className="intro-enter-btn group relative overflow-hidden rounded-full px-10 py-4 text-sm font-semibold tracking-wide transition-all duration-300 active:scale-95 cursor-pointer"
             >
-              {/* Button glow on hover */}
-              <div className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-accent-violet/0 via-accent-violet/10 to-accent-cyan/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <span className="relative z-10 flex items-center gap-3">
                 Enter Portfolio
                 <motion.span
                   animate={{ x: [0, 4, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-accent-violet"
+                  className="text-accent-violet font-bold"
                 >
                   &rarr;
                 </motion.span>
@@ -168,20 +165,20 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
           </div>
 
           {/* Corner accents */}
-          <div className="absolute bottom-6 left-6 text-[10px] tracking-wider text-white/20">
-            Portfolio 2026
+          <div className="absolute bottom-6 left-6 text-xs font-medium tracking-wider text-[#94A3B8]">
+            Kartik Shukla &bull; Portfolio Refresh
           </div>
-          <div className="absolute bottom-6 right-6 text-[10px] tracking-wider text-white/20">
-            kartikshukla.dev
+          <div className="absolute bottom-6 right-6 text-xs font-medium tracking-wider text-[#94A3B8]">
+            AKTU CSE &bull; 2023–2027
           </div>
 
           {/* Top-left decorative line */}
-          <div className="absolute left-0 top-12 h-px w-24 bg-gradient-to-r from-accent-violet/30 to-transparent" />
-          <div className="absolute left-12 top-0 h-24 w-px bg-gradient-to-b from-accent-violet/30 to-transparent" />
+          <div className="absolute left-0 top-12 h-px w-24 bg-gradient-to-r from-accent-violet/40 to-transparent" />
+          <div className="absolute left-12 top-0 h-24 w-px bg-gradient-to-b from-accent-violet/40 to-transparent" />
 
           {/* Bottom-right decorative line */}
-          <div className="absolute bottom-0 right-0 h-px w-24 bg-gradient-to-l from-accent-cyan/30 to-transparent" />
-          <div className="absolute bottom-12 right-0 h-24 w-px bg-gradient-to-t from-accent-cyan/30 to-transparent" />
+          <div className="absolute bottom-0 right-0 h-px w-24 bg-gradient-to-l from-accent-cyan/40 to-transparent" />
+          <div className="absolute bottom-12 right-0 h-24 w-px bg-gradient-to-t from-accent-cyan/40 to-transparent" />
         </motion.div>
       )}
     </AnimatePresence>

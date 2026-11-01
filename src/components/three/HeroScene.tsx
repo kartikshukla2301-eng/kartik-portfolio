@@ -31,22 +31,22 @@ const AbstractShape = memo(function AbstractShape() {
       <mesh ref={meshRef} scale={2.1}>
         <icosahedronGeometry args={[1, 3]} />
         <MeshDistortMaterial
-          color="#7C5CFF"
-          roughness={0.2}
-          metalness={0.8}
+          color="#6651CC"
+          roughness={0.25}
+          metalness={0.65}
           distort={0.25}
           speed={1.5}
           transparent
-          opacity={0.85}
+          opacity={0.9}
         />
       </mesh>
       <mesh ref={wireRef} scale={2.4} position={[0, 0, -0.4]}>
         <icosahedronGeometry args={[1, 2]} />
         <meshStandardMaterial
-          color="#22D3EE"
+          color="#0891B2"
           wireframe
           transparent
-          opacity={0.15}
+          opacity={0.25}
         />
       </mesh>
     </Float>
@@ -94,9 +94,9 @@ const Particles = memo(function Particles() {
       </bufferGeometry>
       <pointsMaterial
         size={0.025}
-        color="#7C5CFF"
+        color="#6651CC"
         transparent
-        opacity={0.35}
+        opacity={0.4}
         sizeAttenuation
       />
     </points>
@@ -106,10 +106,10 @@ const Particles = memo(function Particles() {
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={0.9} color="#ffffff" />
-      <pointLight position={[-3, 2, 4]} intensity={1} color="#7C5CFF" />
-      <pointLight position={[3, -2, 2]} intensity={0.6} color="#22D3EE" />
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[5, 5, 5]} intensity={1.2} color="#ffffff" />
+      <pointLight position={[-3, 2, 4]} intensity={1.5} color="#6651CC" />
+      <pointLight position={[3, -2, 2]} intensity={1.0} color="#0891B2" />
       <AbstractShape />
       <Particles />
     </>
@@ -159,7 +159,7 @@ export function HeroScene() {
   if (reducedMotion) {
     return (
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="h-64 w-64 rounded-full bg-accent-violet/20 blur-3xl" />
+        <div className="h-64 w-64 rounded-full bg-accent-violet/10 blur-3xl" />
         <div className="absolute h-48 w-48 rounded-full bg-accent-cyan/10 blur-3xl" />
       </div>
     );

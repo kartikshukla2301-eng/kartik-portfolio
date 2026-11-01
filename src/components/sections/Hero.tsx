@@ -4,12 +4,13 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { ArrowDown, Mail, ExternalLink, Download } from "lucide-react";
+import { ArrowDown, Mail, ExternalLink, FileText } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { siteConfig, tagCloud } from "@/lib/data";
+import { parseGoogleDriveUrl } from "@/lib/drive";
 
 const HeroScene = dynamic(
   () => import("@/components/three/HeroScene").then((m) => m.HeroScene),
@@ -18,24 +19,24 @@ const HeroScene = dynamic(
 
 const stats = [
   {
-    num: "01",
-    label: "AI Engineer Journey",
-    detail: "B.Tech CSE 2023–2027",
-  },
-  {
-    num: "03",
-    label: "Featured Projects",
-    detail: "AI & Full Stack Apps",
+    num: "04",
+    label: "Professional Internships",
+    detail: "Pristyn Care, OnCare, Infosys, TDA",
   },
   {
     num: "04",
-    label: "Professional Certifications",
-    detail: "AWS, MongoDB, Claude Code",
+    label: "Featured Projects",
+    detail: "DEVLEVELER, GROWEasy & AI Platforms",
   },
   {
-    num: "24/7",
-    label: "Learning & Building",
-    detail: "Always Shipping",
+    num: "06",
+    label: "Verified Credentials",
+    detail: "AWS, MongoDB, Python, Claude Code",
+  },
+  {
+    num: "7.9",
+    label: "Academic CGPA",
+    detail: "B.Tech CSE (2023–2027)",
   },
 ];
 
@@ -52,11 +53,13 @@ export function Hero() {
   const portraitOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
+  const parsedResume = parseGoogleDriveUrl(siteConfig.resumeUrl);
+
   return (
     <section
       id="home"
       ref={ref}
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pt-28 pb-12"
     >
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
@@ -64,26 +67,24 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-6xl text-center">
+      <div className="relative z-10 mx-auto max-w-5xl text-center">
         {/* Portrait */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8, y: 30 }}
           animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{ y: portraitY, scale: portraitScale, opacity: portraitOpacity }}
-          className="mb-8 flex justify-center sm:mb-10"
+          className="mb-6 flex justify-center sm:mb-8"
         >
           <div className="portrait-frame group relative">
-            {/* Outer glow rings */}
-            <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-[rgba(124,92,255,0.12)] via-[rgba(34,211,238,0.08)] to-[rgba(124,92,255,0.12)] blur-2xl transition-all duration-700 group-hover:from-[rgba(124,92,255,0.2)] group-hover:via-[rgba(34,211,238,0.12)] group-hover:to-[rgba(124,92,255,0.2)]" />
-            <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-accent-violet/40 via-accent-cyan/30 to-accent-violet/40 opacity-60" />
+            {/* Soft outer glow */}
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-[rgba(102,81,204,0.12)] via-[rgba(8,145,178,0.08)] to-[rgba(102,81,204,0.12)] blur-2xl transition-all duration-700" />
+            <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-accent-violet/40 via-accent-cyan/30 to-accent-violet/40 opacity-70" />
 
             {/* Main image container */}
-            <div className="relative h-36 w-36 overflow-hidden rounded-full sm:h-44 sm:w-44 md:h-52 md:w-52 lg:h-60 lg:w-60">
-              {/* Glassmorphism ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-white/10 shadow-[0_0_40px_rgba(124,92,255,0.2),0_0_80px_rgba(34,211,238,0.1)]" />
+            <div className="relative h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40 md:h-48 md:w-48 shadow-lg">
+              <div className="absolute inset-0 rounded-full border-2 border-white/60 shadow-[0_0_20px_rgba(102,81,204,0.15)] z-10" />
 
-              {/* Portrait image */}
               <Image
                 src={siteConfig.portrait.src}
                 alt={siteConfig.portrait.alt}
@@ -92,44 +93,33 @@ export function Hero() {
                 priority
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYI4Q/SFhSRFJiX0pcU/9oADAMBAAIRAxEAPwD9P//Z"
-                className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
-
-              {/* Cinematic lighting overlay */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-t from-[rgba(3,3,3,0.4)] via-transparent to-[rgba(124,92,255,0.05)]" />
-
-              {/* Soft inner glow */}
-              <div className="absolute inset-0 rounded-full shadow-[inset_0_0_30px_rgba(124,92,255,0.15)]" />
             </div>
 
             {/* Floating accent dots */}
             <motion.div
               animate={{ y: [-3, 3, -3], x: [-2, 2, -2] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -right-1 top-4 h-2 w-2 rounded-full bg-accent-cyan/60 shadow-[0_0_10px_rgba(34,211,238,0.4)]"
+              className="absolute -right-1 top-4 h-2.5 w-2.5 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(8,145,178,0.5)]"
             />
             <motion.div
               animate={{ y: [2, -4, 2], x: [1, -3, 1] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -left-2 bottom-8 h-1.5 w-1.5 rounded-full bg-accent-violet/60 shadow-[0_0_10px_rgba(124,92,255,0.4)]"
-            />
-            <motion.div
-              animate={{ y: [-2, 3, -2] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute right-6 -bottom-1 h-1 w-1 rounded-full bg-accent-amber/50 shadow-[0_0_8px_rgba(255,184,107,0.3)]"
+              className="absolute -left-2 bottom-8 h-2 w-2 rounded-full bg-accent-violet shadow-[0_0_8px_rgba(102,81,204,0.5)]"
             />
           </div>
         </motion.div>
 
         {/* Status Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-6 sm:mb-8"
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="mb-4 sm:mb-6"
         >
           <Badge variant="accent" pulse>
-            Available for Internships & Projects
+            Available for Internships & Full-Time Roles
           </Badge>
         </motion.div>
 
@@ -137,59 +127,90 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="mb-5 sm:mb-6"
+          transition={{ duration: 0.7, delay: 0.35 }}
+          className="mb-4 sm:mb-5"
           style={{ y: contentY }}
         >
           <h1
-            className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            className="text-4xl font-bold tracking-tight text-[var(--foreground)] sm:text-5xl md:text-6xl lg:text-7xl"
             style={{ fontFamily: "var(--font-display)" }}
           >
+            <span>Hi, I&apos;m </span>
             <span className="text-gradient">
-              <AnimatedText text="Hi, I'm" delay={0.4} />
-            </span>
-            <br />
-            <span className="text-white">
-              <AnimatedText text="Kartik Shukla" delay={0.7} />
+              <AnimatedText text="Kartik Shukla" delay={0.4} />
             </span>
           </h1>
+
+          <p className="mt-3 text-lg font-bold sm:text-xl md:text-2xl text-accent-violet">
+            {siteConfig.primaryTitle}{" "}
+            <span className="text-[var(--secondary-text)] font-normal">|</span>{" "}
+            <span className="text-[var(--secondary-text)] font-medium">
+              {siteConfig.secondaryTitle}
+            </span>
+          </p>
         </motion.div>
 
-        {/* Subheadline */}
+        {/* Description */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-[rgba(255,255,255,0.5)] sm:mb-10 sm:max-w-2xl sm:text-lg"
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="mx-auto mb-8 max-w-xl text-sm sm:text-base leading-relaxed text-[var(--secondary-text)] sm:mb-9 sm:max-w-2xl"
         >
-          AI Engineer & Full Stack Developer — I build intelligent AI-powered
-          products and design scalable, performance-driven web applications that
-          solve real-world problems.
+          {siteConfig.heroDescription}
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* Primary & Secondary Actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
           className="mb-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
         >
+          {/* Primary Action 1: View Projects */}
           <MagneticButton href="#projects" variant="primary">
             <ExternalLink size={16} />
             View Projects
           </MagneticButton>
-          <MagneticButton href={siteConfig.resumeUrl} variant="secondary">
-            <Download size={16} />
-            Download Resume
+
+          {/* Primary Action 2: View Resume (Uses Drive URL or Document Library) */}
+          {parsedResume.isValid && parsedResume.viewUrl ? (
+            <MagneticButton href={parsedResume.viewUrl} variant="secondary">
+              <FileText size={16} />
+              View Resume
+            </MagneticButton>
+          ) : (
+            <MagneticButton href="#certifications" variant="secondary">
+              <FileText size={16} />
+              View Credentials
+            </MagneticButton>
+          )}
+
+          {/* Secondary Action 1: Contact Me */}
+          <MagneticButton href="#contact" variant="secondary">
+            <Mail size={16} />
+            Contact Me
           </MagneticButton>
+
+          {/* Secondary Action 2: LinkedIn */}
+          <a
+            href={siteConfig.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+            className="glass flex h-11 items-center gap-2 rounded-full px-5 text-xs font-semibold text-[var(--foreground)] transition-all duration-300 hover:border-accent-violet hover:text-accent-violet hover:bg-white shadow-xs"
+          >
+            <LinkedinIcon size={15} />
+            LinkedIn
+          </a>
         </motion.div>
 
         {/* Social Row */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-14 flex items-center justify-center gap-3 sm:mb-16 sm:gap-4"
+          className="mb-10 flex items-center justify-center gap-3"
         >
           {[
             { icon: GithubIcon, href: siteConfig.github, label: "GitHub" },
@@ -202,7 +223,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="glass flex h-10 w-10 items-center justify-center rounded-full text-[rgba(255,255,255,0.5)] transition-all duration-300 hover:border-accent-violet/30 hover:text-accent-violet hover:shadow-[0_0_20px_rgba(124,92,255,0.2)] sm:h-11 sm:w-11"
+              className="glass flex h-10 w-10 items-center justify-center rounded-full text-[var(--secondary-text)] transition-all duration-300 hover:border-accent-violet hover:text-accent-violet hover:bg-white hover:shadow-sm"
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -216,7 +237,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="mb-14 flex flex-wrap items-center justify-center gap-2 sm:mb-16"
+          className="mb-12 flex flex-wrap items-center justify-center gap-2"
         >
           {tagCloud.map((tag) => (
             <Badge key={tag} variant="outline" className="text-[11px]">
@@ -227,23 +248,25 @@ export function Hero() {
       </div>
 
       {/* Stats Strip */}
-      <div className="relative z-10 w-full border-t border-white/5">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px md:grid-cols-4">
+      <div className="relative z-10 w-full border-t border-[var(--borders)] bg-white/70 backdrop-blur-md">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-y md:divide-y-0 divide-[var(--borders)] md:grid-cols-4">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.num}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 1.0 + i * 0.1 }}
-              className="flex flex-col items-center px-4 py-6 text-center transition-colors duration-300 hover:bg-white/[0.02]"
+              transition={{ duration: 0.45, delay: 0.95 + i * 0.08 }}
+              className="flex flex-col items-center p-5 text-center transition-colors duration-300 hover:bg-[#F8FAFC]"
             >
-              <span className="mb-1 font-display text-sm font-bold tracking-widest text-accent-violet">
+              <span className="mb-0.5 font-display text-base font-bold text-accent-violet">
                 {stat.num}
               </span>
-              <span className="text-sm font-medium text-white/80">
+              <span className="text-xs font-bold text-[var(--foreground)]">
                 {stat.label}
               </span>
-              <span className="text-xs text-[rgba(255,255,255,0.4)]">{stat.detail}</span>
+              <span className="text-[11px] text-[var(--secondary-text)] mt-0.5">
+                {stat.detail}
+              </span>
             </motion.div>
           ))}
         </div>
@@ -253,17 +276,11 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 1.5, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
+        transition={{ delay: 1.4, duration: 0.6 }}
+        className="mt-8 flex flex-col items-center gap-1.5 text-[var(--secondary-text)]"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-[rgba(255,255,255,0.3)]"
-        >
-          <span className="text-[10px] tracking-widest uppercase">Scroll</span>
-          <ArrowDown size={14} />
-        </motion.div>
+        <span className="text-[10px] tracking-widest uppercase font-semibold">Scroll Down</span>
+        <ArrowDown size={14} className="animate-bounce text-accent-violet" />
       </motion.div>
     </section>
   );

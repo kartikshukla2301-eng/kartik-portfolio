@@ -67,7 +67,7 @@ export default function Home() {
         <SectionReveal id="skills" direction="left">
           <Skills />
         </SectionReveal>
-        <SectionReveal direction="right">
+        <SectionReveal id="experience" direction="right">
           <Experience />
         </SectionReveal>
         <SectionReveal id="projects" direction="up" glow>
@@ -77,7 +77,7 @@ export default function Home() {
         <SectionReveal id="certifications" direction="scale">
           <Certifications />
         </SectionReveal>
-        <SectionReveal id="resume" direction="left" parallax>
+        <SectionReveal id="timeline" direction="left" parallax>
           <Timeline />
         </SectionReveal>
         <SectionReveal direction="right">
