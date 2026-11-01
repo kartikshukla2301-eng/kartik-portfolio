@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Send, Mail } from "lucide-react";
+import { Send, Mail, MapPin, CheckCircle } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -18,11 +18,11 @@ export function Contact() {
       <div className="mx-auto max-w-4xl" ref={ref}>
         <SectionHeading
           eyebrow="Get in Touch"
-          title="Let's Build Something Amazing"
-          description="Actively seeking B.Tech internships, open-source collaboration, and full-stack roles."
+          title="Let's Build Something Great"
+          description="Open to Full Stack Developer, Web Developer and Software Development Engineer opportunities."
         />
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2 mb-20">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -32,49 +32,76 @@ export function Contact() {
             <ContactForm />
           </motion.div>
 
-          {/* Direct Contact */}
+          {/* Direct Contact & Details */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center gap-6"
+            className="flex flex-col justify-between gap-6"
           >
-            <div className="glass rounded-2xl p-6">
+            <div className="glass rounded-2xl p-6 sm:p-8 border border-[var(--borders)] bg-white shadow-xs">
               <h3
-                className="mb-4 text-lg font-bold text-white"
+                className="mb-3 text-lg font-bold text-[var(--foreground)]"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Direct Contact
+                Direct Communication
               </h3>
+              <p className="text-xs text-[var(--secondary-text)] leading-relaxed mb-6">
+                Feel free to reach out directly via email for job opportunities, project inquiries, or technical collaboration.
+              </p>
 
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="mb-6 flex items-center gap-3 text-white/60 transition-colors hover:text-accent-violet"
+                className="mb-6 flex items-center gap-3 text-sm font-semibold text-accent-violet transition-colors hover:underline"
               >
-                <Mail size={16} />
-                <span className="text-sm">{siteConfig.email}</span>
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-violet/10 text-accent-violet">
+                  <Mail size={16} />
+                </div>
+                <span>{siteConfig.email}</span>
               </a>
 
-              <div className="flex gap-3">
-                {[
-                  { icon: GithubIcon, href: siteConfig.github, label: "GitHub" },
-                  { icon: LinkedinIcon, href: siteConfig.linkedin, label: "LinkedIn" },
-                  { icon: InstagramIcon, href: siteConfig.instagram, label: "Instagram" },
-                ].map(({ icon: Icon, href, label }) => (
-                  <motion.a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="glass flex h-10 w-10 items-center justify-center rounded-full text-white/50 transition-all duration-300 hover:border-accent-violet/30 hover:text-accent-violet hover:shadow-[0_0_15px_rgba(124,92,255,0.15)]"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Icon size={16} />
-                  </motion.a>
-                ))}
+              <div className="mb-6 flex items-center gap-3 text-xs text-[var(--secondary-text)]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan">
+                  <MapPin size={16} />
+                </div>
+                <span>Lucknow / NCR, India • Open to Remote & Relocation</span>
               </div>
+
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-[var(--secondary-text)] mb-3">
+                  Social & Developer Profiles
+                </p>
+                <div className="flex gap-2.5">
+                  {[
+                    { icon: GithubIcon, href: siteConfig.github, label: "GitHub" },
+                    { icon: LinkedinIcon, href: siteConfig.linkedin, label: "LinkedIn" },
+                    { icon: InstagramIcon, href: siteConfig.instagram, label: "Instagram" },
+                  ].map(({ icon: Icon, href, label }) => (
+                    <motion.a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="glass flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--borders)] text-[var(--secondary-text)] transition-all duration-300 hover:border-accent-violet hover:text-accent-violet hover:bg-[#F8FAFC] shadow-2xs"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Icon size={16} />
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl border border-[var(--borders)] bg-[#F8FAFC]">
+              <div className="flex items-center gap-2 text-xs font-bold text-accent-violet mb-1">
+                <CheckCircle size={14} className="text-emerald-500" />
+                Response Guarantee
+              </div>
+              <p className="text-xs text-[var(--secondary-text)]">
+                I typically review and reply to professional correspondence within 24 hours.
+              </p>
             </div>
           </motion.div>
         </div>
@@ -99,16 +126,17 @@ function ContactForm() {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
+  // Preserved existing mailto submission backend logic
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:${siteConfig.email}?subject=Portfolio Contact from ${formState.name}&body=${formState.message}`;
+    window.location.href = `mailto:${siteConfig.email}?subject=Portfolio Contact from ${formState.name}&body=${encodeURIComponent(formState.message)}%0D%0A%0D%0AFrom: ${formState.name} (${formState.email})`;
   };
 
   return (
-    <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 space-y-5">
+    <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 sm:p-8 space-y-5 border border-[var(--borders)] bg-white shadow-xs">
       {[
-        { name: "name", label: "Name", type: "text" },
-        { name: "email", label: "Email", type: "email" },
+        { name: "name", label: "Your Full Name", type: "text" },
+        { name: "email", label: "Your Email Address", type: "email" },
       ].map((field) => (
         <div key={field.name} className="relative">
           <input
@@ -119,13 +147,13 @@ function ContactForm() {
             onFocus={() => setFocused(field.name)}
             onBlur={() => setFocused(null)}
             required
-            className="peer w-full rounded-xl border border-white/10 bg-white/5 px-4 pt-5 pb-2 text-sm text-white outline-none transition-all duration-300 focus:border-accent-violet/40 focus:bg-white/[0.07] focus:shadow-[0_0_15px_rgba(124,92,255,0.08)]"
+            className="peer w-full rounded-xl border border-[var(--borders)] bg-[#F8FAFC] px-4 pt-5 pb-2 text-sm text-[var(--foreground)] outline-none transition-all duration-300 focus:border-accent-violet focus:bg-white focus:shadow-xs"
           />
           <label
-            className={`pointer-events-none absolute left-4 transition-all duration-300 ${
+            className={`pointer-events-none absolute left-4 transition-all duration-300 font-medium ${
               focused === field.name || formState[field.name as keyof typeof formState]
-                ? "top-2 text-[10px] text-accent-violet"
-                : "top-3.5 text-sm text-white/30"
+                ? "top-1.5 text-[10px] text-accent-violet"
+                : "top-3.5 text-xs text-[var(--secondary-text)]"
             }`}
           >
             {field.label}
@@ -142,22 +170,22 @@ function ContactForm() {
           onBlur={() => setFocused(null)}
           required
           rows={4}
-          className="peer w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 pt-5 pb-2 text-sm text-white outline-none transition-all duration-300 focus:border-accent-violet/40 focus:bg-white/[0.07] focus:shadow-[0_0_15px_rgba(124,92,255,0.08)]"
+          className="peer w-full resize-none rounded-xl border border-[var(--borders)] bg-[#F8FAFC] px-4 pt-5 pb-2 text-sm text-[var(--foreground)] outline-none transition-all duration-300 focus:border-accent-violet focus:bg-white focus:shadow-xs"
         />
         <label
-          className={`pointer-events-none absolute left-4 transition-all duration-300 ${
+          className={`pointer-events-none absolute left-4 transition-all duration-300 font-medium ${
             focused === "message" || formState.message
-              ? "top-2 text-[10px] text-accent-violet"
-              : "top-3.5 text-sm text-white/30"
+              ? "top-1.5 text-[10px] text-accent-violet"
+              : "top-3.5 text-xs text-[var(--secondary-text)]"
           }`}
         >
-          Message
+          Your Message
         </label>
       </div>
 
       <MagneticButton
         variant="primary"
-        className="w-full justify-center"
+        className="w-full justify-center shadow-md cursor-pointer"
       >
         <Send size={14} />
         Send Message

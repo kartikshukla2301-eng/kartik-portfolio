@@ -58,23 +58,23 @@ export function MagneticButton({
 
   const baseClass =
     variant === "primary"
-      ? "bg-accent-violet text-white shadow-[0_0_20px_rgba(124,92,255,0.25),inset_0_1px_0_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(124,92,255,0.4),inset_0_1px_0_rgba(255,255,255,0.2)]"
-      : "glass text-white glass-hover shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]";
+      ? "bg-accent-violet text-white shadow-[0_4px_14px_rgba(102,81,204,0.3)] hover:shadow-[0_6px_20px_rgba(102,81,204,0.45)] hover:bg-accent-violet/90"
+      : "bg-white text-[#172033] border border-[#E2E8F0] shadow-xs hover:bg-[#F8FAFC] hover:border-accent-violet/40 hover:text-accent-violet";
 
   const Tag = href ? "a" : "button";
   const extraProps = href ? { href } : { onClick: handleClick };
 
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
       <Tag
         ref={ref as never}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`ripple-container relative inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-medium text-sm transition-all duration-300 ${baseClass} ${className}`}
+        className={`ripple-container relative inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold text-xs sm:text-sm transition-all duration-300 ${baseClass} ${className}`}
         {...extraProps}
       >
         {children}

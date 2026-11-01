@@ -2,7 +2,7 @@
 
 # Kartik Shukla — Portfolio
 
-**AI Engineer & Full Stack Developer**
+**Full Stack Developer & AI Engineer**
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev)
@@ -14,7 +14,7 @@
 
 A premium, cinematic developer portfolio built with Next.js 16, React 19, Three.js, and Framer Motion.
 
-[Live Demo](https://kartikshukla.dev) · [Report Bug](https://github.com/kartikshukla2301-eng/kartik-portfolio/issues) · [Request Feature](https://github.com/kartikshukla2301-eng/kartik-portfolio/issues)
+[Live Demo](https://kartik-portfolio-chi-eight.vercel.app/) · [Report Bug](https://github.com/kartikshukla2301-eng/kartik-portfolio/issues) · [Request Feature](https://github.com/kartikshukla2301-eng/kartik-portfolio/issues)
 
 </div>
 
@@ -95,7 +95,7 @@ src/
 
 ## Author
 
-**Kartik Shukla** — AI Engineer & Full Stack Developer
+**Kartik Shukla** — Full Stack Developer & AI Engineer
 
 - Website: [kartikshukla.dev](https://kartik-portfolio-chi-eight.vercel.app/)
 - GitHub: [@kartikshukla2301-eng](https://github.com/kartikshukla2301-eng)

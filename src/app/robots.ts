@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = "https://kartik-portfolio-chi-eight.vercel.app";
   return {
     rules: [
       {
@@ -9,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: "https://kartikshukla.dev/sitemap.xml",
-    host: "https://kartikshukla.dev",
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }

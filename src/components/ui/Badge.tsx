@@ -16,14 +16,14 @@ export function Badge({
   pulse = false,
 }: BadgeProps) {
   const variants = {
-    default: "bg-white/10 text-white/70 border-white/10",
-    accent: "bg-accent-violet/20 text-accent-violet border-accent-violet/30",
-    outline: "bg-transparent text-white/60 border-white/20",
+    default: "bg-[#F1F5F9] text-[#172033] border-[#E2E8F0]",
+    accent: "bg-accent-violet/10 text-accent-violet border-accent-violet/25",
+    outline: "bg-white text-[#64748B] border-[#E2E8F0]",
   };
 
   return (
     <motion.span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium ${variants[variant]} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-0.5 text-xs font-semibold ${variants[variant]} ${className}`}
       whileHover={{ scale: 1.05 }}
     >
       {pulse && (

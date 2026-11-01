@@ -3,12 +3,17 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { Brain, Code2, Lightbulb, GraduationCap } from "lucide-react";
+import { Brain, Code2, Server, GraduationCap } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { aboutCards, siteConfig } from "@/lib/data";
 
-const iconMap = { Brain, Code2, Lightbulb, GraduationCap };
+const iconMap = {
+  Brain,
+  Code2,
+  Server,
+  GraduationCap,
+};
 
 export function About() {
   const quoteRef = useRef<HTMLDivElement>(null);
@@ -18,9 +23,9 @@ export function About() {
     <section id="about" className="relative py-32 px-4">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow="About"
-          title="Engineering for the Next Era."
-          description="Balancing solid software architecture with contextual LLM agents — aligning modern frontend rendering, document structures, and prompt engineering to deliver real product value."
+          eyebrow="About Me"
+          title="Engineering Reliable Systems & Intelligent AI"
+          description="Full Stack Developer and AI Engineer with hands-on experience building production-oriented healthcare systems, scalable web applications, REST APIs and AI-powered applications."
         />
 
         {/* Portrait + Quote Row */}
@@ -34,8 +39,7 @@ export function About() {
             className="flex justify-center md:justify-end"
           >
             <div className="portrait-frame group relative">
-              <div className="absolute -inset-2 rounded-2xl bg-gradient-to-r from-[rgba(124,92,255,0.1)] to-[rgba(34,211,238,0.1)] opacity-0 blur-lg transition-all duration-500 group-hover:opacity-100" />
-              <div className="relative h-56 w-44 overflow-hidden rounded-2xl sm:h-72 sm:w-56">
+              <div className="relative h-60 w-48 overflow-hidden rounded-2xl sm:h-72 sm:w-56 border border-[var(--borders)] shadow-md bg-white">
                 <Image
                   src={siteConfig.portrait.src}
                   alt={siteConfig.portrait.alt}
@@ -45,26 +49,29 @@ export function About() {
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYI4Q/SFhSRFJiX0pcU/9oADAMBAAIRAxEAPwD9P//Z"
                   className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[rgba(3,3,3,0.5)] via-transparent to-[rgba(124,92,255,0.05)]" />
-                <div className="absolute inset-0 rounded-2xl shadow-[inset_0_0_30px_rgba(124,92,255,0.1)]" />
               </div>
             </div>
           </motion.div>
 
-          {/* Pull Quote */}
+          {/* Pull Quote / Summary */}
           <motion.div
             ref={quoteRef}
             initial={{ opacity: 0, y: 30 }}
             animate={quoteInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="glass rounded-2xl p-8 text-center md:text-left"
+            className="glass rounded-2xl p-8 text-center md:text-left border border-[var(--borders)] shadow-sm bg-white"
           >
-            <p className="text-xl italic leading-relaxed text-white/70 sm:text-2xl">
-              &ldquo;The best way to predict the future is to build it. I build
-              products that leverage intelligence to amplify human
-              capability.&rdquo;
+            <p className="text-base sm:text-lg italic leading-relaxed text-[var(--foreground)]">
+              &ldquo;{siteConfig.description}&rdquo;
             </p>
-            <div className="mt-4 h-px w-16 bg-gradient-to-r from-transparent via-accent-violet to-transparent md:mx-0 md:mx-0 mx-auto" />
+            <div className="mt-4 flex items-center gap-3 justify-center md:justify-start">
+              <span className="text-xs font-bold text-accent-violet">
+                {siteConfig.name}
+              </span>
+              <span className="text-xs text-[var(--secondary-text)]">
+                B.Tech CSE (2023–2027) • CGPA 7.9/10
+              </span>
+            </div>
           </motion.div>
         </div>
 
@@ -80,17 +87,17 @@ export function About() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <GlassCard tilt glow="0 0 30px rgba(124, 92, 255, 0.05)">
+                <GlassCard tilt className="h-full bg-white border border-[var(--borders)] shadow-xs hover:shadow-md">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-violet/10 text-accent-violet">
                     <Icon size={22} />
                   </div>
                   <h3
-                    className="mb-2 text-lg font-semibold text-white"
+                    className="mb-2 text-base font-bold text-[var(--foreground)]"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {card.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-white/50">
+                  <p className="text-xs leading-relaxed text-[var(--secondary-text)]">
                     {card.description}
                   </p>
                 </GlassCard>
