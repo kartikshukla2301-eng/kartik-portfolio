@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
 const inter = Inter({
@@ -184,7 +185,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#0B0A08] text-[rgba(255,250,240,0.88)]">
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

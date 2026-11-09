@@ -4,10 +4,11 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { ArrowDown, Mail, ExternalLink, FileText, MapPin } from "lucide-react";
+import { ArrowDown, Mail, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
-import { MagneticButton } from "@/components/ui/MagneticButton";
+import { InfinityButton } from "@/components/ui/InfinityButton";
+import { ColorFillText } from "@/components/ui/ColorFillText";
 import { siteConfig, tagCloud } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
 
@@ -25,7 +26,7 @@ const stats = [
   {
     num: "04",
     label: "Featured Projects",
-    detail: "DEVLEVELER, GROWEasy & AI Platforms",
+    detail: "DevLeveler, AI CSV & Intelligent Agents",
   },
   {
     num: "06",
@@ -121,7 +122,7 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Giant Headline */}
+        {/* Giant Headline with Color-Fill Reveal */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -129,20 +130,25 @@ export function Hero() {
           className="mb-5"
           style={{ y: contentY }}
         >
-          <h1
-            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-[rgba(255,250,240,0.95)]"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            <span>KARTIK </span>
-            <span className="text-gradient-warm">SHUKLA</span>
-          </h1>
+          <div className="overflow-hidden">
+            <ColorFillText
+              as="h1"
+              dataFill="ghost"
+              className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-[#F6F0E2]"
+            >
+              {siteConfig.name}
+            </ColorFillText>
+          </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-3 font-mono text-sm sm:text-base font-semibold tracking-wide text-[#C96F4A]">
-            <span>FULL STACK DEVELOPER</span>
-            <span className="text-[rgba(255,250,240,0.25)]">•</span>
-            <span className="text-[#FFD6A1]">AI ENGINEER</span>
-            <span className="text-[rgba(255,250,240,0.25)]">•</span>
-            <span className="text-[rgba(255,250,240,0.65)]">SOFTWARE ARCHITECT</span>
+          <div className="mt-4">
+            <ColorFillText
+              as="p"
+              dataFill="ghost"
+              delay={0.25}
+              className="font-mono text-xs sm:text-sm font-semibold tracking-widest uppercase text-[#C96F4A]"
+            >
+              FULL STACK DEVELOPER // AI SYSTEMS ARCHITECT
+            </ColorFillText>
           </div>
         </motion.div>
 
@@ -151,54 +157,38 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.45 }}
-          className="mx-auto mb-8 max-w-xl text-sm sm:text-base leading-relaxed text-[rgba(255,250,240,0.6)] sm:mb-9 sm:max-w-2xl"
+          className="mx-auto mb-9 max-w-xl text-sm sm:text-base leading-relaxed text-[rgba(255,250,240,0.65)] font-sans sm:max-w-2xl"
         >
           {siteConfig.heroDescription}
         </motion.p>
 
-        {/* Action Buttons */}
+        {/* Infinity Socks Action Buttons (Sliding 15deg hover + 3-arrow conveyor) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mb-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 font-mono text-xs uppercase tracking-wider"
+          className="mb-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 font-mono text-xs uppercase tracking-wider"
         >
-          {/* Primary Action 1: View Projects */}
-          <MagneticButton href="#projects" variant="primary">
-            <ExternalLink size={14} />
+          {/* Primary Action: Explore Projects */}
+          <InfinityButton href="#projects" variant="terra" withArrow>
             Explore Projects
-          </MagneticButton>
+          </InfinityButton>
 
           {/* Primary Action 2: View Resume */}
           {parsedResume.isValid && parsedResume.viewUrl ? (
-            <MagneticButton href={parsedResume.viewUrl} variant="secondary">
-              <FileText size={14} className="text-[#C96F4A]" />
+            <InfinityButton href={parsedResume.viewUrl} variant="ghost" withArrow target="_blank">
               Verified Resume
-            </MagneticButton>
+            </InfinityButton>
           ) : (
-            <MagneticButton href="#certifications" variant="secondary">
-              <FileText size={14} className="text-[#C96F4A]" />
+            <InfinityButton href="#certifications" variant="ghost" withArrow>
               Credentials Vault
-            </MagneticButton>
+            </InfinityButton>
           )}
 
           {/* Secondary Action: Contact */}
-          <MagneticButton href="#contact" variant="secondary">
-            <Mail size={14} className="text-[#FFD6A1]" />
+          <InfinityButton href="#contact" variant="ghost" withArrow={false}>
             Initiate Contact
-          </MagneticButton>
-
-          {/* LinkedIn Profile */}
-          <a
-            href={siteConfig.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
-            className="btn-infinity-secondary"
-          >
-            <LinkedinIcon size={14} />
-            LinkedIn
-          </a>
+          </InfinityButton>
         </motion.div>
 
         {/* Social Icons & HUD Metadata Row */}

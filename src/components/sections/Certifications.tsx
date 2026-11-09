@@ -11,6 +11,8 @@ import {
   FileCheck2,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ColorFillText } from "@/components/ui/ColorFillText";
+import { InfinityButton } from "@/components/ui/InfinityButton";
 import { DocumentModal } from "@/components/ui/DocumentModal";
 import { certifications, documentLinks, siteConfig, CertificationItem } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
@@ -59,11 +61,23 @@ export function Certifications() {
   return (
     <section id="certifications" className="relative py-32 px-4">
       <div className="mx-auto max-w-5xl" ref={ref}>
-        <SectionHeading
-          eyebrow="Accreditation"
-          title="Document Library & Verified Credentials"
-          description="Direct access to verified certifications, university credentials, and primary technical documentation stored in the cloud repository."
-        />
+        <div className="mb-14">
+          <SectionHeading
+            eyebrow="Accreditation"
+            title="Document Library & Verified Credentials"
+            description="Direct access to verified certifications, university credentials, and primary technical documentation stored in the cloud repository."
+          />
+
+          <div className="mt-4">
+            <ColorFillText
+              as="h2"
+              dataFill="ghost"
+              className="font-display text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F6F0E2]"
+            >
+              VERIFIED // CREDENTIAL ARCHIVE
+            </ColorFillText>
+          </div>
+        </div>
 
         {/* Featured Resume Access Card */}
         <motion.div
@@ -96,7 +110,7 @@ export function Certifications() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <button
+              <InfinityButton
                 onClick={() =>
                   handleOpenDoc(
                     `Latest Resume – ${siteConfig.name}`,
@@ -105,23 +119,24 @@ export function Certifications() {
                     "2026"
                   )
                 }
-                className="btn-infinity cursor-pointer"
+                variant="terra"
+                withArrow
               >
-                <Eye size={15} />
-                <span>VIEW RESUME</span>
-                <span className="btn-infinity-arrow">→</span>
-              </button>
+                VIEW RESUME
+              </InfinityButton>
 
               {parsedResume.isValid && parsedResume.downloadUrl && (
-                <a
+                <InfinityButton
                   href={parsedResume.downloadUrl}
+                  variant="ghost"
+                  withArrow={false}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-infinity-secondary"
                 >
-                  <Download size={15} />
-                  <span>DOWNLOAD PDF</span>
-                </a>
+                  <span className="flex items-center gap-1.5">
+                    <Download size={14} />
+                    <span>DOWNLOAD PDF</span>
+                  </span>
+                </InfinityButton>
               )}
             </div>
           </div>

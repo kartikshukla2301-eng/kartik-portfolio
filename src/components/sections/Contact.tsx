@@ -2,9 +2,11 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Send, Mail, MapPin, CheckCircle } from "lucide-react";
+import { Mail, MapPin, CheckCircle } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ColorFillText } from "@/components/ui/ColorFillText";
+import { InfinityButton } from "@/components/ui/InfinityButton";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/data";
 
@@ -15,11 +17,26 @@ export function Contact() {
   return (
     <section id="contact" className="relative py-32 px-4">
       <div className="mx-auto max-w-5xl" ref={ref}>
-        <SectionHeading
-          eyebrow="Initiate Transmission"
-          title="Let's Build Something Extraordinary"
-          description="Available for Full Stack Developer, Software Engineer, and AI Application roles. Inquiries for production platforms and enterprise contracts welcomed."
-        />
+        <div className="mb-14">
+          <SectionHeading
+            eyebrow="Initiate Transmission"
+            title="Let's Build Something Extraordinary"
+            description="Available for Full Stack Developer, Software Engineer, and AI Application roles. Inquiries for production platforms and enterprise contracts welcomed."
+          />
+
+          <div className="mt-4">
+            <p className="font-mono text-xs tracking-widest uppercase text-[#C96F4A] mb-2 font-bold">
+              CAREER COMMENCE // 2026
+            </p>
+            <ColorFillText
+              as="h2"
+              dataFill="ghost"
+              className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-[#F6F0E2]"
+            >
+              GET IN TOUCH.
+            </ColorFillText>
+          </div>
+        </div>
 
         <div className="grid gap-8 md:grid-cols-2 mb-24">
           {/* Contact Form */}
@@ -208,14 +225,16 @@ function ContactForm() {
         </label>
       </div>
 
-      <button
-        type="submit"
-        className="btn-infinity w-full justify-center cursor-pointer"
-      >
-        <Send size={14} />
-        <span>SEND TRANSMISSION</span>
-        <span className="btn-infinity-arrow">→</span>
-      </button>
+      <div className="pt-2">
+        <InfinityButton
+          type="submit"
+          variant="terra"
+          withArrow
+          className="w-full justify-center"
+        >
+          SEND TRANSMISSION
+        </InfinityButton>
+      </div>
     </form>
   );
 }
