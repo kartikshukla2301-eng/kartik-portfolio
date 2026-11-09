@@ -8,6 +8,8 @@ interface MagneticButtonProps {
   className?: string;
   onClick?: () => void;
   href?: string;
+  target?: string;
+  rel?: string;
   variant?: "primary" | "secondary";
 }
 
@@ -16,6 +18,8 @@ export function MagneticButton({
   className = "",
   onClick,
   href,
+  target,
+  rel,
   variant = "primary",
 }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
@@ -58,11 +62,17 @@ export function MagneticButton({
 
   const baseClass =
     variant === "primary"
-      ? "bg-accent-violet text-white shadow-[0_4px_14px_rgba(102,81,204,0.3)] hover:shadow-[0_6px_20px_rgba(102,81,204,0.45)] hover:bg-accent-violet/90"
-      : "bg-white text-[#172033] border border-[#E2E8F0] shadow-xs hover:bg-[#F8FAFC] hover:border-accent-violet/40 hover:text-accent-violet";
+      ? "bg-accent-violet text-white shadow-[0_4px_20px_rgba(124,92,255,0.4)] hover:shadow-[0_6px_25px_rgba(124,92,255,0.6)] hover:bg-accent-violet/90"
+      : "glass text-white glass-hover shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] border border-white/10 hover:border-accent-violet/40";
 
   const Tag = href ? "a" : "button";
-  const extraProps = href ? { href } : { onClick: handleClick };
+  const extraProps = href
+    ? {
+        href,
+        target: target || (href.startsWith("http") ? "_blank" : undefined),
+        rel: rel || (href.startsWith("http") ? "noopener noreferrer" : undefined),
+      }
+    : { onClick: handleClick };
 
   return (
     <motion.div

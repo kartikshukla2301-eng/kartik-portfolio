@@ -1,7 +1,6 @@
 export const documentLinks = {
   // Centralized Google Drive configuration
-  // Leave empty until user supplies the exact Drive links
-  resume: "", // GOOGLE_DRIVE_RESUME_URL = "[ADD_MY_LATEST_RESUME_DRIVE_LINK]"
+  resume: "https://drive.google.com/file/d/1l7RdUSiIk6kHgYRdxfYx5Vao14-DUm9N/view?usp=sharing",
   mongodb: "", // GOOGLE_DRIVE_MONGODB_CERT_URL = "[ADD_MONGODB_CERTIFICATE_LINK]"
   awsGenAI: "", // GOOGLE_DRIVE_AWS_GENAI_CERT_URL = "[ADD_AWS_GENAI_CERTIFICATE_LINK]"
   claudeCode: "", // GOOGLE_DRIVE_CLAUDE_CODE_CERT_URL = "[ADD_CLAUDE_CODE_CERTIFICATE_LINK]"

@@ -37,7 +37,7 @@ export function Experience() {
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
                     <h3
-                      className="text-xl font-bold tracking-tight text-[var(--foreground)] sm:text-2xl"
+                      className="text-xl font-bold tracking-tight text-white sm:text-2xl"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {exp.role}
@@ -55,12 +55,12 @@ export function Experience() {
                       <span>{exp.company}</span>
                     </div>
                     {exp.legalName && (
-                      <span className="text-xs text-[var(--secondary-text)]">
+                      <span className="text-xs text-white/40">
                         ({exp.legalName})
                       </span>
                     )}
                     {exp.mode && (
-                      <div className="flex items-center gap-1 text-xs text-[var(--secondary-text)]">
+                      <div className="flex items-center gap-1 text-xs text-white/40">
                         <MapPin size={13} />
                         <span>{exp.mode}</span>
                       </div>
@@ -68,7 +68,7 @@ export function Experience() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-[var(--secondary-text)] font-medium shrink-0">
+                <div className="flex items-center gap-2 text-xs text-white/50 font-medium shrink-0">
                   <Calendar size={14} className="text-accent-cyan" />
                   <span>{exp.period}</span>
                 </div>
@@ -80,7 +80,7 @@ export function Experience() {
                   {exp.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-md border border-[var(--glass-border)] bg-[var(--glass-bg)] px-2.5 py-1 text-[11px] font-medium text-[var(--secondary-text)] transition-colors hover:text-accent-violet"
+                      className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/60 transition-colors hover:text-accent-violet hover:border-accent-violet/30"
                     >
                       {tech}
                     </span>
@@ -102,7 +102,7 @@ export function Experience() {
                       size={16}
                       className="mt-0.5 shrink-0 text-accent-cyan transition-transform duration-200 group-hover:scale-110"
                     />
-                    <p className="text-sm leading-relaxed text-[var(--secondary-text)]">
+                    <p className="text-sm leading-relaxed text-white/60">
                       {highlight}
                     </p>
                   </motion.div>

@@ -44,7 +44,8 @@ export function parseGoogleDriveUrl(url?: string | null): ParsedDriveUrl {
       isValid: true,
       fileId,
       previewUrl: `https://drive.google.com/file/d/${fileId}/preview`,
-      viewUrl: `https://drive.google.com/file/d/${fileId}/view`,
+      // Direct PDF preview URL so clicking opens the standalone document directly without Google Drive workspace
+      viewUrl: `https://drive.google.com/file/d/${fileId}/preview`,
       downloadUrl: `https://drive.google.com/uc?export=download&id=${fileId}`,
       rawUrl: trimmed,
     };

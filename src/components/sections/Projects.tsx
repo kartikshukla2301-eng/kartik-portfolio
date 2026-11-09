@@ -34,12 +34,12 @@ export function Projects() {
         >
           <div className="mb-6 flex items-center justify-between">
             <h3
-              className="text-lg font-bold tracking-tight text-[var(--foreground)]"
+              className="text-lg font-bold tracking-tight text-white/90"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Additional Engineering Work
             </h3>
-            <span className="text-xs text-[var(--secondary-text)]">
+            <span className="text-xs text-white/40">
               Embedded systems, chatbots & tooling
             </span>
           </div>
@@ -88,7 +88,7 @@ function ProjectCard({
         className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-2xl"
         style={{
           background:
-            "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(102, 81, 204, 0.08), transparent 60%)",
+            "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 92, 255, 0.12), transparent 60%)",
         }}
       />
 
@@ -108,7 +108,7 @@ function ProjectCard({
               )}
             </div>
             <h3
-              className="text-2xl font-bold tracking-tight text-[var(--foreground)] transition-colors group-hover:text-accent-violet sm:text-[1.65rem]"
+              className="text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-accent-cyan sm:text-[1.65rem]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {project.title}
@@ -119,7 +119,7 @@ function ProjectCard({
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--secondary-text)] transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent-violet"
+              className="text-white/30 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent-violet"
               aria-label={`Open ${project.title} live preview`}
             >
               <ArrowUpRight size={20} />
@@ -128,7 +128,7 @@ function ProjectCard({
         </div>
 
         {/* Description */}
-        <p className="mb-6 text-sm leading-[1.7] text-[var(--secondary-text)]">
+        <p className="mb-6 text-sm leading-[1.7] text-white/50">
           {project.description}
         </p>
 
@@ -148,7 +148,7 @@ function ProjectCard({
               href={project.repo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-5 py-2.5 text-xs font-semibold text-[var(--foreground)] transition-all duration-300 hover:border-accent-violet hover:bg-accent-violet/10 hover:text-accent-violet"
+              className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5 text-xs font-semibold text-white/80 transition-all duration-300 hover:border-accent-violet/40 hover:bg-white/[0.08] hover:text-white"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
             >
@@ -156,7 +156,7 @@ function ProjectCard({
               View Code
             </motion.a>
           ) : (
-            <span className="flex items-center gap-1.5 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-4 py-2 text-xs font-medium text-[var(--secondary-text)]">
+            <span className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-white/40">
               <Lock size={12} />
               Private Repository
             </span>
@@ -167,7 +167,7 @@ function ProjectCard({
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full bg-accent-violet px-5 py-2.5 text-xs font-semibold text-white shadow-[0_4px_14px_rgba(102,81,204,0.3)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(102,81,204,0.45)]"
+              className="flex items-center gap-2 rounded-full bg-accent-violet px-5 py-2.5 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,92,255,0.45)] hover:bg-accent-violet/90"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
             >
@@ -194,16 +194,16 @@ function SecondaryProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.06 }}
-      className="premium-card glass group flex flex-col justify-between rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+      className="premium-card glass group flex flex-col justify-between rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
     >
       <div>
         <div className="mb-2 flex items-start justify-between gap-2">
-          <h4 className="text-sm font-bold tracking-tight text-[var(--foreground)]">
+          <h4 className="text-sm font-bold tracking-tight text-white">
             {project.title}
           </h4>
           {project.isPrivate ? (
             <span
-              className="flex items-center gap-1 rounded bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-700"
+              className="flex items-center gap-1 rounded bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-400"
               title="Private Repository"
             >
               <Lock size={10} />
@@ -215,19 +215,19 @@ function SecondaryProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`GitHub repo for ${project.title}`}
-              className="text-[var(--secondary-text)] transition-colors hover:text-accent-violet"
+              className="text-white/40 transition-colors hover:text-accent-violet"
             >
               <GithubIcon size={14} />
             </a>
           ) : null}
         </div>
 
-        <p className="mb-4 text-xs leading-relaxed text-[var(--secondary-text)]">
+        <p className="mb-4 text-xs leading-relaxed text-white/45">
           {project.description}
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[var(--glass-border)]">
+      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.06]">
         {project.tags.map((tag) => (
           <Badge key={tag} variant="outline" className="text-[10px]">
             {tag}

@@ -7,7 +7,10 @@ import { Mail } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-[var(--borders)] py-14 px-4 bg-white/60">
+    <footer className="relative border-t border-white/[0.06] py-14 px-4 bg-transparent">
+      {/* Top ambient glow line */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-violet/30 to-transparent" />
+
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           {/* Brand */}
@@ -18,13 +21,13 @@ export function Footer() {
             >
               {siteConfig.name}
             </p>
-            <p className="mt-1 text-xs text-[var(--secondary-text)]">
+            <p className="mt-1 text-xs text-white/40">
               {siteConfig.primaryTitle} | {siteConfig.secondaryTitle} • &copy; {new Date().getFullYear()}
             </p>
           </div>
 
           {/* Social */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             {[
               { icon: GithubIcon, href: siteConfig.github, label: "GitHub" },
               { icon: LinkedinIcon, href: siteConfig.linkedin, label: "LinkedIn" },
@@ -37,7 +40,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--borders)] bg-white text-[var(--secondary-text)] transition-all duration-300 hover:border-accent-violet hover:text-accent-violet hover:shadow-2xs"
+                className="glass flex h-9 w-9 items-center justify-center rounded-xl text-white/40 transition-all duration-300 hover:border-accent-violet/40 hover:text-accent-violet hover:shadow-[0_0_15px_rgba(124,92,255,0.2)]"
                 whileHover={{ scale: 1.1, y: -2 }}
               >
                 <Icon size={15} />
@@ -46,7 +49,7 @@ export function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-4 text-xs font-medium text-[var(--secondary-text)]">
+          <div className="flex flex-wrap justify-center gap-4 text-xs font-medium text-white/40">
             {[
               { label: "Home", href: "#home" },
               { label: "About", href: "#about" },
@@ -58,7 +61,7 @@ export function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="transition-colors hover:text-accent-violet"
+                className="transition-colors hover:text-white"
               >
                 {link.label}
               </a>
@@ -67,9 +70,9 @@ export function Footer() {
         </div>
 
         {/* Tech stack note */}
-        <div className="mt-8 border-t border-[var(--borders)] pt-6 text-center">
-          <p className="text-[11px] text-[var(--secondary-text)]">
-            Built with Next.js 16, React 19, Framer Motion, Three.js, GSAP & Tailwind CSS • Premium Light Theme
+        <div className="mt-8 border-t border-white/[0.04] pt-6 text-center">
+          <p className="text-[11px] text-white/20">
+            Built with Next.js 16, React 19, Framer Motion, Three.js, GSAP & Tailwind CSS
           </p>
         </div>
       </div>
