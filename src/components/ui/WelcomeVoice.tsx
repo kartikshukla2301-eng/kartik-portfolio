@@ -131,32 +131,34 @@ export function WelcomeVoiceControls() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed bottom-6 right-6 z-50 flex items-center gap-2"
+            className="fixed bottom-6 right-6 z-50 flex items-center gap-2 font-mono"
           >
-            <div className="flex items-center gap-1.5 rounded-full border border-accent-violet/30 bg-[rgba(10,10,10,0.85)] px-4 py-2 backdrop-blur-xl shadow-lg shadow-accent-violet/10">
+            <div className="flex items-center gap-2 rounded-full border border-[#C96F4A]/40 bg-[#12100D]/95 px-4 py-2 backdrop-blur-xl shadow-2xl shadow-black">
               <div className="flex items-center gap-0.5">
-                {[1, 2, 3].map((i) => (
+                {[1, 2, 3, 4].map((i) => (
                   <motion.div
                     key={i}
-                    className="w-1 rounded-full bg-accent-violet"
-                    animate={{ height: [4, 14, 4] }}
+                    className="w-0.5 rounded-full bg-[#C96F4A]"
+                    animate={{ height: [3, 14, 3] }}
                     transition={{
-                      duration: 0.6,
+                      duration: 0.5,
                       repeat: Infinity,
-                      delay: i * 0.15,
+                      delay: i * 0.12,
                       ease: "easeInOut",
                     }}
                   />
                 ))}
               </div>
-              <span className="ml-1.5 text-xs font-semibold text-white/80">Speaking...</span>
+              <span className="text-[11px] font-semibold text-[rgba(255,250,240,0.85)] uppercase tracking-wider">
+                VOICE INTRO...
+              </span>
             </div>
             <button
               onClick={toggleMute}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[rgba(10,10,10,0.85)] text-white/70 shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-accent-violet hover:text-white cursor-pointer"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(255,250,240,0.16)] bg-[#12100D]/95 text-[rgba(255,250,240,0.7)] shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-[#C96F4A] hover:text-[#C96F4A] cursor-pointer"
               aria-label="Mute voice"
             >
-              <VolumeX size={17} />
+              <VolumeX size={15} />
             </button>
           </motion.div>
         )}
@@ -171,11 +173,11 @@ export function WelcomeVoiceControls() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ delay: 0.5 }}
             onClick={replay}
-            className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[rgba(10,10,10,0.85)] text-white/70 shadow-md backdrop-blur-xl transition-all duration-300 hover:border-accent-violet hover:text-white cursor-pointer"
+            className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-[rgba(255,250,240,0.16)] bg-[#12100D]/90 text-[rgba(255,250,240,0.7)] shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-[#C96F4A] hover:text-[#FFD6A1] hover:scale-105 cursor-pointer"
             aria-label="Replay welcome voice"
-            title="Replay Welcome Greeting"
+            title="Replay Audio Greeting"
           >
-            <Volume2 size={18} />
+            <Volume2 size={17} />
           </motion.button>
         )}
       </AnimatePresence>

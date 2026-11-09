@@ -31,8 +31,9 @@ export function SectionHeading({
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-4 inline-block rounded-full border border-accent-violet/25 bg-accent-violet/10 px-4 py-1 text-[11px] font-bold tracking-wider text-accent-violet uppercase"
+          className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(255,250,240,0.14)] bg-[#12100D] px-3.5 py-1 font-mono text-[10px] font-semibold tracking-[0.2em] text-[#C96F4A] uppercase"
         >
+          <span className="h-1 w-1 rounded-full bg-[#C96F4A]" />
           {eyebrow}
         </motion.span>
       )}
@@ -40,9 +41,10 @@ export function SectionHeading({
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl ${
-          gradient ? "text-gradient" : "text-white"
+        className={`font-display text-3xl font-black uppercase tracking-tight sm:text-4xl md:text-5xl lg:text-6xl ${
+          gradient ? "text-gradient" : "text-[rgba(255,250,240,0.95)]"
         }`}
+        style={{ fontFamily: "var(--font-display)" }}
       >
         {title}
       </motion.h2>
@@ -51,7 +53,7 @@ export function SectionHeading({
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/50 sm:text-base font-normal"
+          className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[rgba(255,250,240,0.55)] sm:text-base font-normal"
         >
           {description}
         </motion.p>

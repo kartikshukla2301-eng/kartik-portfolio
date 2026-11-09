@@ -11,9 +11,10 @@ import {
   Trophy,
   Briefcase,
   CheckCircle,
+  Download,
+  ArrowUpRight,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Badge } from "@/components/ui/Badge";
 import { siteConfig, experiences, projects, certifications, recruiterStats } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
 
@@ -46,28 +47,41 @@ export function RecruiterDashboard() {
     <section className="relative py-32 px-4">
       <div className="mx-auto max-w-5xl" ref={ref}>
         <SectionHeading
-          eyebrow="For Recruiters"
-          title="Quick Dossier"
-          description="Key academic, internship, and technical qualifications summarized for hiring teams."
+          eyebrow="Hiring Telemetry"
+          title="Candidate Dossier & Fast Track"
+          description="High-density engineering snapshot: verified internships, core systems stack, and direct resume access for talent acquisition teams."
         />
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="premium-card glass relative overflow-hidden rounded-2xl border border-white/10"
+          className="court-card relative overflow-hidden rounded-2xl border border-[rgba(255,250,240,0.14)] bg-[#12100D]/95 backdrop-blur-md shadow-2xl"
         >
-          {/* Subtle gradient accent */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-violet/[0.08] via-transparent to-accent-cyan/[0.05]" />
+          {/* Subtle court floor glow */}
+          <div className="absolute top-0 right-0 h-48 w-48 bg-[#C96F4A]/10 blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 p-7 md:p-10">
+          {/* Monospace top bar */}
+          <div className="flex items-center justify-between border-b border-[rgba(255,250,240,0.08)] bg-[#0B0A08]/70 px-6 py-3 font-mono text-[11px] text-[rgba(255,250,240,0.5)]">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C96F4A]" />
+              <span className="tracking-widest uppercase text-[#FFD6A1]">
+                SPEC: KARTIK-SHUKLA // ATS-OPTIMIZED
+              </span>
+            </div>
+            <span className="hidden sm:inline tracking-wider">
+              STATUS: READY FOR INTERVIEW
+            </span>
+          </div>
+
+          <div className="relative z-10 p-7 sm:p-10">
             <div className="grid gap-8 md:grid-cols-2">
               {/* Left column */}
               <div className="space-y-6">
                 {/* Portrait + Name */}
                 <div className="flex items-start gap-4">
-                  <div className="portrait-frame group relative shrink-0">
-                    <div className="relative h-20 w-20 overflow-hidden rounded-xl border border-white/10 shadow-sm">
+                  <div className="relative shrink-0">
+                    <div className="relative h-20 w-20 overflow-hidden rounded-xl border border-[rgba(255,250,240,0.16)] bg-[#161310] shadow-sm">
                       <Image
                         src={siteConfig.portrait.src}
                         alt={siteConfig.portrait.alt}
@@ -81,73 +95,76 @@ export function RecruiterDashboard() {
                   </div>
                   <div>
                     <h3
-                      className="text-xl font-bold text-white"
+                      className="text-xl font-bold text-[#F6F0E2]"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {siteConfig.name}
                     </h3>
-                    <p className="text-xs font-semibold text-accent-violet">
+                    <p className="font-mono text-xs font-semibold text-[#FFD6A1]">
                       {siteConfig.primaryTitle} | {siteConfig.secondaryTitle}
                     </p>
-                    <p className="mt-1 text-xs text-white/50">
+                    <p className="mt-1 font-mono text-xs text-[rgba(255,250,240,0.5)]">
                       {siteConfig.education.college}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <BookOpen size={16} className="mt-1 shrink-0 text-accent-cyan" />
+                  <BookOpen size={16} className="mt-1 shrink-0 text-[#C96F4A]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Education</p>
-                    <p className="text-xs text-white/60">
+                    <p className="text-sm font-semibold text-[#F6F0E2]">Education</p>
+                    <p className="text-xs text-[rgba(255,250,240,0.6)]">
                       {siteConfig.education.degree} — {siteConfig.education.university}
                     </p>
-                    <p className="text-xs font-medium text-accent-violet mt-0.5">
+                    <p className="font-mono text-xs text-[#FFD6A1] mt-0.5">
                       CGPA: {siteConfig.education.cgpa} • Graduating {siteConfig.education.expectedGraduation} (Expected)
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Briefcase size={16} className="mt-1 shrink-0 text-accent-violet" />
+                  <Briefcase size={16} className="mt-1 shrink-0 text-[#C96F4A]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Verified Internships</p>
-                    <p className="text-xs text-white/60 leading-relaxed">
+                    <p className="text-sm font-semibold text-[#F6F0E2]">Verified Internships</p>
+                    <p className="text-xs text-[rgba(255,250,240,0.6)] leading-relaxed">
                       Pristyn Care (HIS Full Stack), OnCare Cancer Centre (Developer Intern), Infosys Makers Lab (IoT), The Developers Arena (Python).
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Target size={16} className="mt-1 shrink-0 text-accent-amber" />
+                  <Target size={16} className="mt-1 shrink-0 text-[#FFD6A1]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Career Positioning</p>
-                    <p className="text-xs leading-relaxed text-white/60">
-                      Open to Full Stack Developer, Web Developer, and Software Development Engineer roles. Focused on building reliable web applications, clean REST APIs, and production AI integrations.
+                    <p className="text-sm font-semibold text-[#F6F0E2]">Career Positioning</p>
+                    <p className="text-xs leading-relaxed text-[rgba(255,250,240,0.6)] font-sans">
+                      Targeting Full Stack Developer, Software Engineer, and AI Applications roles. Strong foundations in distributed services, scalable REST APIs, and production LLM orchestration.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Layers size={16} className="mt-1 shrink-0 text-accent-cyan" />
+                  <Layers size={16} className="mt-1 shrink-0 text-[#C96F4A]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Core Stack</p>
-                    <div className="mt-1.5 flex flex-wrap gap-1.5">
+                    <p className="text-sm font-semibold text-[#F6F0E2]">Core Production Stack</p>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
                       {stackChips.map((chip) => (
-                        <Badge key={chip} variant="outline" className="text-[10px]">
+                        <span
+                          key={chip}
+                          className="rounded border border-[rgba(255,250,240,0.1)] bg-[#161310] px-2 py-0.5 font-mono text-[10px] text-[rgba(255,250,240,0.7)]"
+                        >
                           {chip}
-                        </Badge>
+                        </span>
                       ))}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Trophy size={16} className="mt-1 shrink-0 text-amber-500" />
+                  <Trophy size={16} className="mt-1 shrink-0 text-[#FFD6A1]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Leadership & Extracurricular</p>
-                    <p className="text-xs text-white/60 leading-relaxed">
-                      {recruiterStats.leadership} — led digital outreach and event branding. Active participant in coding communities.
+                    <p className="text-sm font-semibold text-[#F6F0E2]">Leadership & Community</p>
+                    <p className="text-xs text-[rgba(255,250,240,0.6)] leading-relaxed font-sans">
+                      {recruiterStats.leadership} — led digital outreach and event branding. Active open-source contributor and technical mentor.
                     </p>
                   </div>
                 </div>
@@ -163,12 +180,12 @@ export function RecruiterDashboard() {
                       initial={{ opacity: 0, y: 15 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
-                      className="glass rounded-xl p-4 text-center border border-white/10 hover:border-accent-violet/30 transition-colors"
+                      className="rounded-xl border border-[rgba(255,250,240,0.1)] bg-[#161310] p-4 text-center transition-colors hover:border-[#C96F4A]/40"
                     >
-                      <div className="text-xl sm:text-2xl font-bold text-accent-violet">
+                      <div className="text-2xl font-bold font-mono text-[#FFD6A1]">
                         {stat.value}
                       </div>
-                      <div className="text-[11px] text-white/50 mt-1 font-medium">
+                      <div className="font-mono text-[11px] text-[rgba(255,250,240,0.5)] mt-1">
                         {stat.label}
                       </div>
                     </motion.div>
@@ -176,32 +193,34 @@ export function RecruiterDashboard() {
                 </div>
 
                 {/* Resume Action */}
-                <div className="p-5 rounded-xl border border-white/10 bg-white/[0.02] space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent-violet">
-                    <CheckCircle size={14} className="text-emerald-500" />
-                    Verified Resume Available
+                <div className="p-6 rounded-xl border border-[rgba(255,250,240,0.12)] bg-[#161310]/80 space-y-3">
+                  <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#C96F4A]">
+                    <CheckCircle size={14} className="text-[#FFD6A1]" />
+                    <span>VERIFIED RESUME // READY FOR REVIEW</span>
                   </div>
-                  <p className="text-xs text-white/60">
-                    Access Kartik&apos;s latest resume with complete details of healthcare systems and AI platforms.
+                  <p className="text-xs text-[rgba(255,250,240,0.6)] font-sans">
+                    Access Kartik&apos;s latest PDF curriculum vitae with verified healthcare engineering metrics and production architecture summaries.
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5 pt-1">
                     <a
                       href={parsedResume.isValid && parsedResume.viewUrl ? parsedResume.viewUrl : "#certifications"}
                       target={parsedResume.isValid && parsedResume.viewUrl ? "_blank" : undefined}
                       rel={parsedResume.isValid && parsedResume.viewUrl ? "noopener noreferrer" : undefined}
-                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-accent-violet px-4 py-2.5 text-xs font-semibold text-white shadow-lg shadow-accent-violet/20 hover:bg-accent-violet/90 transition-all text-center"
+                      className="btn-infinity flex-1 justify-center"
                     >
                       <FileText size={14} />
-                      View Resume (PDF)
+                      <span>OPEN RESUME (PDF)</span>
+                      <span className="btn-infinity-arrow">→</span>
                     </a>
                     {parsedResume.isValid && parsedResume.downloadUrl && (
                       <a
                         href={parsedResume.downloadUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-white/80 hover:bg-white/10 transition-all"
+                        className="btn-infinity-secondary"
                       >
-                        Download PDF
+                        <Download size={14} />
+                        <span>DOWNLOAD</span>
                       </a>
                     )}
                   </div>
@@ -209,8 +228,8 @@ export function RecruiterDashboard() {
 
                 {/* Professional Links */}
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-white/40 mb-2.5">
-                    Profiles & Contact
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#C96F4A] mb-2.5">
+                    EXTERNAL PROFILES & VERIFICATION
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {[
@@ -218,7 +237,7 @@ export function RecruiterDashboard() {
                       { label: "LinkedIn", href: siteConfig.linkedin },
                       { label: "LeetCode", href: siteConfig.leetcode },
                       { label: "GeeksforGeeks", href: siteConfig.geeksforgeeks },
-                      { label: "Email", href: `mailto:${siteConfig.email}` },
+                      { label: "Email Direct", href: `mailto:${siteConfig.email}` },
                       { label: "Instagram", href: siteConfig.instagram },
                     ].map((link) => (
                       <a
@@ -226,9 +245,10 @@ export function RecruiterDashboard() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="glass rounded-lg py-2 px-3 text-center text-xs font-medium text-white/60 transition-all hover:border-accent-violet/40 hover:text-white hover:bg-white/[0.06]"
+                        className="flex items-center justify-between rounded-lg border border-[rgba(255,250,240,0.1)] bg-[#161310] py-2 px-3 font-mono text-xs text-[rgba(255,250,240,0.7)] transition-all hover:border-[#C96F4A] hover:text-[#FFD6A1]"
                       >
-                        {link.label}
+                        <span>{link.label}</span>
+                        <ArrowUpRight size={11} className="text-[#C96F4A]" />
                       </a>
                     ))}
                   </div>

@@ -31,22 +31,22 @@ const AbstractShape = memo(function AbstractShape() {
       <mesh ref={meshRef} scale={2.1}>
         <icosahedronGeometry args={[1, 3]} />
         <MeshDistortMaterial
-          color="#7C5CFF"
-          roughness={0.2}
-          metalness={0.8}
+          color="#C96F4A"
+          roughness={0.25}
+          metalness={0.75}
           distort={0.25}
           speed={1.5}
           transparent
-          opacity={0.85}
+          opacity={0.8}
         />
       </mesh>
       <mesh ref={wireRef} scale={2.4} position={[0, 0, -0.4]}>
         <icosahedronGeometry args={[1, 2]} />
         <meshStandardMaterial
-          color="#22D3EE"
+          color="#FFD6A1"
           wireframe
           transparent
-          opacity={0.15}
+          opacity={0.18}
         />
       </mesh>
     </Float>
@@ -94,7 +94,7 @@ const Particles = memo(function Particles() {
       </bufferGeometry>
       <pointsMaterial
         size={0.025}
-        color="#7C5CFF"
+        color="#FFD6A1"
         transparent
         opacity={0.35}
         sizeAttenuation
@@ -107,9 +107,9 @@ function Scene() {
   return (
     <>
       <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={0.9} color="#ffffff" />
-      <pointLight position={[-3, 2, 4]} intensity={1} color="#7C5CFF" />
-      <pointLight position={[3, -2, 2]} intensity={0.6} color="#22D3EE" />
+      <directionalLight position={[5, 5, 5]} intensity={0.9} color="#FFFFFF" />
+      <pointLight position={[-3, 2, 4]} intensity={1} color="#C96F4A" />
+      <pointLight position={[3, -2, 2]} intensity={0.6} color="#FFD6A1" />
       <AbstractShape />
       <Particles />
     </>

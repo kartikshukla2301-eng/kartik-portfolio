@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 const CANONICAL_URL = "https://kartik-portfolio-chi-eight.vercel.app";
 
 export const viewport: Viewport = {
-  themeColor: "#030303",
+  themeColor: "#0B0A08",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -183,7 +183,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#030303] text-[#e8e8e8]">
+      <body className="min-h-screen bg-[#0B0A08] text-[rgba(255,250,240,0.88)]">
         {children}
       </body>
     </html>

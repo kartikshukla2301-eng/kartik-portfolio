@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
-import { Menu, X, FileText } from "lucide-react";
+import { Menu, X, ArrowUpRight, FileText } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
 
@@ -62,35 +62,36 @@ export function Navbar() {
 
   return (
     <>
-      {/* Desktop Nav */}
+      {/* Desktop Bar */}
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.8 }}
+        transition={{ duration: 0.6, delay: 1.2 }}
         className={`fixed top-4 left-1/2 z-50 -translate-x-1/2 transition-all duration-500 ${
           scrolled ? "w-[95%] max-w-4xl" : "w-[92%] max-w-5xl"
         }`}
       >
         <nav
-          className={`glass flex items-center justify-between rounded-full px-5 py-3 transition-all duration-300 ${
-            scrolled ? "py-2.5 shadow-lg shadow-black/40 border-accent-violet/30" : ""
+          className={`flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-300 border border-[rgba(255,250,240,0.14)] bg-[#12100D]/90 backdrop-blur-xl ${
+            scrolled ? "shadow-2xl shadow-black/80 border-[#C96F4A]/30 py-2" : ""
           }`}
         >
           {/* Logo */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center gap-2 text-sm font-bold text-white"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="flex items-center gap-2 text-sm font-bold tracking-tight text-[rgba(255,250,240,0.95)]"
           >
-            <span className="text-gradient font-black text-base">KS</span>
-            <span className="hidden sm:inline font-semibold text-xs tracking-tight text-white/90">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#C96F4A] text-xs font-black text-white">
+              KS
+            </span>
+            <span className="font-mono text-xs uppercase tracking-wider text-[rgba(255,250,240,0.7)]">
               Kartik Shukla
             </span>
           </a>
 
           {/* Desktop Links */}
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden items-center gap-1 lg:flex font-mono text-[11px] uppercase tracking-wider">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
@@ -98,16 +99,16 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
+                  className={`relative rounded-full px-3 py-1.5 transition-all duration-200 ${
                     isActive
-                      ? "text-white"
-                      : "text-white/50 hover:text-white/90"
+                      ? "text-white font-bold"
+                      : "text-[rgba(255,250,240,0.5)] hover:text-white"
                   }`}
                 >
                   {isActive && (
                     <motion.div
-                      layoutId="activeNav"
-                      className="absolute inset-0 rounded-full bg-white/10"
+                      layoutId="activeNavInfinity"
+                      className="absolute inset-0 rounded-full bg-[rgba(201,111,74,0.18)] border border-[rgba(201,111,74,0.4)]"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
@@ -124,19 +125,19 @@ export function Navbar() {
                 href={parsedResume.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-accent-violet px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-accent-violet/90 hover:shadow-[0_0_15px_rgba(124,92,255,0.4)]"
+                className="btn-infinity py-1.5 px-4 text-[11px]"
               >
-                <FileText size={13} />
-                Resume
+                <span>Resume</span>
+                <ArrowUpRight size={13} className="text-[#FFD6A1]" />
               </a>
             ) : (
               <a
                 href="#certifications"
                 onClick={(e) => handleNavClick(e, "#certifications")}
-                className="flex items-center gap-1.5 rounded-full bg-accent-violet px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-accent-violet/90 hover:shadow-[0_0_15px_rgba(124,92,255,0.4)]"
+                className="btn-infinity py-1.5 px-4 text-[11px]"
               >
-                <FileText size={13} />
-                Credentials
+                <span>Dossier</span>
+                <ArrowUpRight size={13} className="text-[#FFD6A1]" />
               </a>
             )}
           </div>
@@ -144,7 +145,7 @@ export function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white transition-colors lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-[rgba(255,250,240,0.7)] hover:bg-white/10 hover:text-white transition-colors lg:hidden cursor-pointer"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -152,7 +153,7 @@ export function Navbar() {
         </nav>
       </motion.header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -164,7 +165,7 @@ export function Navbar() {
           >
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+              className="absolute inset-0 bg-[#0B0A08]/85 backdrop-blur-xl"
               onClick={() => setMobileOpen(false)}
             />
 
@@ -174,9 +175,9 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 350, damping: 30 }}
-              className="absolute inset-y-0 right-0 w-full max-w-xs bg-[rgba(10,10,12,0.97)] border-l border-white/10 p-6 pt-24 shadow-2xl flex flex-col justify-between"
+              className="absolute inset-y-0 right-0 w-full max-w-xs bg-[#12100D] border-l border-[rgba(255,250,240,0.14)] p-6 pt-24 shadow-2xl flex flex-col justify-between"
             >
-              <nav className="flex flex-col gap-1.5">
+              <nav className="flex flex-col gap-2 font-mono text-xs uppercase tracking-wider">
                 {navLinks.map((link, i) => {
                   const isActive = activeSection === link.href.replace("#", "");
                   return (
@@ -187,12 +188,11 @@ export function Navbar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.05 + i * 0.04 }}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className={`rounded-xl px-4 py-2.5 text-base font-semibold transition-all duration-200 ${
+                      className={`rounded-xl px-4 py-3 transition-all duration-200 ${
                         isActive
-                          ? "bg-white/10 text-white"
-                          : "text-white/50 hover:text-white hover:bg-white/5"
+                          ? "bg-[#C96F4A]/15 border border-[#C96F4A]/40 text-white font-bold"
+                          : "text-[rgba(255,250,240,0.5)] hover:text-white hover:bg-white/5"
                       }`}
-                      style={{ fontFamily: "var(--font-display)" }}
                     >
                       {link.label}
                     </motion.a>
@@ -200,25 +200,25 @@ export function Navbar() {
                 })}
               </nav>
 
-              <div className="pt-6 border-t border-white/10">
+              <div className="pt-6 border-t border-[rgba(255,250,240,0.12)]">
                 {parsedResume.isValid && parsedResume.viewUrl ? (
                   <a
                     href={parsedResume.viewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)]"
+                    className="btn-infinity w-full text-xs font-semibold py-3"
                   >
                     <FileText size={15} />
-                    View Resume
+                    View Verified Resume
                   </a>
                 ) : (
                   <a
                     href="#certifications"
                     onClick={(e) => handleNavClick(e, "#certifications")}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)]"
+                    className="btn-infinity w-full text-xs font-semibold py-3"
                   >
                     <FileText size={15} />
-                    View Credentials Library
+                    View Credentials
                   </a>
                 )}
               </div>
