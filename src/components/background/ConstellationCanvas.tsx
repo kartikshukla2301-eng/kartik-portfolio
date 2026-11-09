@@ -60,7 +60,7 @@ export function ConstellationCanvas() {
     window.addEventListener("resize", handleResize, { passive: true });
     document.addEventListener("visibilitychange", handleVisibility);
 
-    const colors = ["#7C5CFF", "#22D3EE", "#FFB86B", "#ffffff"];
+    const colors = ["#C96F4A", "#FFD6A1", "#EDE4D2", "rgba(255, 250, 240, 0.7)"];
     const count = Math.min(50, Math.floor((width * height) / 25000));
 
     const particles: Particle[] = Array.from({ length: count }, () => {
@@ -131,7 +131,7 @@ export function ConstellationCanvas() {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = "#7C5CFF";
+            ctx.strokeStyle = "#C96F4A";
             ctx.globalAlpha = lineAlpha;
             ctx.lineWidth = 0.75;
             ctx.stroke();

@@ -27,7 +27,7 @@ export function GlassCard({
       const posX = ((e.clientX - rect.left) / rect.width) * 100;
       const posY = ((e.clientY - rect.top) / rect.height) * 100;
 
-      cardRef.current.style.transform = `perspective(800px) rotateX(${y * -6}deg) rotateY(${x * 6}deg) scale3d(1.01, 1.01, 1.01)`;
+      cardRef.current.style.transform = `perspective(800px) rotateX(${y * -5}deg) rotateY(${x * 5}deg) scale3d(1.01, 1.01, 1.01)`;
       cardRef.current.style.setProperty("--mouse-x", `${posX}%`);
       cardRef.current.style.setProperty("--mouse-y", `${posY}%`);
     },
@@ -44,7 +44,7 @@ export function GlassCard({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`premium-card glass relative overflow-hidden rounded-2xl p-6 transition-all duration-300 ${className}`}
+      className={`group court-card relative overflow-hidden rounded-2xl p-6 transition-all duration-300 border border-[rgba(255,250,240,0.12)] bg-[#12100D]/90 backdrop-blur-md hover:border-[#C96F4A]/40 ${className}`}
       style={{
         boxShadow: glow || undefined,
         willChange: tilt ? "transform" : "auto",
@@ -55,10 +55,10 @@ export function GlassCard({
       {/* Dynamic cursor glow via CSS variable */}
       {tilt && (
         <div
-          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 hover:opacity-100 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(102, 81, 204, 0.08), transparent 60%)",
+              "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 111, 74, 0.16), transparent 60%)",
           }}
         />
       )}

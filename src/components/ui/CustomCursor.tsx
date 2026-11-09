@@ -46,7 +46,7 @@ export function CustomCursor() {
         target.closest("[contenteditable]")
       ) {
         setCursorState("text");
-      } else if (target.closest(".glass") || target.closest(".premium-card")) {
+      } else if (target.closest(".glass") || target.closest(".premium-card") || target.closest(".court-card")) {
         setCursorState("hover");
       } else {
         setCursorState("default");
@@ -72,17 +72,17 @@ export function CustomCursor() {
   };
 
   const cursorColors = {
-    default: "rgba(255, 255, 255, 0.2)",
-    hover: "rgba(124, 92, 255, 0.15)",
-    text: "rgba(34, 211, 238, 0.8)",
-    pointer: "rgba(124, 92, 255, 0.2)",
+    default: "rgba(201, 111, 74, 0.18)",
+    hover: "rgba(201, 111, 74, 0.12)",
+    text: "rgba(255, 214, 161, 0.8)",
+    pointer: "rgba(201, 111, 74, 0.25)",
   };
 
   const borderColors = {
-    default: "rgba(255, 255, 255, 0.4)",
-    hover: "rgba(124, 92, 255, 0.6)",
-    text: "rgba(34, 211, 238, 0)",
-    pointer: "rgba(124, 92, 255, 0.8)",
+    default: "rgba(201, 111, 74, 0.45)",
+    hover: "rgba(255, 214, 161, 0.6)",
+    text: "transparent",
+    pointer: "rgba(201, 111, 74, 0.8)",
   };
 
   const size = cursorSizes[cursorState];
@@ -107,10 +107,7 @@ export function CustomCursor() {
           backgroundColor: cursorColors[cursorState],
           borderWidth: cursorState === "text" ? 0 : 1.5,
           borderColor: borderColors[cursorState],
-          borderRadius:
-            cursorState === "text"
-              ? "2px"
-              : "50%",
+          borderRadius: cursorState === "text" ? "2px" : "50%",
           willChange: "transform",
         }}
         animate={{
@@ -131,9 +128,9 @@ export function CustomCursor() {
         }}
       >
         <div
-          className="h-1.5 w-1.5 rounded-full bg-white"
+          className="h-1.5 w-1.5 rounded-full bg-[#FFD6A1]"
           style={{
-            opacity: cursorState === "text" ? 0 : 0.9,
+            opacity: cursorState === "text" ? 0 : 0.95,
           }}
         />
       </motion.div>

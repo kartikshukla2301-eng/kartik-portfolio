@@ -9,10 +9,8 @@ import {
   Eye,
   CheckCircle,
   FileCheck2,
-  Sparkles,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Badge } from "@/components/ui/Badge";
 import { DocumentModal } from "@/components/ui/DocumentModal";
 import { certifications, documentLinks, siteConfig, CertificationItem } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
@@ -62,9 +60,9 @@ export function Certifications() {
     <section id="certifications" className="relative py-32 px-4">
       <div className="mx-auto max-w-5xl" ref={ref}>
         <SectionHeading
-          eyebrow="Credentials"
-          title="Document Library & Certifications"
-          description="Verified professional credentials, certifications, and technical documentation hosted on Google Drive."
+          eyebrow="Accreditation"
+          title="Document Library & Verified Credentials"
+          description="Direct access to verified certifications, university credentials, and primary technical documentation stored in the cloud repository."
         />
 
         {/* Featured Resume Access Card */}
@@ -72,31 +70,27 @@ export function Certifications() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="premium-card glass mb-10 overflow-hidden rounded-2xl p-6 sm:p-8"
+          className="court-card group mb-12 overflow-hidden rounded-2xl border border-[rgba(255,250,240,0.16)] bg-[#12100D]/95 backdrop-blur-md p-7 sm:p-9 transition-all duration-300 hover:border-[#C96F4A]/50"
         >
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent-violet/10 text-accent-violet shadow-[0_0_20px_rgba(124,92,255,0.2)]">
-                <FileCheck2 size={28} />
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#C96F4A]/15 border border-[#C96F4A]/30 text-[#FFD6A1] shadow-[0_0_25px_rgba(201,111,74,0.25)]">
+                <FileCheck2 size={26} />
               </div>
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-accent-violet">
-                    Official Document
-                  </span>
-                  <Badge variant="accent" className="text-[10px]">
-                    <Sparkles size={10} className="mr-0.5" />
-                    Latest
-                  </Badge>
+                <div className="flex items-center gap-2 mb-1 font-mono text-[11px] tracking-widest text-[#C96F4A] uppercase">
+                  <span>PRIMARY CURRICULUM VITAE</span>
+                  <span>{"//"}</span>
+                  <span className="text-[#FFD6A1]">2026 EDITION</span>
                 </div>
                 <h3
-                  className="text-xl font-bold tracking-tight text-white sm:text-2xl"
+                  className="text-xl sm:text-2xl font-bold tracking-tight text-[#F6F0E2]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   Latest Resume – {siteConfig.name}
                 </h3>
-                <p className="mt-1 text-xs sm:text-sm text-white/50">
-                  Full Stack Developer | AI Engineer • Updated with healthcare systems, production internships & AI platforms
+                <p className="mt-1 text-xs sm:text-sm text-[rgba(255,250,240,0.6)] font-sans max-w-xl">
+                  Full Stack Developer & AI Engineer • Complete dossier covering production healthcare systems, R&D Maker Labs, and scalable AI platforms.
                 </p>
               </div>
             </div>
@@ -111,10 +105,11 @@ export function Certifications() {
                     "2026"
                   )
                 }
-                className="flex items-center gap-2 rounded-xl bg-accent-violet px-5 py-2.5 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)] transition-all hover:bg-accent-violet/90 hover:shadow-[0_0_30px_rgba(124,92,255,0.45)] cursor-pointer"
+                className="btn-infinity cursor-pointer"
               >
                 <Eye size={15} />
-                View Resume
+                <span>VIEW RESUME</span>
+                <span className="btn-infinity-arrow">→</span>
               </button>
 
               {parsedResume.isValid && parsedResume.downloadUrl && (
@@ -122,10 +117,10 @@ export function Certifications() {
                   href={parsedResume.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-xs font-semibold text-white/80 transition-all hover:bg-white/10 hover:text-white"
+                  className="btn-infinity-secondary"
                 >
                   <Download size={15} />
-                  Download PDF
+                  <span>DOWNLOAD PDF</span>
                 </a>
               )}
             </div>
@@ -178,6 +173,7 @@ function CredentialCard({
   const isInView = useInView(ref, { once: true, margin: "-40px" });
 
   const driveUrl = documentLinks[cert.driveKey] || "";
+  const indexStr = String(index + 1).padStart(2, "0");
 
   return (
     <motion.div
@@ -185,39 +181,43 @@ function CredentialCard({
       initial={{ opacity: 0, y: 25 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="premium-card glass group flex flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:border-accent-violet/40 hover:shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+      className="court-card group flex flex-col justify-between rounded-2xl p-6 sm:p-7 border border-[rgba(255,250,240,0.12)] bg-[#12100D]/90 backdrop-blur-md transition-all duration-300 hover:border-[#C96F4A]/40"
     >
       <div>
-        <div className="mb-4 flex items-start gap-3.5">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-violet/10 text-accent-violet transition-colors group-hover:bg-accent-violet group-hover:text-white">
-            <FileText size={20} />
+        <div className="mb-4 flex items-start justify-between gap-3">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#C96F4A]/12 border border-[#C96F4A]/25 text-[#FFD6A1] transition-colors group-hover:bg-[#C96F4A] group-hover:text-[#0B0A08]">
+            <FileText size={18} />
           </div>
-          <div className="min-w-0">
-            <span className="text-[10px] font-bold tracking-wider uppercase text-accent-violet">
-              Verified Credential
-            </span>
-            <h4
-              className="mt-0.5 text-base font-bold leading-snug text-white"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              {cert.title}
-            </h4>
-            <p className="mt-1 text-xs font-medium text-white/50">
-              {cert.issuer}
-            </p>
-          </div>
+          <span className="font-mono text-[10px] tracking-widest text-[rgba(255,250,240,0.35)]">
+            {`CERT ${indexStr} //`}
+          </span>
+        </div>
+
+        <div className="min-w-0">
+          <span className="font-mono text-[10px] tracking-widest uppercase text-[#C96F4A]">
+            VERIFIED CREDENTIAL
+          </span>
+          <h4
+            className="mt-1 text-base font-bold leading-snug text-[#F6F0E2] group-hover:text-[#FFD6A1] transition-colors"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            {cert.title}
+          </h4>
+          <p className="mt-1 font-mono text-xs text-[rgba(255,250,240,0.5)]">
+            {cert.issuer}
+          </p>
         </div>
 
         {cert.location && (
-          <p className="mb-3 text-[11px] text-white/40 italic">
+          <p className="mt-2 font-mono text-[11px] text-[rgba(255,250,240,0.4)] italic">
             {cert.location}
           </p>
         )}
       </div>
 
-      <div className="mt-5 pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-2">
-        <span className="flex items-center gap-1.5 text-xs text-white/40">
-          <CheckCircle size={13} className="text-emerald-400" />
+      <div className="mt-6 pt-4 border-t border-[rgba(255,250,240,0.08)] flex flex-wrap items-center justify-between gap-2">
+        <span className="flex items-center gap-1.5 font-mono text-xs text-[rgba(255,250,240,0.5)]">
+          <CheckCircle size={13} className="text-[#C96F4A]" />
           {cert.year}
         </span>
 
@@ -227,10 +227,10 @@ function CredentialCard({
               href={cert.credentialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-accent-cyan transition-colors hover:text-accent-cyan/80"
+              className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-[#FFD6A1] transition-colors hover:text-[#C96F4A]"
             >
               <ExternalLink size={12} />
-              Verify
+              VERIFY
             </a>
           )}
 
@@ -238,10 +238,10 @@ function CredentialCard({
             onClick={() =>
               onOpenDoc(cert.title, driveUrl, cert.issuer, cert.year, cert.credentialUrl)
             }
-            className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 transition-all hover:bg-accent-violet hover:text-white hover:border-accent-violet cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[rgba(255,250,240,0.14)] bg-[#161310] px-3 py-1.5 font-mono text-xs font-medium text-[rgba(255,250,240,0.8)] transition-all hover:border-[#C96F4A] hover:bg-[#C96F4A] hover:text-[#0B0A08] cursor-pointer"
           >
-            <Eye size={13} />
-            View Document
+            <Eye size={12} />
+            VIEW DOC
           </button>
         </div>
       </div>

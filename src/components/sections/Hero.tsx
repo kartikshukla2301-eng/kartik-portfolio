@@ -4,11 +4,10 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { ArrowDown, Mail, ExternalLink, FileText } from "lucide-react";
+import { ArrowDown, Mail, ExternalLink, FileText, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { AnimatedText } from "@/components/ui/AnimatedText";
 import { siteConfig, tagCloud } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
 
@@ -31,7 +30,7 @@ const stats = [
   {
     num: "06",
     label: "Verified Credentials",
-    detail: "AWS, MongoDB, Python, Claude Code",
+    detail: "AWS, MongoDB, Python, Softpro",
   },
   {
     num: "7.9",
@@ -48,10 +47,10 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const portraitY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const portraitOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, 70]);
+  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+  const portraitOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 35]);
 
   const parsedResume = parseGoogleDriveUrl(siteConfig.resumeUrl);
 
@@ -59,32 +58,40 @@ export function Hero() {
     <section
       id="home"
       ref={ref}
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pt-28 pb-12"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pt-32 pb-12 bg-[#0B0A08]"
     >
-      {/* 3D Background */}
+      {/* 3D Warm Copper Scene */}
       <div className="absolute inset-0 z-0">
         <HeroScene />
       </div>
 
-      {/* Content */}
+      {/* Infinity Socks Court Floor Ambient Lighting */}
+      <div className="court-floor-glow absolute inset-0 z-0" />
+
+      {/* Main Content */}
       <div className="relative z-10 mx-auto max-w-5xl text-center">
-        {/* Portrait */}
+        {/* HUD Top Tag */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 30 }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(255,250,240,0.16)] bg-[#12100D]/90 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-[#C96F4A] backdrop-blur-md"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-[#C96F4A] animate-pulse" />
+          AVAILABLE FOR FULL-TIME ROLES & INTERNSHIPS
+        </motion.div>
+
+        {/* Portrait with Court Halo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85, y: 30 }}
           animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
           style={{ y: portraitY, scale: portraitScale, opacity: portraitOpacity }}
-          className="mb-6 flex justify-center sm:mb-8"
+          className="mb-8 flex justify-center"
         >
           <div className="portrait-frame group relative">
-            {/* Outer glow rings */}
-            <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-[rgba(124,92,255,0.15)] via-[rgba(34,211,238,0.1)] to-[rgba(124,92,255,0.15)] blur-2xl transition-all duration-700 group-hover:from-[rgba(124,92,255,0.25)] group-hover:via-[rgba(34,211,238,0.15)] group-hover:to-[rgba(124,92,255,0.25)]" />
-            <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-accent-violet/40 via-accent-cyan/30 to-accent-violet/40 opacity-70" />
-
             {/* Main image container */}
-            <div className="relative h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40 md:h-48 md:w-48 shadow-[0_0_40px_rgba(124,92,255,0.2)]">
-              <div className="absolute inset-0 rounded-full border-2 border-white/10 shadow-[inset_0_0_20px_rgba(124,92,255,0.2)] z-10" />
-
+            <div className="relative h-36 w-36 overflow-hidden rounded-full sm:h-44 sm:w-44 md:h-52 md:w-52 border-2 border-[rgba(255,250,240,0.2)] shadow-[0_12px_45px_rgba(0,0,0,0.8),0_0_35px_rgba(201,111,74,0.25)]">
               <Image
                 src={siteConfig.portrait.src}
                 alt={siteConfig.portrait.alt}
@@ -96,178 +103,173 @@ export function Hero() {
                 className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
 
-              {/* Cinematic lighting overlay */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-t from-[rgba(3,3,3,0.5)] via-transparent to-[rgba(124,92,255,0.08)] pointer-events-none" />
+              {/* Warm court floor reflection overlay */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-t from-[#0B0A08]/60 via-transparent to-[rgba(255,214,161,0.06)] pointer-events-none" />
             </div>
 
-            {/* Floating accent dots */}
+            {/* Floating copper accent dots */}
             <motion.div
               animate={{ y: [-3, 3, -3], x: [-2, 2, -2] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -right-1 top-4 h-2.5 w-2.5 rounded-full bg-accent-cyan shadow-[0_0_10px_rgba(34,211,238,0.6)]"
+              className="absolute -right-1 top-4 h-2.5 w-2.5 rounded-full bg-[#FFD6A1] shadow-[0_0_12px_rgba(255,214,161,0.8)]"
             />
             <motion.div
               animate={{ y: [2, -4, 2], x: [1, -3, 1] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -left-2 bottom-8 h-2 w-2 rounded-full bg-accent-violet shadow-[0_0_10px_rgba(124,92,255,0.6)]"
+              className="absolute -left-2 bottom-8 h-2 w-2 rounded-full bg-[#C96F4A] shadow-[0_0_12px_rgba(201,111,74,0.8)]"
             />
           </div>
         </motion.div>
 
-        {/* Status Badge */}
+        {/* Giant Headline */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="mb-4 sm:mb-6"
-        >
-          <Badge variant="accent" pulse>
-            Available for Internships & Full-Time Roles
-          </Badge>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.35 }}
-          className="mb-4 sm:mb-5"
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="mb-5"
           style={{ y: contentY }}
         >
           <h1
-            className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-[rgba(255,250,240,0.95)]"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            <span className="text-white">Hi, I&apos;m </span>
-            <span className="text-gradient">
-              <AnimatedText text="Kartik Shukla" delay={0.4} />
-            </span>
+            <span>KARTIK </span>
+            <span className="text-gradient-warm">SHUKLA</span>
           </h1>
 
-          <p className="mt-3 text-lg font-bold sm:text-xl md:text-2xl text-accent-violet">
-            {siteConfig.primaryTitle}{" "}
-            <span className="text-white/40 font-normal">|</span>{" "}
-            <span className="text-white/70 font-medium">
-              {siteConfig.secondaryTitle}
-            </span>
-          </p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-3 font-mono text-sm sm:text-base font-semibold tracking-wide text-[#C96F4A]">
+            <span>FULL STACK DEVELOPER</span>
+            <span className="text-[rgba(255,250,240,0.25)]">•</span>
+            <span className="text-[#FFD6A1]">AI ENGINEER</span>
+            <span className="text-[rgba(255,250,240,0.25)]">•</span>
+            <span className="text-[rgba(255,250,240,0.65)]">SOFTWARE ARCHITECT</span>
+          </div>
         </motion.div>
 
-        {/* Description */}
+        {/* Narrative Description */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.55 }}
-          className="mx-auto mb-8 max-w-xl text-sm sm:text-base leading-relaxed text-white/50 sm:mb-9 sm:max-w-2xl"
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mx-auto mb-8 max-w-xl text-sm sm:text-base leading-relaxed text-[rgba(255,250,240,0.6)] sm:mb-9 sm:max-w-2xl"
         >
           {siteConfig.heroDescription}
         </motion.p>
 
-        {/* Primary & Secondary Actions */}
+        {/* Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="mb-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mb-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 font-mono text-xs uppercase tracking-wider"
         >
           {/* Primary Action 1: View Projects */}
           <MagneticButton href="#projects" variant="primary">
-            <ExternalLink size={16} />
-            View Projects
+            <ExternalLink size={14} />
+            Explore Projects
           </MagneticButton>
 
           {/* Primary Action 2: View Resume */}
           {parsedResume.isValid && parsedResume.viewUrl ? (
             <MagneticButton href={parsedResume.viewUrl} variant="secondary">
-              <FileText size={16} />
-              View Resume
+              <FileText size={14} className="text-[#C96F4A]" />
+              Verified Resume
             </MagneticButton>
           ) : (
             <MagneticButton href="#certifications" variant="secondary">
-              <FileText size={16} />
-              View Credentials
+              <FileText size={14} className="text-[#C96F4A]" />
+              Credentials Vault
             </MagneticButton>
           )}
 
-          {/* Secondary Action 1: Contact Me */}
+          {/* Secondary Action: Contact */}
           <MagneticButton href="#contact" variant="secondary">
-            <Mail size={16} />
-            Contact Me
+            <Mail size={14} className="text-[#FFD6A1]" />
+            Initiate Contact
           </MagneticButton>
 
-          {/* Secondary Action 2: LinkedIn */}
+          {/* LinkedIn Profile */}
           <a
             href={siteConfig.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
-            className="glass flex h-11 items-center gap-2 rounded-full px-5 text-xs font-semibold text-white/80 transition-all duration-300 hover:border-accent-violet hover:text-white hover:shadow-[0_0_20px_rgba(124,92,255,0.2)]"
+            className="btn-infinity-secondary"
           >
-            <LinkedinIcon size={15} />
+            <LinkedinIcon size={14} />
             LinkedIn
           </a>
         </motion.div>
 
-        {/* Social Row */}
+        {/* Social Icons & HUD Metadata Row */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-10 flex items-center justify-center gap-3"
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="mb-10 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-[rgba(255,250,240,0.5)]"
         >
-          {[
-            { icon: GithubIcon, href: siteConfig.github, label: "GitHub" },
-            { icon: LinkedinIcon, href: siteConfig.linkedin, label: "LinkedIn" },
-            { icon: Mail, href: `mailto:${siteConfig.email}`, label: "Email" },
-          ].map(({ icon: Icon, href, label }) => (
-            <motion.a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="glass flex h-10 w-10 items-center justify-center rounded-full text-white/50 transition-all duration-300 hover:border-accent-violet/40 hover:text-accent-violet hover:shadow-[0_0_15px_rgba(124,92,255,0.25)]"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Icon size={17} />
-            </motion.a>
-          ))}
+          <div className="flex items-center gap-2">
+            {[
+              { icon: GithubIcon, href: siteConfig.github, label: "GitHub" },
+              { icon: LinkedinIcon, href: siteConfig.linkedin, label: "LinkedIn" },
+              { icon: Mail, href: `mailto:${siteConfig.email}`, label: "Email" },
+            ].map(({ icon: Icon, href, label }) => (
+              <motion.a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(255,250,240,0.14)] bg-[#12100D] text-[rgba(255,250,240,0.6)] transition-all duration-300 hover:border-[#C96F4A] hover:text-[#FFD6A1] hover:scale-105"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Icon size={15} />
+              </motion.a>
+            ))}
+          </div>
+
+          <div className="hidden sm:inline-block h-3 w-px bg-[rgba(255,250,240,0.15)]" />
+
+          <div className="flex items-center gap-2">
+            <MapPin size={12} className="text-[#C96F4A]" />
+            <span>LUCKNOW / NCR, INDIA</span>
+          </div>
         </motion.div>
 
         {/* Tag Cloud */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.9 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
           className="mb-12 flex flex-wrap items-center justify-center gap-2"
         >
           {tagCloud.map((tag) => (
-            <Badge key={tag} variant="outline" className="text-[11px]">
+            <Badge key={tag} variant="outline" className="text-[10px]">
               {tag}
             </Badge>
           ))}
         </motion.div>
       </div>
 
-      {/* Stats Strip */}
-      <div className="relative z-10 w-full border-t border-white/[0.06] bg-black/40 backdrop-blur-md">
-        <div className="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-y md:divide-y-0 divide-white/[0.06] md:grid-cols-4">
+      {/* Stats Counter Strip with Hairline Borders */}
+      <div className="relative z-10 w-full border-t border-[rgba(255,250,240,0.12)] bg-[#12100D]/90 backdrop-blur-xl">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-y md:divide-y-0 divide-[rgba(255,250,240,0.1)] md:grid-cols-4 font-mono">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.num}
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: 0.95 + i * 0.08 }}
-              className="flex flex-col items-center p-5 text-center transition-colors duration-300 hover:bg-white/[0.02]"
+              transition={{ duration: 0.45, delay: 0.85 + i * 0.08 }}
+              className="flex flex-col items-center p-5 text-center transition-colors duration-300 hover:bg-[#161310]"
             >
-              <span className="mb-0.5 font-display text-base font-bold text-accent-violet">
+              <span className="mb-0.5 font-display text-2xl font-black text-[#FFD6A1]">
                 {stat.num}
               </span>
-              <span className="text-xs font-bold text-white/90">
+              <span className="text-xs font-bold uppercase tracking-wider text-[rgba(255,250,240,0.9)]">
                 {stat.label}
               </span>
-              <span className="text-[11px] text-white/40 mt-0.5">
+              <span className="text-[11px] text-[rgba(255,250,240,0.45)] mt-0.5">
                 {stat.detail}
               </span>
             </motion.div>
@@ -275,15 +277,15 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Down Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 1.4, duration: 0.6 }}
-        className="mt-8 flex flex-col items-center gap-1.5 text-white/30"
+        transition={{ delay: 1.2, duration: 0.6 }}
+        className="mt-8 flex flex-col items-center gap-1.5 font-mono text-[10px] tracking-[0.2em] uppercase text-[rgba(255,250,240,0.35)]"
       >
-        <span className="text-[10px] tracking-widest uppercase font-semibold">Scroll Down</span>
-        <ArrowDown size={14} className="animate-bounce text-accent-violet" />
+        <span>SCROLL DOWN</span>
+        <ArrowDown size={13} className="animate-bounce text-[#C96F4A]" />
       </motion.div>
     </section>
   );
