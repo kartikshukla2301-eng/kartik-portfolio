@@ -72,25 +72,25 @@ export function Navbar() {
         }`}
       >
         <nav
-          className={`flex items-center justify-between rounded-full px-5 py-3 transition-all duration-300 border border-[var(--borders)] bg-white/90 backdrop-blur-md shadow-sm ${
-            scrolled ? "py-2.5 shadow-md border-accent-violet/20" : ""
+          className={`glass flex items-center justify-between rounded-full px-5 py-3 transition-all duration-300 ${
+            scrolled ? "py-2.5 shadow-lg shadow-black/40 border-accent-violet/30" : ""
           }`}
         >
           {/* Logo */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center gap-2 text-sm font-bold text-[var(--foreground)]"
+            className="flex items-center gap-2 text-sm font-bold text-white"
             style={{ fontFamily: "var(--font-display)" }}
           >
             <span className="text-gradient font-black text-base">KS</span>
-            <span className="hidden sm:inline font-semibold text-xs tracking-tight">
+            <span className="hidden sm:inline font-semibold text-xs tracking-tight text-white/90">
               Kartik Shukla
             </span>
           </a>
 
           {/* Desktop Links */}
-          <div className="hidden items-center gap-0.5 lg:flex">
+          <div className="hidden items-center gap-1 lg:flex">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
@@ -98,16 +98,16 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
+                  className={`relative rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-accent-violet"
-                      : "text-[var(--secondary-text)] hover:text-[var(--foreground)]"
+                      ? "text-white"
+                      : "text-white/50 hover:text-white/90"
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute inset-0 rounded-full bg-accent-violet/10"
+                      className="absolute inset-0 rounded-full bg-white/10"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
@@ -124,7 +124,7 @@ export function Navbar() {
                 href={parsedResume.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-accent-violet px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-accent-violet/90 hover:shadow-xs"
+                className="flex items-center gap-1.5 rounded-full bg-accent-violet px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-accent-violet/90 hover:shadow-[0_0_15px_rgba(124,92,255,0.4)]"
               >
                 <FileText size={13} />
                 Resume
@@ -133,7 +133,7 @@ export function Navbar() {
               <a
                 href="#certifications"
                 onClick={(e) => handleNavClick(e, "#certifications")}
-                className="flex items-center gap-1.5 rounded-full bg-accent-violet px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-accent-violet/90 hover:shadow-xs"
+                className="flex items-center gap-1.5 rounded-full bg-accent-violet px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-accent-violet/90 hover:shadow-[0_0_15px_rgba(124,92,255,0.4)]"
               >
                 <FileText size={13} />
                 Credentials
@@ -144,7 +144,7 @@ export function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--foreground)] hover:bg-[#F1F5F9] transition-colors lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white transition-colors lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -164,7 +164,7 @@ export function Navbar() {
           >
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/80 backdrop-blur-xl"
               onClick={() => setMobileOpen(false)}
             />
 
@@ -174,7 +174,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 350, damping: 30 }}
-              className="absolute inset-y-0 right-0 w-full max-w-xs bg-white p-6 pt-24 shadow-2xl flex flex-col justify-between"
+              className="absolute inset-y-0 right-0 w-full max-w-xs bg-[rgba(10,10,12,0.97)] border-l border-white/10 p-6 pt-24 shadow-2xl flex flex-col justify-between"
             >
               <nav className="flex flex-col gap-1.5">
                 {navLinks.map((link, i) => {
@@ -189,8 +189,8 @@ export function Navbar() {
                       onClick={(e) => handleNavClick(e, link.href)}
                       className={`rounded-xl px-4 py-2.5 text-base font-semibold transition-all duration-200 ${
                         isActive
-                          ? "bg-accent-violet/10 text-accent-violet"
-                          : "text-[var(--secondary-text)] hover:text-[var(--foreground)] hover:bg-[#F8FAFC]"
+                          ? "bg-white/10 text-white"
+                          : "text-white/50 hover:text-white hover:bg-white/5"
                       }`}
                       style={{ fontFamily: "var(--font-display)" }}
                     >
@@ -200,13 +200,13 @@ export function Navbar() {
                 })}
               </nav>
 
-              <div className="pt-6 border-t border-[var(--borders)]">
+              <div className="pt-6 border-t border-white/10">
                 {parsedResume.isValid && parsedResume.viewUrl ? (
                   <a
                     href={parsedResume.viewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-xs font-semibold text-white shadow-sm"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)]"
                   >
                     <FileText size={15} />
                     View Resume
@@ -215,7 +215,7 @@ export function Navbar() {
                   <a
                     href="#certifications"
                     onClick={(e) => handleNavClick(e, "#certifications")}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-xs font-semibold text-white shadow-sm"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)]"
                   >
                     <FileText size={15} />
                     View Credentials Library

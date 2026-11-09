@@ -72,11 +72,11 @@ export function Certifications() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="premium-card glass mb-10 overflow-hidden rounded-2xl p-6 sm:p-8 border border-[var(--borders)] shadow-sm bg-gradient-to-br from-white to-[#EEF2F8]"
+          className="premium-card glass mb-10 overflow-hidden rounded-2xl p-6 sm:p-8"
         >
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent-violet/10 text-accent-violet shadow-sm">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent-violet/10 text-accent-violet shadow-[0_0_20px_rgba(124,92,255,0.2)]">
                 <FileCheck2 size={28} />
               </div>
               <div>
@@ -90,12 +90,12 @@ export function Certifications() {
                   </Badge>
                 </div>
                 <h3
-                  className="text-xl font-bold tracking-tight text-[var(--foreground)] sm:text-2xl"
+                  className="text-xl font-bold tracking-tight text-white sm:text-2xl"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   Latest Resume – {siteConfig.name}
                 </h3>
-                <p className="mt-1 text-xs sm:text-sm text-[var(--secondary-text)]">
+                <p className="mt-1 text-xs sm:text-sm text-white/50">
                   Full Stack Developer | AI Engineer • Updated with healthcare systems, production internships & AI platforms
                 </p>
               </div>
@@ -111,7 +111,7 @@ export function Certifications() {
                     "2026"
                   )
                 }
-                className="flex items-center gap-2 rounded-xl bg-accent-violet px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-accent-violet/90 hover:shadow-md cursor-pointer"
+                className="flex items-center gap-2 rounded-xl bg-accent-violet px-5 py-2.5 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)] transition-all hover:bg-accent-violet/90 hover:shadow-[0_0_30px_rgba(124,92,255,0.45)] cursor-pointer"
               >
                 <Eye size={15} />
                 View Resume
@@ -122,7 +122,7 @@ export function Certifications() {
                   href={parsedResume.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-xl border border-[var(--borders)] bg-white px-5 py-2.5 text-xs font-semibold text-[var(--foreground)] transition-all hover:bg-[#F8FAFC] shadow-xs"
+                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-xs font-semibold text-white/80 transition-all hover:bg-white/10 hover:text-white"
                 >
                   <Download size={15} />
                   Download PDF
@@ -185,7 +185,7 @@ function CredentialCard({
       initial={{ opacity: 0, y: 25 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="premium-card glass group flex flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:shadow-md hover:border-accent-violet/30"
+      className="premium-card glass group flex flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:border-accent-violet/40 hover:shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
     >
       <div>
         <div className="mb-4 flex items-start gap-3.5">
@@ -197,27 +197,27 @@ function CredentialCard({
               Verified Credential
             </span>
             <h4
-              className="mt-0.5 text-base font-bold leading-snug text-[var(--foreground)]"
+              className="mt-0.5 text-base font-bold leading-snug text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {cert.title}
             </h4>
-            <p className="mt-1 text-xs font-medium text-[var(--secondary-text)]">
+            <p className="mt-1 text-xs font-medium text-white/50">
               {cert.issuer}
             </p>
           </div>
         </div>
 
         {cert.location && (
-          <p className="mb-3 text-[11px] text-[var(--secondary-text)] italic">
+          <p className="mb-3 text-[11px] text-white/40 italic">
             {cert.location}
           </p>
         )}
       </div>
 
-      <div className="mt-5 pt-4 border-t border-[var(--borders)] flex flex-wrap items-center justify-between gap-2">
-        <span className="flex items-center gap-1.5 text-xs text-[var(--secondary-text)]">
-          <CheckCircle size={13} className="text-emerald-500" />
+      <div className="mt-5 pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-2">
+        <span className="flex items-center gap-1.5 text-xs text-white/40">
+          <CheckCircle size={13} className="text-emerald-400" />
           {cert.year}
         </span>
 
@@ -238,7 +238,7 @@ function CredentialCard({
             onClick={() =>
               onOpenDoc(cert.title, driveUrl, cert.issuer, cert.year, cert.credentialUrl)
             }
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--secondary-bg)] px-3 py-1.5 text-xs font-semibold text-[var(--foreground)] transition-all hover:bg-accent-violet hover:text-white cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 transition-all hover:bg-accent-violet hover:text-white hover:border-accent-violet cursor-pointer"
           >
             <Eye size={13} />
             View Document

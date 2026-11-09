@@ -39,14 +39,14 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col justify-between gap-6"
           >
-            <div className="glass rounded-2xl p-6 sm:p-8 border border-[var(--borders)] bg-white shadow-xs">
+            <div className="glass rounded-2xl p-6 sm:p-8 border border-white/10">
               <h3
-                className="mb-3 text-lg font-bold text-[var(--foreground)]"
+                className="mb-3 text-lg font-bold text-white"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Direct Communication
               </h3>
-              <p className="text-xs text-[var(--secondary-text)] leading-relaxed mb-6">
+              <p className="text-xs text-white/60 leading-relaxed mb-6">
                 Feel free to reach out directly via email for job opportunities, project inquiries, or technical collaboration.
               </p>
 
@@ -60,7 +60,7 @@ export function Contact() {
                 <span>{siteConfig.email}</span>
               </a>
 
-              <div className="mb-6 flex items-center gap-3 text-xs text-[var(--secondary-text)]">
+              <div className="mb-6 flex items-center gap-3 text-xs text-white/60">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan">
                   <MapPin size={16} />
                 </div>
@@ -68,7 +68,7 @@ export function Contact() {
               </div>
 
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-[var(--secondary-text)] mb-3">
+                <p className="text-xs font-bold uppercase tracking-wider text-white/40 mb-3">
                   Social & Developer Profiles
                 </p>
                 <div className="flex gap-2.5">
@@ -83,7 +83,7 @@ export function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="glass flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--borders)] text-[var(--secondary-text)] transition-all duration-300 hover:border-accent-violet hover:text-accent-violet hover:bg-[#F8FAFC] shadow-2xs"
+                      className="glass flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-white/60 transition-all duration-300 hover:border-accent-violet hover:text-white hover:bg-white/10"
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -94,12 +94,12 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl border border-[var(--borders)] bg-[#F8FAFC]">
+            <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
               <div className="flex items-center gap-2 text-xs font-bold text-accent-violet mb-1">
                 <CheckCircle size={14} className="text-emerald-500" />
                 Response Guarantee
               </div>
-              <p className="text-xs text-[var(--secondary-text)]">
+              <p className="text-xs text-white/50">
                 I typically review and reply to professional correspondence within 24 hours.
               </p>
             </div>
@@ -133,7 +133,7 @@ function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 sm:p-8 space-y-5 border border-[var(--borders)] bg-white shadow-xs">
+    <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 sm:p-8 space-y-5 border border-white/10">
       {[
         { name: "name", label: "Your Full Name", type: "text" },
         { name: "email", label: "Your Email Address", type: "email" },
@@ -147,13 +147,13 @@ function ContactForm() {
             onFocus={() => setFocused(field.name)}
             onBlur={() => setFocused(null)}
             required
-            className="peer w-full rounded-xl border border-[var(--borders)] bg-[#F8FAFC] px-4 pt-5 pb-2 text-sm text-[var(--foreground)] outline-none transition-all duration-300 focus:border-accent-violet focus:bg-white focus:shadow-xs"
+            className="peer w-full rounded-xl border border-white/10 bg-white/5 px-4 pt-5 pb-2 text-sm text-white outline-none transition-all duration-300 focus:border-accent-violet/50 focus:bg-white/[0.07]"
           />
           <label
             className={`pointer-events-none absolute left-4 transition-all duration-300 font-medium ${
               focused === field.name || formState[field.name as keyof typeof formState]
                 ? "top-1.5 text-[10px] text-accent-violet"
-                : "top-3.5 text-xs text-[var(--secondary-text)]"
+                : "top-3.5 text-xs text-white/40"
             }`}
           >
             {field.label}
@@ -170,13 +170,13 @@ function ContactForm() {
           onBlur={() => setFocused(null)}
           required
           rows={4}
-          className="peer w-full resize-none rounded-xl border border-[var(--borders)] bg-[#F8FAFC] px-4 pt-5 pb-2 text-sm text-[var(--foreground)] outline-none transition-all duration-300 focus:border-accent-violet focus:bg-white focus:shadow-xs"
+          className="peer w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 pt-5 pb-2 text-sm text-white outline-none transition-all duration-300 focus:border-accent-violet/50 focus:bg-white/[0.07]"
         />
         <label
           className={`pointer-events-none absolute left-4 transition-all duration-300 font-medium ${
             focused === "message" || formState.message
               ? "top-1.5 text-[10px] text-accent-violet"
-              : "top-3.5 text-xs text-[var(--secondary-text)]"
+              : "top-3.5 text-xs text-white/40"
           }`}
         >
           Your Message
@@ -185,7 +185,7 @@ function ContactForm() {
 
       <MagneticButton
         variant="primary"
-        className="w-full justify-center shadow-md cursor-pointer"
+        className="w-full justify-center shadow-lg shadow-accent-violet/20 cursor-pointer"
       >
         <Send size={14} />
         Send Message

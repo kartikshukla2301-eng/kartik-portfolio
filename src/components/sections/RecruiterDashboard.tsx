@@ -55,10 +55,10 @@ export function RecruiterDashboard() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="premium-card glass relative overflow-hidden rounded-2xl border border-[var(--borders)] shadow-sm bg-white"
+          className="premium-card glass relative overflow-hidden rounded-2xl border border-white/10"
         >
           {/* Subtle gradient accent */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-violet/[0.04] via-transparent to-accent-cyan/[0.04]" />
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-violet/[0.08] via-transparent to-accent-cyan/[0.05]" />
 
           <div className="relative z-10 p-7 md:p-10">
             <div className="grid gap-8 md:grid-cols-2">
@@ -67,7 +67,7 @@ export function RecruiterDashboard() {
                 {/* Portrait + Name */}
                 <div className="flex items-start gap-4">
                   <div className="portrait-frame group relative shrink-0">
-                    <div className="relative h-20 w-20 overflow-hidden rounded-xl border border-[var(--borders)] shadow-sm">
+                    <div className="relative h-20 w-20 overflow-hidden rounded-xl border border-white/10 shadow-sm">
                       <Image
                         src={siteConfig.portrait.src}
                         alt={siteConfig.portrait.alt}
@@ -81,7 +81,7 @@ export function RecruiterDashboard() {
                   </div>
                   <div>
                     <h3
-                      className="text-xl font-bold text-[var(--foreground)]"
+                      className="text-xl font-bold text-white"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {siteConfig.name}
@@ -89,7 +89,7 @@ export function RecruiterDashboard() {
                     <p className="text-xs font-semibold text-accent-violet">
                       {siteConfig.primaryTitle} | {siteConfig.secondaryTitle}
                     </p>
-                    <p className="mt-1 text-xs text-[var(--secondary-text)]">
+                    <p className="mt-1 text-xs text-white/50">
                       {siteConfig.education.college}
                     </p>
                   </div>
@@ -98,8 +98,8 @@ export function RecruiterDashboard() {
                 <div className="flex items-start gap-3">
                   <BookOpen size={16} className="mt-1 shrink-0 text-accent-cyan" />
                   <div>
-                    <p className="text-sm font-semibold text-[var(--foreground)]">Education</p>
-                    <p className="text-xs text-[var(--secondary-text)]">
+                    <p className="text-sm font-semibold text-white">Education</p>
+                    <p className="text-xs text-white/60">
                       {siteConfig.education.degree} — {siteConfig.education.university}
                     </p>
                     <p className="text-xs font-medium text-accent-violet mt-0.5">
@@ -111,8 +111,8 @@ export function RecruiterDashboard() {
                 <div className="flex items-start gap-3">
                   <Briefcase size={16} className="mt-1 shrink-0 text-accent-violet" />
                   <div>
-                    <p className="text-sm font-semibold text-[var(--foreground)]">Verified Internships</p>
-                    <p className="text-xs text-[var(--secondary-text)] leading-relaxed">
+                    <p className="text-sm font-semibold text-white">Verified Internships</p>
+                    <p className="text-xs text-white/60 leading-relaxed">
                       Pristyn Care (HIS Full Stack), OnCare Cancer Centre (Developer Intern), Infosys Makers Lab (IoT), The Developers Arena (Python).
                     </p>
                   </div>
@@ -121,8 +121,8 @@ export function RecruiterDashboard() {
                 <div className="flex items-start gap-3">
                   <Target size={16} className="mt-1 shrink-0 text-accent-amber" />
                   <div>
-                    <p className="text-sm font-semibold text-[var(--foreground)]">Career Positioning</p>
-                    <p className="text-xs leading-relaxed text-[var(--secondary-text)]">
+                    <p className="text-sm font-semibold text-white">Career Positioning</p>
+                    <p className="text-xs leading-relaxed text-white/60">
                       Open to Full Stack Developer, Web Developer, and Software Development Engineer roles. Focused on building reliable web applications, clean REST APIs, and production AI integrations.
                     </p>
                   </div>
@@ -131,7 +131,7 @@ export function RecruiterDashboard() {
                 <div className="flex items-start gap-3">
                   <Layers size={16} className="mt-1 shrink-0 text-accent-cyan" />
                   <div>
-                    <p className="text-sm font-semibold text-[var(--foreground)]">Core Stack</p>
+                    <p className="text-sm font-semibold text-white">Core Stack</p>
                     <div className="mt-1.5 flex flex-wrap gap-1.5">
                       {stackChips.map((chip) => (
                         <Badge key={chip} variant="outline" className="text-[10px]">
@@ -145,8 +145,8 @@ export function RecruiterDashboard() {
                 <div className="flex items-start gap-3">
                   <Trophy size={16} className="mt-1 shrink-0 text-amber-500" />
                   <div>
-                    <p className="text-sm font-semibold text-[var(--foreground)]">Leadership & Extracurricular</p>
-                    <p className="text-xs text-[var(--secondary-text)] leading-relaxed">
+                    <p className="text-sm font-semibold text-white">Leadership & Extracurricular</p>
+                    <p className="text-xs text-white/60 leading-relaxed">
                       {recruiterStats.leadership} — led digital outreach and event branding. Active participant in coding communities.
                     </p>
                   </div>
@@ -163,12 +163,12 @@ export function RecruiterDashboard() {
                       initial={{ opacity: 0, y: 15 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
-                      className="glass rounded-xl p-4 text-center border border-[var(--borders)] bg-[#F8FAFC]"
+                      className="glass rounded-xl p-4 text-center border border-white/10 hover:border-accent-violet/30 transition-colors"
                     >
                       <div className="text-xl sm:text-2xl font-bold text-accent-violet">
                         {stat.value}
                       </div>
-                      <div className="text-[11px] text-[var(--secondary-text)] mt-1 font-medium">
+                      <div className="text-[11px] text-white/50 mt-1 font-medium">
                         {stat.label}
                       </div>
                     </motion.div>
@@ -176,30 +176,32 @@ export function RecruiterDashboard() {
                 </div>
 
                 {/* Resume Action */}
-                <div className="p-5 rounded-xl border border-[var(--borders)] bg-[var(--secondary-bg)] space-y-3">
+                <div className="p-5 rounded-xl border border-white/10 bg-white/[0.02] space-y-3">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent-violet">
                     <CheckCircle size={14} className="text-emerald-500" />
                     Verified Resume Available
                   </div>
-                  <p className="text-xs text-[var(--secondary-text)]">
+                  <p className="text-xs text-white/60">
                     Access Kartik&apos;s latest resume with complete details of healthcare systems and AI platforms.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <a
-                      href="#certifications"
-                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-accent-violet px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-accent-violet/90 transition-all text-center"
+                      href={parsedResume.isValid && parsedResume.viewUrl ? parsedResume.viewUrl : "#certifications"}
+                      target={parsedResume.isValid && parsedResume.viewUrl ? "_blank" : undefined}
+                      rel={parsedResume.isValid && parsedResume.viewUrl ? "noopener noreferrer" : undefined}
+                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-accent-violet px-4 py-2.5 text-xs font-semibold text-white shadow-lg shadow-accent-violet/20 hover:bg-accent-violet/90 transition-all text-center"
                     >
                       <FileText size={14} />
-                      View in Document Library
+                      View Resume (PDF)
                     </a>
                     {parsedResume.isValid && parsedResume.downloadUrl && (
                       <a
                         href={parsedResume.downloadUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 rounded-xl border border-[var(--borders)] bg-white px-4 py-2.5 text-xs font-semibold text-[var(--foreground)] hover:bg-[#F8FAFC] transition-all"
+                        className="flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-white/80 hover:bg-white/10 transition-all"
                       >
-                        PDF
+                        Download PDF
                       </a>
                     )}
                   </div>
@@ -207,7 +209,7 @@ export function RecruiterDashboard() {
 
                 {/* Professional Links */}
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-[var(--secondary-text)] mb-2.5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-white/40 mb-2.5">
                     Profiles & Contact
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -224,7 +226,7 @@ export function RecruiterDashboard() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="glass rounded-lg py-2 px-3 text-center text-xs font-medium text-[var(--secondary-text)] transition-all hover:border-accent-violet/40 hover:text-accent-violet hover:bg-white shadow-2xs"
+                        className="glass rounded-lg py-2 px-3 text-center text-xs font-medium text-white/60 transition-all hover:border-accent-violet/40 hover:text-white hover:bg-white/[0.06]"
                       >
                         {link.label}
                       </a>

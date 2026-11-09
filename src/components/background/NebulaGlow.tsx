@@ -43,22 +43,23 @@ export function NebulaGlow() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
-      {/* Soft Light Ambient Nebula Orbs */}
-      <div className="absolute -top-40 left-1/4 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(102,81,204,0.06)_0%,transparent_70%)] blur-[120px] animate-float" />
+      {/* Deep Ambient Nebula Orbs */}
+      <div className="absolute -top-40 left-1/4 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,0.12)_0%,transparent_70%)] blur-[120px] animate-float" />
       <div
-        className="absolute top-1/3 -right-32 h-[550px] w-[550px] rounded-full bg-[radial-gradient(circle,rgba(8,145,178,0.05)_0%,transparent_70%)] blur-[130px] animate-float"
+        className="absolute top-1/3 -right-32 h-[550px] w-[550px] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.08)_0%,transparent_70%)] blur-[130px] animate-float"
         style={{ animationDelay: "2s", animationDuration: "6s" }}
       />
       <div
-        className="absolute -bottom-40 left-1/3 h-[650px] w-[650px] rounded-full bg-[radial-gradient(circle,rgba(102,81,204,0.05)_0%,transparent_70%)] blur-[140px] animate-float"
+        className="absolute -bottom-40 left-1/3 h-[650px] w-[650px] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,0.09)_0%,transparent_70%)] blur-[140px] animate-float"
         style={{ animationDelay: "4s", animationDuration: "7s" }}
       />
+      <div className="absolute top-2/3 left-10 h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(255,184,107,0.04)_0%,transparent_70%)] blur-[100px]" />
 
       {/* Interactive Cursor Spotlight Glow */}
       {!reducedMotion && (
         <div
           ref={spotlightRef}
-          className="absolute left-0 top-0 h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(102,81,204,0.04)_0%,rgba(8,145,178,0.02)_35%,transparent_70%)] blur-[80px] will-change-transform"
+          className="absolute left-0 top-0 h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,0.08)_0%,rgba(34,211,238,0.03)_35%,transparent_70%)] blur-[80px] will-change-transform"
         />
       )}
     </div>
