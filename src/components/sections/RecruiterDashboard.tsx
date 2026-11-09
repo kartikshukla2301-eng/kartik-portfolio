@@ -55,10 +55,10 @@ export function RecruiterDashboard() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="premium-card glass relative overflow-hidden rounded-2xl border border-white/10"
+          className="premium-card glass relative overflow-hidden rounded-2xl border border-[#E2E8F0]"
         >
           {/* Subtle gradient accent */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-violet/[0.08] via-transparent to-accent-cyan/[0.05]" />
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#4F46E5]/[0.05] via-transparent to-[#0D9488]/[0.03]" />
 
           <div className="relative z-10 p-7 md:p-10">
             <div className="grid gap-8 md:grid-cols-2">
@@ -67,7 +67,7 @@ export function RecruiterDashboard() {
                 {/* Portrait + Name */}
                 <div className="flex items-start gap-4">
                   <div className="portrait-frame group relative shrink-0">
-                    <div className="relative h-20 w-20 overflow-hidden rounded-xl border border-white/10 shadow-sm">
+                    <div className="relative h-20 w-20 overflow-hidden rounded-xl border border-[#E2E8F0] shadow-xs">
                       <Image
                         src={siteConfig.portrait.src}
                         alt={siteConfig.portrait.alt}
@@ -81,57 +81,57 @@ export function RecruiterDashboard() {
                   </div>
                   <div>
                     <h3
-                      className="text-xl font-bold text-white"
+                      className="text-xl font-bold text-[#0F172A]"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {siteConfig.name}
                     </h3>
-                    <p className="text-xs font-semibold text-accent-violet">
+                    <p className="text-xs font-semibold text-[#4F46E5]">
                       {siteConfig.primaryTitle} | {siteConfig.secondaryTitle}
                     </p>
-                    <p className="mt-1 text-xs text-white/50">
+                    <p className="mt-1 text-xs text-[#64748B]">
                       {siteConfig.education.college}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <BookOpen size={16} className="mt-1 shrink-0 text-accent-cyan" />
+                  <BookOpen size={16} className="mt-1 shrink-0 text-[#0D9488]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Education</p>
-                    <p className="text-xs text-white/60">
+                    <p className="text-sm font-semibold text-[#0F172A]">Education</p>
+                    <p className="text-xs text-[#475569]">
                       {siteConfig.education.degree} — {siteConfig.education.university}
                     </p>
-                    <p className="text-xs font-medium text-accent-violet mt-0.5">
+                    <p className="text-xs font-medium text-[#4F46E5] mt-0.5">
                       CGPA: {siteConfig.education.cgpa} • Graduating {siteConfig.education.expectedGraduation} (Expected)
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Briefcase size={16} className="mt-1 shrink-0 text-accent-violet" />
+                  <Briefcase size={16} className="mt-1 shrink-0 text-[#4F46E5]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Verified Internships</p>
-                    <p className="text-xs text-white/60 leading-relaxed">
+                    <p className="text-sm font-semibold text-[#0F172A]">Verified Internships</p>
+                    <p className="text-xs text-[#475569] leading-relaxed">
                       Pristyn Care (HIS Full Stack), OnCare Cancer Centre (Developer Intern), Infosys Makers Lab (IoT), The Developers Arena (Python).
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Target size={16} className="mt-1 shrink-0 text-accent-amber" />
+                  <Target size={16} className="mt-1 shrink-0 text-[#D97706]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Career Positioning</p>
-                    <p className="text-xs leading-relaxed text-white/60">
+                    <p className="text-sm font-semibold text-[#0F172A]">Career Positioning</p>
+                    <p className="text-xs leading-relaxed text-[#475569]">
                       Open to Full Stack Developer, Web Developer, and Software Development Engineer roles. Focused on building reliable web applications, clean REST APIs, and production AI integrations.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Layers size={16} className="mt-1 shrink-0 text-accent-cyan" />
+                  <Layers size={16} className="mt-1 shrink-0 text-[#0D9488]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Core Stack</p>
+                    <p className="text-sm font-semibold text-[#0F172A]">Core Stack</p>
                     <div className="mt-1.5 flex flex-wrap gap-1.5">
                       {stackChips.map((chip) => (
                         <Badge key={chip} variant="outline" className="text-[10px]">
@@ -143,10 +143,10 @@ export function RecruiterDashboard() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Trophy size={16} className="mt-1 shrink-0 text-amber-500" />
+                  <Trophy size={16} className="mt-1 shrink-0 text-[#D97706]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Leadership & Extracurricular</p>
-                    <p className="text-xs text-white/60 leading-relaxed">
+                    <p className="text-sm font-semibold text-[#0F172A]">Leadership & Extracurricular</p>
+                    <p className="text-xs text-[#475569] leading-relaxed">
                       {recruiterStats.leadership} — led digital outreach and event branding. Active participant in coding communities.
                     </p>
                   </div>
@@ -163,12 +163,12 @@ export function RecruiterDashboard() {
                       initial={{ opacity: 0, y: 15 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
-                      className="glass rounded-xl p-4 text-center border border-white/10 hover:border-accent-violet/30 transition-colors"
+                      className="glass rounded-xl p-4 text-center border border-[#E2E8F0] hover:border-[#4F46E5]/30 transition-colors"
                     >
-                      <div className="text-xl sm:text-2xl font-bold text-accent-violet">
+                      <div className="text-xl sm:text-2xl font-bold text-[#4F46E5]">
                         {stat.value}
                       </div>
-                      <div className="text-[11px] text-white/50 mt-1 font-medium">
+                      <div className="text-[11px] text-[#64748B] mt-1 font-medium">
                         {stat.label}
                       </div>
                     </motion.div>
@@ -176,12 +176,12 @@ export function RecruiterDashboard() {
                 </div>
 
                 {/* Resume Action */}
-                <div className="p-5 rounded-xl border border-white/10 bg-white/[0.02] space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent-violet">
+                <div className="p-5 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#4F46E5]">
                     <CheckCircle size={14} className="text-emerald-500" />
                     Verified Resume Available
                   </div>
-                  <p className="text-xs text-white/60">
+                  <p className="text-xs text-[#475569]">
                     Access Kartik&apos;s latest resume with complete details of healthcare systems and AI platforms.
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -189,7 +189,7 @@ export function RecruiterDashboard() {
                       href={parsedResume.isValid && parsedResume.viewUrl ? parsedResume.viewUrl : "#certifications"}
                       target={parsedResume.isValid && parsedResume.viewUrl ? "_blank" : undefined}
                       rel={parsedResume.isValid && parsedResume.viewUrl ? "noopener noreferrer" : undefined}
-                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-accent-violet px-4 py-2.5 text-xs font-semibold text-white shadow-lg shadow-accent-violet/20 hover:bg-accent-violet/90 transition-all text-center"
+                      className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-[#4F46E5] px-4 py-2.5 text-xs font-semibold text-white shadow-md shadow-[#4F46E5]/20 hover:bg-[#4338CA] transition-all text-center"
                     >
                       <FileText size={14} />
                       View Resume (PDF)
@@ -199,7 +199,7 @@ export function RecruiterDashboard() {
                         href={parsedResume.downloadUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-white/80 hover:bg-white/10 transition-all"
+                        className="flex items-center justify-center gap-1.5 rounded-xl border border-[#E2E8F0] bg-white px-4 py-2.5 text-xs font-semibold text-[#0F172A] hover:bg-[#F8FAFC] transition-all"
                       >
                         Download PDF
                       </a>
@@ -209,7 +209,7 @@ export function RecruiterDashboard() {
 
                 {/* Professional Links */}
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-white/40 mb-2.5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-2.5">
                     Profiles & Contact
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -226,7 +226,7 @@ export function RecruiterDashboard() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="glass rounded-lg py-2 px-3 text-center text-xs font-medium text-white/60 transition-all hover:border-accent-violet/40 hover:text-white hover:bg-white/[0.06]"
+                        className="glass rounded-lg py-2 px-3 text-center text-xs font-medium text-[#475569] transition-all hover:border-[#4F46E5]/40 hover:text-[#4F46E5] hover:bg-white"
                       >
                         {link.label}
                       </a>

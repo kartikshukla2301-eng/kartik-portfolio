@@ -34,12 +34,12 @@ export function Projects() {
         >
           <div className="mb-6 flex items-center justify-between">
             <h3
-              className="text-lg font-bold tracking-tight text-white/90"
+              className="text-lg font-bold tracking-tight text-[#0F172A]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Additional Engineering Work
             </h3>
-            <span className="text-xs text-white/40">
+            <span className="text-xs text-[#64748B]">
               Embedded systems, chatbots & tooling
             </span>
           </div>
@@ -88,7 +88,7 @@ function ProjectCard({
         className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-2xl"
         style={{
           background:
-            "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 92, 255, 0.12), transparent 60%)",
+            "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(79, 70, 229, 0.08), transparent 60%)",
         }}
       />
 
@@ -97,7 +97,7 @@ function ProjectCard({
         <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             <div className="mb-2 flex items-center gap-2">
-              <span className="font-display text-[11px] font-bold tracking-[0.2em] text-accent-violet uppercase">
+              <span className="font-display text-[11px] font-bold tracking-[0.2em] text-[#4F46E5] uppercase">
                 Project {String(index + 1).padStart(2, "0")}
               </span>
               {project.status && (
@@ -108,7 +108,7 @@ function ProjectCard({
               )}
             </div>
             <h3
-              className="text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-accent-cyan sm:text-[1.65rem]"
+              className="text-2xl font-bold tracking-tight text-[#0F172A] transition-colors group-hover:text-[#4F46E5] sm:text-[1.65rem]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {project.title}
@@ -119,7 +119,7 @@ function ProjectCard({
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/30 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent-violet"
+              className="text-[#94A3B8] transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[#4F46E5]"
               aria-label={`Open ${project.title} live preview`}
             >
               <ArrowUpRight size={20} />
@@ -128,7 +128,7 @@ function ProjectCard({
         </div>
 
         {/* Description */}
-        <p className="mb-6 text-sm leading-[1.7] text-white/50">
+        <p className="mb-6 text-sm leading-[1.7] text-[#475569]">
           {project.description}
         </p>
 
@@ -148,7 +148,7 @@ function ProjectCard({
               href={project.repo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5 text-xs font-semibold text-white/80 transition-all duration-300 hover:border-accent-violet/40 hover:bg-white/[0.08] hover:text-white"
+              className="flex items-center gap-2 rounded-full border border-[#E2E8F0] bg-white px-5 py-2.5 text-xs font-semibold text-[#0F172A] shadow-xs transition-all duration-300 hover:border-[#4F46E5]/40 hover:bg-[#F8FAFC] hover:text-[#4F46E5]"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
             >
@@ -156,7 +156,7 @@ function ProjectCard({
               View Code
             </motion.a>
           ) : (
-            <span className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-white/40">
+            <span className="flex items-center gap-1.5 rounded-full border border-[#E2E8F0] bg-[#F8FAFC] px-4 py-2 text-xs font-medium text-[#64748B]">
               <Lock size={12} />
               Private Repository
             </span>
@@ -167,7 +167,7 @@ function ProjectCard({
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full bg-accent-violet px-5 py-2.5 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,92,255,0.45)] hover:bg-accent-violet/90"
+              className="flex items-center gap-2 rounded-full bg-[#4F46E5] px-5 py-2.5 text-xs font-semibold text-white shadow-[0_4px_16px_rgba(79,70,229,0.3)] transition-all duration-300 hover:shadow-[0_6px_22px_rgba(79,70,229,0.45)] hover:bg-[#4338CA]"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
             >
@@ -194,16 +194,16 @@ function SecondaryProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.06 }}
-      className="premium-card glass group flex flex-col justify-between rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+      className="premium-card glass group flex flex-col justify-between rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(0,0,0,0.06)]"
     >
       <div>
         <div className="mb-2 flex items-start justify-between gap-2">
-          <h4 className="text-sm font-bold tracking-tight text-white">
+          <h4 className="text-sm font-bold tracking-tight text-[#0F172A]">
             {project.title}
           </h4>
           {project.isPrivate ? (
             <span
-              className="flex items-center gap-1 rounded bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-400"
+              className="flex items-center gap-1 rounded bg-amber-50 border border-amber-200/80 px-1.5 py-0.5 text-[10px] font-medium text-amber-700"
               title="Private Repository"
             >
               <Lock size={10} />
@@ -215,19 +215,19 @@ function SecondaryProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`GitHub repo for ${project.title}`}
-              className="text-white/40 transition-colors hover:text-accent-violet"
+              className="text-[#64748B] transition-colors hover:text-[#4F46E5]"
             >
               <GithubIcon size={14} />
             </a>
           ) : null}
         </div>
 
-        <p className="mb-4 text-xs leading-relaxed text-white/45">
+        <p className="mb-4 text-xs leading-relaxed text-[#475569]">
           {project.description}
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.06]">
+      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[#E2E8F0]">
         {project.tags.map((tag) => (
           <Badge key={tag} variant="outline" className="text-[10px]">
             {tag}

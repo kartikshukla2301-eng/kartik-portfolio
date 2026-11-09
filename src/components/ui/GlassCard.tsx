@@ -58,7 +58,7 @@ export function GlassCard({
           className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 hover:opacity-100 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(102, 81, 204, 0.08), transparent 60%)",
+              "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(79, 70, 229, 0.07), transparent 60%)",
           }}
         />
       )}

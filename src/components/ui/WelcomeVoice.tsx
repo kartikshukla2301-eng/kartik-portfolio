@@ -133,7 +133,7 @@ export function WelcomeVoiceControls() {
             exit={{ opacity: 0, scale: 0.8 }}
             className="fixed bottom-6 right-6 z-50 flex items-center gap-2"
           >
-            <div className="flex items-center gap-1.5 rounded-full border border-accent-violet/30 bg-[rgba(10,10,10,0.85)] px-4 py-2 backdrop-blur-xl shadow-lg shadow-accent-violet/10">
+            <div className="flex items-center gap-1.5 rounded-full border border-[#4F46E5]/30 bg-white/95 px-4 py-2 backdrop-blur-xl shadow-lg shadow-[#4F46E5]/10">
               <div className="flex items-center gap-0.5">
                 {[1, 2, 3].map((i) => (
                   <motion.div
@@ -149,11 +149,11 @@ export function WelcomeVoiceControls() {
                   />
                 ))}
               </div>
-              <span className="ml-1.5 text-xs font-semibold text-white/80">Speaking...</span>
+              <span className="ml-1.5 text-xs font-semibold text-[#0F172A]">Speaking...</span>
             </div>
             <button
               onClick={toggleMute}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[rgba(10,10,10,0.85)] text-white/70 shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-accent-violet hover:text-white cursor-pointer"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#475569] shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-[#4F46E5] hover:text-[#4F46E5] cursor-pointer"
               aria-label="Mute voice"
             >
               <VolumeX size={17} />
@@ -171,7 +171,7 @@ export function WelcomeVoiceControls() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ delay: 0.5 }}
             onClick={replay}
-            className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[rgba(10,10,10,0.85)] text-white/70 shadow-md backdrop-blur-xl transition-all duration-300 hover:border-accent-violet hover:text-white cursor-pointer"
+            className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#475569] shadow-md backdrop-blur-xl transition-all duration-300 hover:border-[#4F46E5] hover:text-[#4F46E5] cursor-pointer"
             aria-label="Replay welcome voice"
             title="Replay Welcome Greeting"
           >

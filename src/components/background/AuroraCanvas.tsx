@@ -61,7 +61,7 @@ export function AuroraCanvas() {
         h * 0.4,
         w * 0.45
       );
-      g1.addColorStop(0, "rgba(124, 92, 255, 0.07)");
+      g1.addColorStop(0, "rgba(79, 70, 229, 0.06)");
       g1.addColorStop(1, "transparent");
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, w, h);
@@ -75,7 +75,7 @@ export function AuroraCanvas() {
         h * 0.3,
         w * 0.35
       );
-      g2.addColorStop(0, "rgba(34, 211, 238, 0.05)");
+      g2.addColorStop(0, "rgba(13, 148, 136, 0.04)");
       g2.addColorStop(1, "transparent");
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, w, h);

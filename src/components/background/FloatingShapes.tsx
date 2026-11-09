@@ -89,7 +89,7 @@ export function FloatingShapes() {
         shape.y + mouseRef.current.y * (shape.size / 40)
       );
       ctx.rotate(shape.rotation);
-      ctx.strokeStyle = `rgba(124, 92, 255, ${shape.opacity})`;
+      ctx.strokeStyle = `rgba(79, 70, 229, ${shape.opacity})`;
       ctx.lineWidth = 1;
 
       if (shape.type === "triangle") {

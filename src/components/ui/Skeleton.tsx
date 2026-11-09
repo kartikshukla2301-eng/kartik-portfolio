@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 function SkeletonPulse({ className }: { className?: string }) {
   return (
     <div
-      className={`animate-pulse rounded-md bg-white/[0.04] ${className || ""}`}
+      className={`animate-pulse rounded-md bg-[#E2E8F0]/80 ${className || ""}`}
     />
   );
 }
@@ -47,7 +47,7 @@ export function GitHubSkeleton() {
                 {Array.from({ length: 84 }).map((_, i) => (
                   <div
                     key={i}
-                    className="aspect-square rounded-[2px] bg-white/[0.02]"
+                    className="aspect-square rounded-[2px] bg-[#E2E8F0]/50"
                   />
                 ))}
               </div>

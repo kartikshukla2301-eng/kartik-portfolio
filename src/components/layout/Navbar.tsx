@@ -73,18 +73,18 @@ export function Navbar() {
       >
         <nav
           className={`glass flex items-center justify-between rounded-full px-5 py-3 transition-all duration-300 ${
-            scrolled ? "py-2.5 shadow-lg shadow-black/40 border-accent-violet/30" : ""
+            scrolled ? "py-2.5 shadow-lg shadow-black/5 border-[#4F46E5]/20" : ""
           }`}
         >
           {/* Logo */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center gap-2 text-sm font-bold text-white"
+            className="flex items-center gap-2 text-sm font-bold text-[#0F172A]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             <span className="text-gradient font-black text-base">KS</span>
-            <span className="hidden sm:inline font-semibold text-xs tracking-tight text-white/90">
+            <span className="hidden sm:inline font-semibold text-xs tracking-tight text-[#475569]">
               Kartik Shukla
             </span>
           </a>
@@ -100,14 +100,14 @@ export function Navbar() {
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={`relative rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-white"
-                      : "text-white/50 hover:text-white/90"
+                      ? "text-[#0F172A]"
+                      : "text-[#475569] hover:text-[#0F172A]"
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute inset-0 rounded-full bg-white/10"
+                      className="absolute inset-0 rounded-full bg-[#4F46E5]/10"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
@@ -124,7 +124,7 @@ export function Navbar() {
                 href={parsedResume.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-accent-violet px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-accent-violet/90 hover:shadow-[0_0_15px_rgba(124,92,255,0.4)]"
+                className="flex items-center gap-1.5 rounded-full bg-[#4F46E5] px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-[#4338CA] hover:shadow-[0_0_15px_rgba(79,70,229,0.35)]"
               >
                 <FileText size={13} />
                 Resume
@@ -133,7 +133,7 @@ export function Navbar() {
               <a
                 href="#certifications"
                 onClick={(e) => handleNavClick(e, "#certifications")}
-                className="flex items-center gap-1.5 rounded-full bg-accent-violet px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-accent-violet/90 hover:shadow-[0_0_15px_rgba(124,92,255,0.4)]"
+                className="flex items-center gap-1.5 rounded-full bg-[#4F46E5] px-4 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-[#4338CA] hover:shadow-[0_0_15px_rgba(79,70,229,0.35)]"
               >
                 <FileText size={13} />
                 Credentials
@@ -144,7 +144,7 @@ export function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white transition-colors lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0F172A] transition-colors lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -164,7 +164,7 @@ export function Navbar() {
           >
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+              className="absolute inset-0 bg-[#0F172A]/40 backdrop-blur-md"
               onClick={() => setMobileOpen(false)}
             />
 
@@ -174,7 +174,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 350, damping: 30 }}
-              className="absolute inset-y-0 right-0 w-full max-w-xs bg-[rgba(10,10,12,0.97)] border-l border-white/10 p-6 pt-24 shadow-2xl flex flex-col justify-between"
+              className="absolute inset-y-0 right-0 w-full max-w-xs bg-white/95 backdrop-blur-2xl border-l border-[#E2E8F0] p-6 pt-24 shadow-2xl flex flex-col justify-between"
             >
               <nav className="flex flex-col gap-1.5">
                 {navLinks.map((link, i) => {
@@ -189,8 +189,8 @@ export function Navbar() {
                       onClick={(e) => handleNavClick(e, link.href)}
                       className={`rounded-xl px-4 py-2.5 text-base font-semibold transition-all duration-200 ${
                         isActive
-                          ? "bg-white/10 text-white"
-                          : "text-white/50 hover:text-white hover:bg-white/5"
+                          ? "bg-[#4F46E5]/10 text-[#4F46E5]"
+                          : "text-[#475569] hover:text-[#0F172A] hover:bg-[#F8FAFC]"
                       }`}
                       style={{ fontFamily: "var(--font-display)" }}
                     >
@@ -200,13 +200,13 @@ export function Navbar() {
                 })}
               </nav>
 
-              <div className="pt-6 border-t border-white/10">
+              <div className="pt-6 border-t border-[#E2E8F0]">
                 {parsedResume.isValid && parsedResume.viewUrl ? (
                   <a
                     href={parsedResume.viewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)]"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#4F46E5] py-3 text-xs font-semibold text-white shadow-[0_4px_16px_rgba(79,70,229,0.3)] hover:bg-[#4338CA]"
                   >
                     <FileText size={15} />
                     View Resume
@@ -215,7 +215,7 @@ export function Navbar() {
                   <a
                     href="#certifications"
                     onClick={(e) => handleNavClick(e, "#certifications")}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-violet py-3 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)]"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#4F46E5] py-3 text-xs font-semibold text-white shadow-[0_4px_16px_rgba(79,70,229,0.3)] hover:bg-[#4338CA]"
                   >
                     <FileText size={15} />
                     View Credentials Library

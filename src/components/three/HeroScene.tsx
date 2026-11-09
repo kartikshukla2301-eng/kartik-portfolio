@@ -31,10 +31,10 @@ const AbstractShape = memo(function AbstractShape() {
       <mesh ref={meshRef} scale={2.1}>
         <icosahedronGeometry args={[1, 3]} />
         <MeshDistortMaterial
-          color="#7C5CFF"
-          roughness={0.2}
-          metalness={0.8}
-          distort={0.25}
+          color="#EEF2FF"
+          roughness={0.15}
+          metalness={0.25}
+          distort={0.22}
           speed={1.5}
           transparent
           opacity={0.85}
@@ -43,10 +43,10 @@ const AbstractShape = memo(function AbstractShape() {
       <mesh ref={wireRef} scale={2.4} position={[0, 0, -0.4]}>
         <icosahedronGeometry args={[1, 2]} />
         <meshStandardMaterial
-          color="#22D3EE"
+          color="#4F46E5"
           wireframe
           transparent
-          opacity={0.15}
+          opacity={0.18}
         />
       </mesh>
     </Float>

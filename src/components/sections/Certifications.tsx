@@ -76,12 +76,12 @@ export function Certifications() {
         >
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent-violet/10 text-accent-violet shadow-[0_0_20px_rgba(124,92,255,0.2)]">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#4F46E5]/10 text-[#4F46E5] shadow-[0_0_20px_rgba(79,70,229,0.15)]">
                 <FileCheck2 size={28} />
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-accent-violet">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#4F46E5]">
                     Official Document
                   </span>
                   <Badge variant="accent" className="text-[10px]">
@@ -90,12 +90,12 @@ export function Certifications() {
                   </Badge>
                 </div>
                 <h3
-                  className="text-xl font-bold tracking-tight text-white sm:text-2xl"
+                  className="text-xl font-bold tracking-tight text-[#0F172A] sm:text-2xl"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   Latest Resume – {siteConfig.name}
                 </h3>
-                <p className="mt-1 text-xs sm:text-sm text-white/50">
+                <p className="mt-1 text-xs sm:text-sm text-[#475569]">
                   Full Stack Developer | AI Engineer • Updated with healthcare systems, production internships & AI platforms
                 </p>
               </div>
@@ -111,7 +111,7 @@ export function Certifications() {
                     "2026"
                   )
                 }
-                className="flex items-center gap-2 rounded-xl bg-accent-violet px-5 py-2.5 text-xs font-semibold text-white shadow-[0_0_20px_rgba(124,92,255,0.3)] transition-all hover:bg-accent-violet/90 hover:shadow-[0_0_30px_rgba(124,92,255,0.45)] cursor-pointer"
+                className="flex items-center gap-2 rounded-xl bg-[#4F46E5] px-5 py-2.5 text-xs font-semibold text-white shadow-[0_4px_16px_rgba(79,70,229,0.3)] transition-all hover:bg-[#4338CA] hover:shadow-[0_6px_22px_rgba(79,70,229,0.45)] cursor-pointer"
               >
                 <Eye size={15} />
                 View Resume
@@ -122,7 +122,7 @@ export function Certifications() {
                   href={parsedResume.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-xs font-semibold text-white/80 transition-all hover:bg-white/10 hover:text-white"
+                  className="flex items-center gap-2 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] px-5 py-2.5 text-xs font-semibold text-[#0F172A] transition-all hover:bg-white hover:border-[#4F46E5]/40"
                 >
                   <Download size={15} />
                   Download PDF
@@ -185,39 +185,39 @@ function CredentialCard({
       initial={{ opacity: 0, y: 25 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="premium-card glass group flex flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:border-accent-violet/40 hover:shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+      className="premium-card glass group flex flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:border-[#4F46E5]/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
     >
       <div>
         <div className="mb-4 flex items-start gap-3.5">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-violet/10 text-accent-violet transition-colors group-hover:bg-accent-violet group-hover:text-white">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#4F46E5]/10 text-[#4F46E5] transition-colors group-hover:bg-[#4F46E5] group-hover:text-white">
             <FileText size={20} />
           </div>
           <div className="min-w-0">
-            <span className="text-[10px] font-bold tracking-wider uppercase text-accent-violet">
+            <span className="text-[10px] font-bold tracking-wider uppercase text-[#4F46E5]">
               Verified Credential
             </span>
             <h4
-              className="mt-0.5 text-base font-bold leading-snug text-white"
+              className="mt-0.5 text-base font-bold leading-snug text-[#0F172A]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {cert.title}
             </h4>
-            <p className="mt-1 text-xs font-medium text-white/50">
+            <p className="mt-1 text-xs font-medium text-[#64748B]">
               {cert.issuer}
             </p>
           </div>
         </div>
 
         {cert.location && (
-          <p className="mb-3 text-[11px] text-white/40 italic">
+          <p className="mb-3 text-[11px] text-[#64748B] italic">
             {cert.location}
           </p>
         )}
       </div>
 
-      <div className="mt-5 pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-2">
-        <span className="flex items-center gap-1.5 text-xs text-white/40">
-          <CheckCircle size={13} className="text-emerald-400" />
+      <div className="mt-5 pt-4 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-2">
+        <span className="flex items-center gap-1.5 text-xs text-[#64748B]">
+          <CheckCircle size={13} className="text-emerald-500" />
           {cert.year}
         </span>
 
@@ -227,7 +227,7 @@ function CredentialCard({
               href={cert.credentialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-accent-cyan transition-colors hover:text-accent-cyan/80"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-[#0D9488] transition-colors hover:text-[#0D9488]/80"
             >
               <ExternalLink size={12} />
               Verify
@@ -238,7 +238,7 @@ function CredentialCard({
             onClick={() =>
               onOpenDoc(cert.title, driveUrl, cert.issuer, cert.year, cert.credentialUrl)
             }
-            className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 transition-all hover:bg-accent-violet hover:text-white hover:border-accent-violet cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] bg-white px-3 py-1.5 text-xs font-medium text-[#0F172A] shadow-2xs transition-all hover:bg-[#4F46E5] hover:text-white hover:border-[#4F46E5] cursor-pointer"
           >
             <Eye size={13} />
             View Document

@@ -30,14 +30,14 @@ export function Experience() {
               className="premium-card glass relative overflow-hidden rounded-2xl p-7 md:p-9 transition-all duration-300"
             >
               {/* Accent vertical line */}
-              <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-accent-violet via-accent-cyan to-transparent" />
+              <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-[#4F46E5] via-[#0D9488] to-transparent" />
 
               {/* Header */}
               <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
                     <h3
-                      className="text-xl font-bold tracking-tight text-white sm:text-2xl"
+                      className="text-xl font-bold tracking-tight text-[#0F172A] sm:text-2xl"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {exp.role}
@@ -50,17 +50,17 @@ export function Experience() {
                   </div>
 
                   <div className="mt-1.5 flex flex-wrap items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1.5 font-semibold text-accent-violet">
+                    <div className="flex items-center gap-1.5 font-semibold text-[#4F46E5]">
                       <Building2 size={15} />
                       <span>{exp.company}</span>
                     </div>
                     {exp.legalName && (
-                      <span className="text-xs text-white/40">
+                      <span className="text-xs text-[#64748B]">
                         ({exp.legalName})
                       </span>
                     )}
                     {exp.mode && (
-                      <div className="flex items-center gap-1 text-xs text-white/40">
+                      <div className="flex items-center gap-1 text-xs text-[#64748B]">
                         <MapPin size={13} />
                         <span>{exp.mode}</span>
                       </div>
@@ -68,8 +68,8 @@ export function Experience() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-white/50 font-medium shrink-0">
-                  <Calendar size={14} className="text-accent-cyan" />
+                <div className="flex items-center gap-2 text-xs text-[#64748B] font-medium shrink-0">
+                  <Calendar size={14} className="text-[#0D9488]" />
                   <span>{exp.period}</span>
                 </div>
               </div>
@@ -80,7 +80,7 @@ export function Experience() {
                   {exp.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/60 transition-colors hover:text-accent-violet hover:border-accent-violet/30"
+                      className="rounded-md border border-[#E2E8F0] bg-[#F8FAFC] px-2.5 py-1 text-[11px] font-medium text-[#475569] transition-colors hover:text-[#4F46E5] hover:border-[#4F46E5]/40 hover:bg-[#4F46E5]/10"
                     >
                       {tech}
                     </span>
@@ -100,9 +100,9 @@ export function Experience() {
                   >
                     <CheckCircle2
                       size={16}
-                      className="mt-0.5 shrink-0 text-accent-cyan transition-transform duration-200 group-hover:scale-110"
+                      className="mt-0.5 shrink-0 text-[#0D9488] transition-transform duration-200 group-hover:scale-110"
                     />
-                    <p className="text-sm leading-relaxed text-white/60">
+                    <p className="text-sm leading-relaxed text-[#475569]">
                       {highlight}
                     </p>
                   </motion.div>

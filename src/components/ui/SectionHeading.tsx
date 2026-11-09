@@ -41,7 +41,7 @@ export function SectionHeading({
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}
         className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl ${
-          gradient ? "text-gradient" : "text-white"
+          gradient ? "text-gradient" : "text-[#0F172A]"
         }`}
       >
         {title}
@@ -51,7 +51,7 @@ export function SectionHeading({
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/50 sm:text-base font-normal"
+          className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#475569] sm:text-base font-normal"
         >
           {description}
         </motion.p>

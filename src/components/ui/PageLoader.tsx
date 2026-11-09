@@ -56,7 +56,7 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
               : { opacity: 1, scale: 1, filter: "blur(0px)" }
           }
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-[#030303]"
+          className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-[#FAFAFC]"
         >
           {/* Aurora background */}
           <div className="intro-aurora absolute inset-0 pointer-events-none">
@@ -80,7 +80,7 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
             {/* Name — letter by letter */}
             <div className="overflow-hidden">
               <h1
-                className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-white"
+                className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-[#0F172A]"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {nameChars.map((char, i) => (
@@ -111,10 +111,10 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
               }}
               className="text-center"
             >
-              <p className="text-base sm:text-lg md:text-xl font-medium text-white/70">
-                <span className="font-semibold text-accent-violet">Full Stack Developer</span>
-                <span className="mx-3 text-white/30">&bull;</span>
-                <span className="font-semibold text-accent-cyan">AI Engineer</span>
+              <p className="text-base sm:text-lg md:text-xl font-medium text-[#475569]">
+                <span className="font-semibold text-[#4F46E5]">Full Stack Developer</span>
+                <span className="mx-3 text-[#CBD5E1]">&bull;</span>
+                <span className="font-semibold text-[#0D9488]">AI Engineer</span>
               </p>
             </motion.div>
 
@@ -125,7 +125,7 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
               transition={{ delay: 0.15 + nameChars.length * 0.04 + 0.35 }}
               className="w-56 overflow-hidden sm:w-64"
             >
-              <div className="h-1 w-full rounded-full bg-white/10">
+              <div className="h-1 w-full rounded-full bg-[#E2E8F0]">
                 <motion.div
                   initial={{ x: "-100%" }}
                   animate={{ x: "0%" }}
@@ -149,14 +149,14 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
               onClick={handleEnter}
-              className="intro-enter-btn group relative overflow-hidden rounded-full px-10 py-4 text-sm font-semibold tracking-wide transition-all duration-300 active:scale-95 cursor-pointer text-white"
+              className="intro-enter-btn group relative overflow-hidden rounded-full px-10 py-4 text-sm font-semibold tracking-wide transition-all duration-300 active:scale-95 cursor-pointer text-[#0F172A]"
             >
               <span className="relative z-10 flex items-center gap-3">
                 Enter Portfolio
                 <motion.span
                   animate={{ x: [0, 4, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-accent-cyan font-bold"
+                  className="text-[#0D9488] font-bold"
                 >
                   &rarr;
                 </motion.span>
@@ -165,10 +165,10 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
           </div>
 
           {/* Corner accents */}
-          <div className="absolute bottom-6 left-6 text-xs font-medium tracking-wider text-white/30">
+          <div className="absolute bottom-6 left-6 text-xs font-medium tracking-wider text-[#94A3B8]">
             Kartik Shukla &bull; Portfolio
           </div>
-          <div className="absolute bottom-6 right-6 text-xs font-medium tracking-wider text-white/30">
+          <div className="absolute bottom-6 right-6 text-xs font-medium tracking-wider text-[#94A3B8]">
             AKTU CSE &bull; 2023–2027
           </div>
 

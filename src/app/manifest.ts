@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Portfolio of Kartik Shukla, Full Stack Developer and AI Engineer. Explore projects, production development experience, technical skills and AI-powered applications.",
     start_url: "/",
     display: "standalone",
-    background_color: "#030303",
-    theme_color: "#030303",
+    background_color: "#FAFAFC",
+    theme_color: "#4F46E5",
     icons: [
       {
         src: "/favicon.ico",

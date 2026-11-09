@@ -16,9 +16,9 @@ export function Badge({
   pulse = false,
 }: BadgeProps) {
   const variants = {
-    default: "bg-white/5 text-white/80 border-white/10",
-    accent: "bg-accent-violet/15 text-accent-violet border-accent-violet/30",
-    outline: "bg-transparent text-white/60 border-white/15",
+    default: "bg-[#F1F5F9] text-[#0F172A] border-[#E2E8F0]",
+    accent: "bg-[#4F46E5]/10 text-[#4F46E5] border-[#4F46E5]/25",
+    outline: "bg-white text-[#475569] border-[#E2E8F0]",
   };
 
   return (

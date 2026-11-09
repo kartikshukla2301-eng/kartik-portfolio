@@ -72,17 +72,17 @@ export function CustomCursor() {
   };
 
   const cursorColors = {
-    default: "rgba(255, 255, 255, 0.2)",
-    hover: "rgba(124, 92, 255, 0.15)",
-    text: "rgba(34, 211, 238, 0.8)",
-    pointer: "rgba(124, 92, 255, 0.2)",
+    default: "rgba(79, 70, 229, 0.15)",
+    hover: "rgba(79, 70, 229, 0.08)",
+    text: "rgba(13, 148, 136, 0.7)",
+    pointer: "rgba(79, 70, 229, 0.12)",
   };
 
   const borderColors = {
-    default: "rgba(255, 255, 255, 0.4)",
-    hover: "rgba(124, 92, 255, 0.6)",
-    text: "rgba(34, 211, 238, 0)",
-    pointer: "rgba(124, 92, 255, 0.8)",
+    default: "rgba(79, 70, 229, 0.3)",
+    hover: "rgba(79, 70, 229, 0.5)",
+    text: "rgba(13, 148, 136, 0)",
+    pointer: "rgba(79, 70, 229, 0.7)",
   };
 
   const size = cursorSizes[cursorState];
@@ -131,7 +131,7 @@ export function CustomCursor() {
         }}
       >
         <div
-          className="h-1.5 w-1.5 rounded-full bg-white"
+          className="h-1.5 w-1.5 rounded-full bg-[#4F46E5]"
           style={{
             opacity: cursorState === "text" ? 0 : 0.9,
           }}

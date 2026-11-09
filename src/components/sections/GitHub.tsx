@@ -78,17 +78,17 @@ function ContributionGraph({ repos }: { repos: GitHubRepo[] }) {
             style={{
               backgroundColor:
                 intensity > 0.7
-                  ? "rgba(124, 92, 255, 0.85)"
+                  ? "rgba(79, 70, 229, 0.85)"
                   : intensity > 0.4
-                  ? "rgba(124, 92, 255, 0.55)"
+                  ? "rgba(79, 70, 229, 0.55)"
                   : intensity > 0.15
-                  ? "rgba(124, 92, 255, 0.25)"
-                  : "rgba(255, 255, 255, 0.04)",
+                  ? "rgba(79, 70, 229, 0.25)"
+                  : "rgba(15, 23, 42, 0.06)",
             }}
           />
         ))}
       </div>
-      <div className="mt-3 flex items-center justify-between text-[11px] text-white/40">
+      <div className="mt-3 flex items-center justify-between text-[11px] text-[#64748B]">
         <span>12 weeks ago</span>
         <div className="flex items-center gap-1.5">
           <span>Less</span>
@@ -98,7 +98,7 @@ function ContributionGraph({ repos }: { repos: GitHubRepo[] }) {
                 key={o}
                 className="h-2.5 w-2.5 rounded-[2px]"
                 style={{
-                  backgroundColor: `rgba(124, 92, 255, ${o})`,
+                  backgroundColor: `rgba(79, 70, 229, ${o})`,
                 }}
               />
             ))}
@@ -121,23 +121,23 @@ function LanguageBar({ languages }: { languages: LanguageStat[] }) {
       {top.map((lang) => (
         <div key={lang.name}>
           <div className="mb-1.5 flex items-center justify-between text-xs">
-            <span className="flex items-center gap-2 font-medium text-white">
+            <span className="flex items-center gap-2 font-medium text-[#0F172A]">
               <span
                 className="h-2.5 w-2.5 rounded-full"
-                style={{ backgroundColor: lang.color || "#7C5CFF" }}
+                style={{ backgroundColor: lang.color || "#4F46E5" }}
               />
               {lang.name}
             </span>
-            <span className="text-white/40 font-medium">{lang.percentage}%</span>
+            <span className="text-[#64748B] font-medium">{lang.percentage}%</span>
           </div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+          <div className="h-1.5 overflow-hidden rounded-full bg-[#E2E8F0]">
             <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: `${(lang.percentage / total) * 100}%` }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
               className="h-full rounded-full"
-              style={{ backgroundColor: lang.color || "#7C5CFF" }}
+              style={{ backgroundColor: lang.color || "#4F46E5" }}
             />
           </div>
         </div>
@@ -199,29 +199,29 @@ export function GitHubSection() {
               transition={{ duration: 0.5 }}
             >
               {/* Profile mini card */}
-              <div className="glass mb-4 flex items-center gap-4 rounded-2xl p-4 border border-white/10">
+              <div className="glass mb-4 flex items-center gap-4 rounded-2xl p-4 border border-[#E2E8F0]">
                 <Image
                   src={profile.avatar_url}
                   alt={profile.login}
                   width={48}
                   height={48}
-                  className="rounded-full ring-2 ring-accent-violet/40"
+                  className="rounded-full ring-2 ring-[#4F46E5]/40"
                   unoptimized
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-white truncate">
+                    <span className="text-sm font-bold text-[#0F172A] truncate">
                       {profile.name || profile.login}
                     </span>
                     {profile.location && (
-                      <span className="flex items-center gap-1 text-[11px] text-white/50">
+                      <span className="flex items-center gap-1 text-[11px] text-[#64748B]">
                         <MapPin size={11} />
                         {profile.location}
                       </span>
                     )}
                   </div>
                   {profile.bio && (
-                    <p className="mt-0.5 text-xs text-white/50 truncate">
+                    <p className="mt-0.5 text-xs text-[#64748B] truncate">
                       {profile.bio}
                     </p>
                   )}
@@ -230,7 +230,7 @@ export function GitHubSection() {
                   href={profile.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-semibold text-white/80 transition-all duration-300 hover:border-accent-violet hover:text-white hover:bg-white/10"
+                  className="shrink-0 rounded-full border border-[#E2E8F0] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#0F172A] shadow-xs transition-all duration-300 hover:border-[#4F46E5] hover:text-[#4F46E5] hover:bg-[#F8FAFC]"
                 >
                   Follow
                 </a>
@@ -265,16 +265,16 @@ export function GitHubSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.4, delay: 0.1 + i * 0.05 }}
-                    className="glass rounded-xl p-4 text-center border border-white/10 transition-all duration-300 hover:border-accent-violet/30"
+                    className="glass rounded-xl p-4 text-center border border-[#E2E8F0] transition-all duration-300 hover:border-[#4F46E5]/30"
                   >
                     <stat.icon
                       size={16}
-                      className="mx-auto mb-2 text-accent-violet"
+                      className="mx-auto mb-2 text-[#4F46E5]"
                     />
-                    <div className="text-lg font-bold text-white">
+                    <div className="text-lg font-bold text-[#0F172A]">
                       {stat.value}
                     </div>
-                    <div className="text-[11px] text-white/50 font-medium">{stat.label}</div>
+                    <div className="text-[11px] text-[#64748B] font-medium">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -285,9 +285,9 @@ export function GitHubSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="glass rounded-2xl p-6 border border-white/10"
+              className="glass rounded-2xl p-6 border border-[#E2E8F0]"
             >
-              <h4 className="mb-3 text-sm font-bold text-white">
+              <h4 className="mb-3 text-sm font-bold text-[#0F172A]">
                 Contribution Activity
               </h4>
               <ContributionGraph repos={repos} />
@@ -299,9 +299,9 @@ export function GitHubSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.25 }}
-                className="glass rounded-2xl p-6 border border-white/10"
+                className="glass rounded-2xl p-6 border border-[#E2E8F0]"
               >
-                <h4 className="mb-4 text-sm font-bold text-white">
+                <h4 className="mb-4 text-sm font-bold text-[#0F172A]">
                   Top Languages Used
                 </h4>
                 <LanguageBar languages={languages} />
@@ -319,34 +319,34 @@ export function GitHubSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
-                  className="premium-card glass group block rounded-2xl p-4 border border-white/10 transition-all duration-300 hover:border-accent-violet/30"
+                  className="premium-card glass group block rounded-2xl p-4 border border-[#E2E8F0] transition-all duration-300 hover:border-[#4F46E5]/30 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
                 >
                   <div className="mb-2 flex items-center gap-2">
-                    <GithubIcon size={14} className="text-white/40" />
-                    <span className="text-sm font-bold text-white truncate">
+                    <GithubIcon size={14} className="text-[#64748B]" />
+                    <span className="text-sm font-bold text-[#0F172A] truncate">
                       {repo.name}
                     </span>
                     {repo.homepage && (
                       <ArrowUpRight
                         size={12}
-                        className="ml-auto shrink-0 text-white/40 transition-colors group-hover:text-accent-cyan"
+                        className="ml-auto shrink-0 text-[#64748B] transition-colors group-hover:text-[#4F46E5]"
                       />
                     )}
                   </div>
                   {repo.description && (
-                    <p className="mb-3 text-[11px] leading-relaxed text-white/50 line-clamp-2">
+                    <p className="mb-3 text-[11px] leading-relaxed text-[#475569] line-clamp-2">
                       {repo.description}
                     </p>
                   )}
-                  <div className="flex items-center gap-3 text-[11px] text-white/50">
+                  <div className="flex items-center gap-3 text-[11px] text-[#64748B]">
                     {repo.language && (
-                      <span className="flex items-center gap-1 font-medium text-white/70">
+                      <span className="flex items-center gap-1 font-medium text-[#0F172A]">
                         <span
                           className="h-2 w-2 rounded-full"
                           style={{
                             backgroundColor:
                               languages.find((l) => l.name === repo.language)
-                                ?.color || "#7C5CFF",
+                                ?.color || "#4F46E5",
                           }}
                         />
                         {repo.language}
@@ -360,7 +360,7 @@ export function GitHubSection() {
                       <GitFork size={11} />
                       {repo.forks_count}
                     </span>
-                    <span className="ml-auto text-[10px] text-white/40">
+                    <span className="ml-auto text-[10px] text-[#94A3B8]">
                       {timeAgo(repo.pushed_at)}
                     </span>
                   </div>
@@ -376,34 +376,34 @@ export function GitHubSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <div className="premium-card glass relative overflow-hidden rounded-2xl p-6 sm:p-7 h-full border border-white/10">
+            <div className="premium-card glass relative overflow-hidden rounded-2xl p-6 sm:p-7 h-full border border-[#E2E8F0]">
               <div className="relative z-10">
                 <div className="mb-4 flex items-center gap-2">
-                  <Zap size={16} className="text-amber-400" />
-                  <span className="text-xs font-bold tracking-wider text-amber-400 uppercase">
+                  <Zap size={16} className="text-amber-500" />
+                  <span className="text-xs font-bold tracking-wider text-amber-600 uppercase">
                     Currently Building
                   </span>
                 </div>
 
                 <h3
-                  className="mb-2 text-xl font-bold text-white"
+                  className="mb-2 text-xl font-bold text-[#0F172A]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {developerAI.name}
                 </h3>
-                <p className="mb-6 text-xs sm:text-sm text-white/60 leading-relaxed">
+                <p className="mb-6 text-xs sm:text-sm text-[#475569] leading-relaxed">
                   {developerAI.description}
                 </p>
 
                 {/* Progress */}
                 <div className="mb-6">
                   <div className="mb-2 flex items-center justify-between text-xs">
-                    <span className="text-white/50 font-medium">Core Engine Compilation</span>
-                    <span className="font-bold text-accent-violet">
+                    <span className="text-[#64748B] font-medium">Core Engine Compilation</span>
+                    <span className="font-bold text-[#4F46E5]">
                       {developerAI.progress}%
                     </span>
                   </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-2 overflow-hidden rounded-full bg-[#E2E8F0]">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={
@@ -412,7 +412,7 @@ export function GitHubSection() {
                           : {}
                       }
                       transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-                      className="h-full rounded-full bg-gradient-to-r from-accent-violet to-accent-cyan"
+                      className="h-full rounded-full bg-gradient-to-r from-[#4F46E5] to-[#0D9488]"
                     />
                   </div>
                 </div>
@@ -428,7 +428,7 @@ export function GitHubSection() {
 
                 {/* Roadmap */}
                 <div className="space-y-3">
-                  <h4 className="text-xs font-bold text-white/40 tracking-wider uppercase">
+                  <h4 className="text-xs font-bold text-[#94A3B8] tracking-wider uppercase">
                     Development Roadmap
                   </h4>
                   {developerAI.roadmap.map((phase, i) => (
@@ -436,18 +436,18 @@ export function GitHubSection() {
                       <div className="relative">
                         <div
                           className={`h-2.5 w-2.5 rounded-full ${
-                            i === 0 ? "bg-accent-violet" : "bg-white/20"
+                            i === 0 ? "bg-[#4F46E5]" : "bg-[#CBD5E1]"
                           }`}
                         />
                         {i < developerAI.roadmap.length - 1 && (
-                          <div className="absolute left-1/2 top-2.5 h-3 w-px -translate-x-1/2 bg-white/20" />
+                          <div className="absolute left-1/2 top-2.5 h-3 w-px -translate-x-1/2 bg-[#E2E8F0]" />
                         )}
                       </div>
                       <div className="flex-1 flex items-center justify-between">
-                        <span className="text-xs font-medium text-white">
+                        <span className="text-xs font-medium text-[#0F172A]">
                           {phase.phase}
                         </span>
-                        <span className="text-[11px] text-white/40">
+                        <span className="text-[11px] text-[#64748B]">
                           {phase.quarter}
                         </span>
                       </div>
