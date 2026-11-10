@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
@@ -19,8 +19,6 @@ import { PageLoader } from "@/components/ui/PageLoader";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { NebulaGlow } from "@/components/background/NebulaGlow";
-import { CyberGrid } from "@/components/background/CyberGrid";
-import { ConstellationCanvas } from "@/components/background/ConstellationCanvas";
 import { NoiseOverlay } from "@/components/background/NoiseOverlay";
 import { AdSenseBanner } from "@/components/ui/AdSenseBanner";
 
@@ -31,11 +29,38 @@ const LenisProvider = dynamic(
 
 export default function Home() {
   const { speak } = useWelcomeVoice();
+  const [targetSection, setTargetSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const sec = params.get("section");
+      if (sec) {
+        setTargetSection(sec);
+      }
+    }
+  }, []);
 
   const handleIntroEnter = useCallback(() => {
     // Small delay so the transition finishes before voice starts
     setTimeout(() => speak(), 400);
   }, [speak]);
+
+  if (targetSection === "experience") {
+    return (
+      <main className="min-h-screen bg-[#0B0A08] py-16 px-4 sm:px-6 lg:px-8">
+        <Experience />
+      </main>
+    );
+  }
+
+  if (targetSection === "github") {
+    return (
+      <main className="min-h-screen bg-[#0B0A08] py-16 px-4 sm:px-6 lg:px-8">
+        <GitHubSection />
+      </main>
+    );
+  }
 
   return (
     <LenisProvider>
@@ -51,10 +76,8 @@ export default function Home() {
       {/* Welcome voice controls (mute/replay) */}
       <WelcomeVoiceControls />
 
-      {/* Premium Multi-Layered Background */}
+      {/* Premium Infinity Socks Court Background */}
       <NebulaGlow />
-      <CyberGrid />
-      <ConstellationCanvas />
       <NoiseOverlay />
 
       {/* Content */}

@@ -27,8 +27,8 @@ export function Experience() {
     panels.forEach((panel) => {
       ScrollTrigger.create({
         trigger: panel,
-        start: "top 80%",
-        end: "bottom 20%",
+        start: "top 85%",
+        end: "bottom 15%",
         onEnter: () => {
           panel.classList.add("is-in", "is-live");
         },
@@ -49,9 +49,9 @@ export function Experience() {
   }, []);
 
   return (
-    <section id="experience" ref={containerRef} className="qq relative py-32 px-4" data-appear="wipe">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-16">
+    <section id="experience" ref={containerRef} className="qq relative py-32 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl w-full">
+        <div className="mb-14">
           <SectionHeading
             eyebrow="The Four Quarters"
             title="Professional Residencies & Production Engineering"
@@ -70,8 +70,8 @@ export function Experience() {
           </div>
         </div>
 
-        {/* The Four Quarters Panels matching Infinity Socks .qq__panel */}
-        <div className="space-y-12">
+        {/* The Four Quarters: Balanced 2x2 Grid occupying available desktop width */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           {experiences.map((exp, idx) => {
             const quarterIndex = `0${idx + 1} / 04`;
             const domain = quarterDomains[idx] || "ENGINEERING SYSTEMS";
@@ -79,11 +79,10 @@ export function Experience() {
             return (
               <article
                 key={exp.company + exp.period}
-                className="qq__panel relative w-full overflow-hidden rounded-2xl border border-[rgba(255,250,240,0.14)] bg-[#0C0A08] p-8 sm:p-12 transition-all duration-500 hover:border-[#C96F4A]/50"
-                style={{ height: "auto", minHeight: "440px" }}
+                className="qq__panel relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,250,240,0.12)] bg-[#0C0A08] p-6 sm:p-8 transition-all duration-500 hover:border-[#C96F4A]/60 hover:shadow-[0_16px_45px_rgba(0,0,0,0.85),0_0_30px_rgba(201,111,74,0.16)]"
               >
                 {/* Panel Gradient Shade */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#12100D] via-[#0C0A08] to-[#161310] opacity-90 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#13100D] via-[#0C0A08] to-[#15120F] opacity-95 pointer-events-none" />
 
                 {/* Left Burnt Terracotta Accent Strip */}
                 <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-[#C96F4A] via-[#FFD6A1] to-transparent" />
@@ -91,34 +90,35 @@ export function Experience() {
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   <div>
                     {/* Infinity Socks HUD Row */}
-                    <div className="qq__hudrow flex items-center justify-between border-b border-[rgba(255,250,240,0.1)] pb-3 font-mono text-[11px] tracking-widest text-[rgba(255,250,240,0.5)]">
-                      <span className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#C96F4A]" />
-                        <b className="text-[#C96F4A]">{domain}</b>
+                    <div className="qq__hudrow flex items-center justify-between border-b border-[rgba(255,250,240,0.1)] pb-3 font-mono text-[10px] sm:text-[11px] tracking-widest text-[rgba(255,250,240,0.5)]">
+                      <span className="flex items-center gap-2 truncate pr-2">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#C96F4A] shrink-0" />
+                        <b className="text-[#C96F4A] uppercase truncate">{`[0${idx + 1} // ${domain}]`}</b>
                       </span>
-                      <span className="text-[#FFD6A1] font-bold">{quarterIndex}</span>
+                      <span className="text-[#FFD6A1] font-bold shrink-0">{quarterIndex}</span>
                     </div>
 
                     {/* Role & Company Headline */}
-                    <div className="my-6">
-                      <div className="flex flex-wrap items-center gap-3">
+                    <div className="my-5">
+                      <div className="flex flex-wrap items-center gap-2.5">
                         <h3
-                          className="qq__name text-2xl sm:text-3xl font-bold tracking-tight text-[#F6F0E2]"
+                          className="qq__name text-xl sm:text-2xl font-bold tracking-tight text-[#F6F0E2]"
                           style={{ fontFamily: "var(--font-display)" }}
                         >
                           {exp.role}
                         </h3>
                         {exp.isOngoing && (
-                          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#C96F4A]/15 border border-[#C96F4A]/40 px-3 py-0.5 font-mono text-[10px] tracking-widest text-[#FFD6A1]">
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#C96F4A]/15 border border-[#C96F4A]/40 px-2.5 py-0.5 font-mono text-[10px] tracking-widest text-[#FFD6A1]">
                             <span className="h-1.5 w-1.5 rounded-full bg-[#C96F4A] animate-pulse" />
                             ACTIVE
                           </span>
                         )}
                       </div>
 
-                      <div className="mt-2.5 flex flex-wrap items-center gap-3 text-sm">
+                      {/* Company & Legal Info */}
+                      <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
                         <div className="flex items-center gap-1.5 font-semibold text-[#FFD6A1]">
-                          <Building2 size={15} className="text-[#C96F4A]" />
+                          <Building2 size={14} className="text-[#C96F4A] shrink-0" />
                           <span>{exp.company}</span>
                         </div>
                         {exp.legalName && (
@@ -126,26 +126,30 @@ export function Experience() {
                             [{exp.legalName}]
                           </span>
                         )}
+                      </div>
+
+                      {/* Period & Mode Meta Row */}
+                      <div className="mt-2.5 flex flex-wrap items-center gap-2 font-mono text-xs text-[rgba(255,250,240,0.55)]">
+                        <div className="flex items-center gap-1 bg-[#14110E] px-2.5 py-0.5 rounded border border-[rgba(255,250,240,0.08)]">
+                          <Calendar size={11} className="text-[#C96F4A]" />
+                          <span>{exp.period}</span>
+                        </div>
                         {exp.mode && (
-                          <div className="flex items-center gap-1 font-mono text-xs text-[rgba(255,250,240,0.55)]">
-                            <MapPin size={13} className="text-[#C96F4A]" />
+                          <div className="flex items-center gap-1 bg-[#14110E] px-2.5 py-0.5 rounded border border-[rgba(255,250,240,0.08)]">
+                            <MapPin size={11} className="text-[#C96F4A]" />
                             <span>{exp.mode}</span>
                           </div>
                         )}
-                        <div className="flex items-center gap-1.5 font-mono text-xs text-[rgba(255,250,240,0.55)] ml-auto bg-[#161310] px-3 py-1 rounded-md border border-[rgba(255,250,240,0.1)]">
-                          <Calendar size={13} className="text-[#C96F4A]" />
-                          <span>{exp.period}</span>
-                        </div>
                       </div>
                     </div>
 
                     {/* Technologies Chips */}
                     {exp.technologies && exp.technologies.length > 0 && (
-                      <div className="mb-6 flex flex-wrap gap-1.5">
+                      <div className="mb-5 flex flex-wrap gap-1.5">
                         {exp.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="rounded border border-[rgba(255,250,240,0.1)] bg-[#161310] px-2.5 py-1 font-mono text-[11px] text-[rgba(255,250,240,0.7)]"
+                            className="rounded border border-[rgba(255,250,240,0.09)] bg-[#14110E] px-2.5 py-0.5 font-mono text-[10px] text-[rgba(255,250,240,0.7)]"
                           >
                             {tech}
                           </span>
@@ -155,14 +159,14 @@ export function Experience() {
                   </div>
 
                   {/* Highlights Claim */}
-                  <div className="qq__claim space-y-3 pt-4 border-t border-[rgba(255,250,240,0.08)]">
-                    {exp.highlights.map((highlight, i) => (
-                      <div key={i} className="flex items-start gap-3">
+                  <div className="qq__claim space-y-2.5 pt-4 border-t border-[rgba(255,250,240,0.08)]">
+                    {exp.highlights.slice(0, 4).map((highlight, i) => (
+                      <div key={i} className="flex items-start gap-2.5">
                         <CheckCircle2
-                          size={15}
+                          size={13}
                           className="mt-1 shrink-0 text-[#C96F4A]"
                         />
-                        <p className="text-sm leading-relaxed text-[rgba(255,250,240,0.75)] font-sans">
+                        <p className="text-xs sm:text-[13px] leading-relaxed text-[rgba(255,250,240,0.75)] font-sans">
                           {highlight}
                         </p>
                       </div>

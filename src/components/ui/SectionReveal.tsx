@@ -26,6 +26,7 @@ export function SectionReveal({
 }: SectionRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const shouldReveal = isInView || (typeof window !== "undefined" && window.location.search.includes("reveal"));
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -58,7 +59,7 @@ export function SectionReveal({
         scale: direction === "scale" ? 0.95 : 1,
       }}
       animate={
-        isInView
+        shouldReveal
           ? {
               opacity: 1,
               x: 0,

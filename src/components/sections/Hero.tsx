@@ -3,7 +3,6 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { ArrowDown, Mail, MapPin, Cpu, Activity } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
@@ -11,11 +10,6 @@ import { InfinityButton } from "@/components/ui/InfinityButton";
 import { ColorFillText } from "@/components/ui/ColorFillText";
 import { siteConfig, tagCloud } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
-
-const HeroScene = dynamic(
-  () => import("@/components/three/HeroScene").then((m) => m.HeroScene),
-  { ssr: false }
-);
 
 const stats = [
   {
@@ -60,11 +54,6 @@ export function Hero() {
       ref={ref}
       className="relative flex min-h-screen flex-col justify-between overflow-hidden px-4 pt-28 pb-8 bg-[#0B0A08]"
     >
-      {/* 3D Warm Copper Scene */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <HeroScene />
-      </div>
-
       {/* Infinity Socks Court Floor Ambient Lighting */}
       <div className="court-floor-glow absolute inset-0 z-0" />
 
