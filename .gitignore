@@ -45,3 +45,7 @@ _dream_inspect*.py
 
 # duplicate certificate source files (canonical copies live in public/certificates/)
 /certifcates/
+
+# temporary screenshot and inspection scripts
+/scripts/
+*.png

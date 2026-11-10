@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
@@ -29,41 +29,11 @@ const LenisProvider = dynamic(
 
 export default function Home() {
   const { speak } = useWelcomeVoice();
-  const [targetSection] = useState<string | null>(() => {
-    if (typeof window !== "undefined") {
-      return new URLSearchParams(window.location.search).get("section");
-    }
-    return null;
-  });
 
   const handleIntroEnter = useCallback(() => {
     // Small delay so the transition finishes before voice starts
     setTimeout(() => speak(), 400);
   }, [speak]);
-
-  if (targetSection === "experience") {
-    return (
-      <main className="min-h-screen bg-[#0B0A08] py-16 px-4 sm:px-6 lg:px-8">
-        <Experience />
-      </main>
-    );
-  }
-
-  if (targetSection === "certifications") {
-    return (
-      <main className="min-h-screen bg-[#0B0A08] py-16 px-4 sm:px-6 lg:px-8">
-        <Certifications />
-      </main>
-    );
-  }
-
-  if (targetSection === "github") {
-    return (
-      <main className="min-h-screen bg-[#0B0A08] py-16 px-4 sm:px-6 lg:px-8">
-        <GitHubSection />
-      </main>
-    );
-  }
 
   return (
     <LenisProvider>
