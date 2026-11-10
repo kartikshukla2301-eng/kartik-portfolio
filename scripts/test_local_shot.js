@@ -50,6 +50,14 @@ async function run() {
       console.log('Saved portfolio_experience.png, size:', fs.statSync('portfolio_experience.png').size);
     }
 
+    // 2b. Certifications 2x2 Grid View
+    const tempCert = path.join(os.tmpdir(), 'portfolio_certifications.png');
+    execSync(`"${chromePath}" --headless=new --disable-gpu --no-sandbox --window-size=1920,1200 --screenshot="${tempCert}" --virtual-time-budget=4000 "http://127.0.0.1:3456/?noloader=1&reveal=1&section=certifications"`);
+    if (fs.existsSync(tempCert)) {
+      fs.copyFileSync(tempCert, path.join(process.cwd(), 'portfolio_certifications.png'));
+      console.log('Saved portfolio_certifications.png, size:', fs.statSync('portfolio_certifications.png').size);
+    }
+
     // 3. GitHub Activity Section View
     const tempGit = path.join(os.tmpdir(), 'portfolio_github.png');
     execSync(`"${chromePath}" --headless=new --disable-gpu --no-sandbox --window-size=1920,1300 --screenshot="${tempGit}" --virtual-time-budget=4000 "http://127.0.0.1:3456/?noloader=1&reveal=1&section=github"`);

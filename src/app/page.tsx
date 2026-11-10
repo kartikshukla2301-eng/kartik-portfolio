@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
@@ -29,17 +29,12 @@ const LenisProvider = dynamic(
 
 export default function Home() {
   const { speak } = useWelcomeVoice();
-  const [targetSection, setTargetSection] = useState<string | null>(null);
-
-  useEffect(() => {
+  const [targetSection] = useState<string | null>(() => {
     if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const sec = params.get("section");
-      if (sec) {
-        setTargetSection(sec);
-      }
+      return new URLSearchParams(window.location.search).get("section");
     }
-  }, []);
+    return null;
+  });
 
   const handleIntroEnter = useCallback(() => {
     // Small delay so the transition finishes before voice starts
@@ -50,6 +45,14 @@ export default function Home() {
     return (
       <main className="min-h-screen bg-[#0B0A08] py-16 px-4 sm:px-6 lg:px-8">
         <Experience />
+      </main>
+    );
+  }
+
+  if (targetSection === "certifications") {
+    return (
+      <main className="min-h-screen bg-[#0B0A08] py-16 px-4 sm:px-6 lg:px-8">
+        <Certifications />
       </main>
     );
   }
