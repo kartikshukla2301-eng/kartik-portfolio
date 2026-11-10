@@ -131,7 +131,7 @@ export function WelcomeVoiceControls() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed bottom-6 right-6 z-50 flex items-center gap-2 font-mono"
+            className="fixed bottom-4 left-4 z-50 flex items-center gap-2 font-mono sm:bottom-6 sm:left-6"
           >
             <div className="flex items-center gap-2 rounded-full border border-[#C96F4A]/40 bg-[#12100D]/95 px-4 py-2 backdrop-blur-xl shadow-2xl shadow-black">
               <div className="flex items-center gap-0.5">
@@ -173,7 +173,7 @@ export function WelcomeVoiceControls() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ delay: 0.5 }}
             onClick={replay}
-            className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-[rgba(255,250,240,0.16)] bg-[#12100D]/90 text-[rgba(255,250,240,0.7)] shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-[#C96F4A] hover:text-[#FFD6A1] hover:scale-105 cursor-pointer"
+            className="fixed bottom-4 left-4 z-50 flex h-11 w-11 sm:bottom-6 sm:left-6 items-center justify-center rounded-full border border-[rgba(255,250,240,0.16)] bg-[#12100D]/90 text-[rgba(255,250,240,0.7)] shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-[#C96F4A] hover:text-[#FFD6A1] hover:scale-105 cursor-pointer"
             aria-label="Replay welcome voice"
             title="Replay Audio Greeting"
           >

@@ -1,240 +1,149 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { Mail, MapPin, CheckCircle } from "lucide-react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ColorFillText } from "@/components/ui/ColorFillText";
 import { InfinityButton } from "@/components/ui/InfinityButton";
-import { Footer } from "@/components/layout/Footer";
-import { siteConfig } from "@/lib/data";
+import { SplitReveal } from "@/components/motion/SplitReveal";
+import { useContent } from "@/components/providers/ContentProvider";
+import { buildMailto } from "@/lib/mail";
+
+const FIELD =
+  "w-full rounded-xl border border-[rgba(33,26,18,0.2)] bg-[rgba(255,255,255,0.55)] px-4 py-3.5 font-mono text-sm text-[#211A12] outline-none transition-colors placeholder:text-[rgba(33,26,18,0.4)] focus:border-[#C96F4A] focus:bg-white";
 
 export function Contact() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const { profile } = useContent();
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    window.location.href = buildMailto(profile.email, form.name.trim(), form.email.trim(), form.message.trim());
+  };
 
   return (
-    <section id="contact" className="relative py-32 px-4">
-      <div className="mx-auto max-w-5xl" ref={ref}>
-        <div className="mb-14">
-          <SectionHeading
-            eyebrow="Initiate Transmission"
-            title="Let's Build Something Extraordinary"
-            description="Available for Full Stack Developer, Software Engineer, and AI Application roles. Inquiries for production platforms and enterprise contracts welcomed."
-          />
+    <section id="contact" className="light-section relative px-4 py-20 sm:px-6 sm:py-28">
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <SectionHeading
+          tone="light"
+          eyebrow="Contact"
+          title="Get in touch"
+          description="Open to full stack, software engineering and AI application roles, internships and freelance work. Replies usually within a day."
+        />
 
-          <div className="mt-4">
-            <p className="font-mono text-xs tracking-widest uppercase text-[#C96F4A] mb-2 font-bold">
-              CAREER COMMENCE // 2026
+        <SplitReveal
+          as="p"
+          by="chars"
+          className="mb-12 font-display text-[clamp(3.5rem,12vw,9rem)] uppercase leading-[0.85] text-[#211A12] sm:mb-16"
+        >
+          Say hello.
+        </SplitReveal>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5 rounded-2xl border border-[rgba(33,26,18,0.14)] bg-[rgba(255,255,255,0.4)] p-6 backdrop-blur-sm sm:p-9"
+          >
+            <p className="border-b border-[rgba(33,26,18,0.12)] pb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[#B4603E]">
+              Send a message
             </p>
-            <ColorFillText
-              as="h2"
-              dataFill="ghost"
-              className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-[#F6F0E2]"
-            >
-              GET IN TOUCH.
-            </ColorFillText>
-          </div>
-        </div>
 
-        <div className="grid gap-8 md:grid-cols-2 mb-24">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <ContactForm />
-          </motion.div>
+            <div>
+              <label htmlFor="c-name" className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.2em] text-[rgba(33,26,18,0.6)]">
+                Name
+              </label>
+              <input id="c-name" name="name" type="text" required autoComplete="name" value={form.name} onChange={handleChange} placeholder="Your name" className={FIELD} />
+            </div>
 
-          {/* Direct Contact & Details */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-between gap-6"
-          >
-            <div className="court-card rounded-2xl p-7 sm:p-9 border border-[rgba(255,250,240,0.14)] bg-[#12100D]/95 backdrop-blur-md">
-              <div className="mb-4 flex items-center justify-between border-b border-[rgba(255,250,240,0.08)] pb-3">
-                <span className="font-mono text-[10px] tracking-widest uppercase text-[#C96F4A]">
-                  COMMUNICATION CHANNEL
-                </span>
-                <span className="font-mono text-[10px] text-[rgba(255,250,240,0.4)]">
-                  DIRECT ACCESS
-                </span>
-              </div>
+            <div>
+              <label htmlFor="c-email" className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.2em] text-[rgba(33,26,18,0.6)]">
+                Email
+              </label>
+              <input id="c-email" name="email" type="email" required autoComplete="email" inputMode="email" value={form.email} onChange={handleChange} placeholder="you@company.com" className={FIELD} />
+            </div>
 
-              <h3
-                className="mb-3 text-xl sm:text-2xl font-bold text-[#F6F0E2]"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Direct Communication
-              </h3>
-              <p className="text-xs sm:text-sm text-[rgba(255,250,240,0.6)] leading-relaxed mb-6 font-sans">
-                Direct transmission line for executive discussions, senior technical hiring, or immediate architectural collaboration.
+            <div>
+              <label htmlFor="c-message" className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.2em] text-[rgba(33,26,18,0.6)]">
+                Message
+              </label>
+              <textarea id="c-message" name="message" required rows={5} value={form.message} onChange={handleChange} placeholder="What are you building?" className={`${FIELD} resize-none`} />
+            </div>
+
+            <InfinityButton type="submit" variant="ink" withArrow className="w-full">
+              Send message
+            </InfinityButton>
+            <p className="font-mono text-[10px] text-[rgba(33,26,18,0.5)]">Opens your email app with the message filled in.</p>
+          </form>
+
+          <div className="flex flex-col gap-6">
+            <div className="rounded-2xl border border-[rgba(33,26,18,0.14)] bg-[rgba(255,255,255,0.4)] p-6 backdrop-blur-sm sm:p-9">
+              <p className="mb-4 border-b border-[rgba(33,26,18,0.12)] pb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[#B4603E]">
+                Direct
               </p>
 
               <a
-                href={`mailto:${siteConfig.email}`}
-                className="group mb-6 flex items-center gap-3.5 p-3 rounded-xl border border-[rgba(255,250,240,0.1)] bg-[#161310] transition-colors hover:border-[#C96F4A]"
+                href={`mailto:${profile.email}`}
+                className="group mb-4 flex items-center gap-3.5 rounded-xl border border-[rgba(33,26,18,0.14)] bg-[rgba(255,255,255,0.5)] p-3 transition-colors hover:border-[#C96F4A]"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#C96F4A]/15 border border-[#C96F4A]/30 text-[#FFD6A1]">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#C96F4A]/15 text-[#B4603E]">
                   <Mail size={16} />
-                </div>
-                <div className="min-w-0">
-                  <div className="font-mono text-[10px] text-[rgba(255,250,240,0.4)] uppercase">
-                    PRIMARY INBOX
-                  </div>
-                  <div className="font-mono text-xs font-semibold text-[#FFD6A1] truncate group-hover:text-[#F6F0E2]">
-                    {siteConfig.email}
-                  </div>
-                </div>
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-mono text-[10px] uppercase text-[rgba(33,26,18,0.5)]">Email</span>
+                  <span className="block truncate font-mono text-xs font-semibold text-[#211A12]">{profile.email}</span>
+                </span>
               </a>
 
-              <div className="mb-6 flex items-center gap-3.5 p-3 rounded-xl border border-[rgba(255,250,240,0.08)] bg-[#161310]/60">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#C96F4A]/10 text-[#C96F4A]">
+              <div className="mb-6 flex items-center gap-3.5 rounded-xl border border-[rgba(33,26,18,0.1)] p-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#C96F4A]/10 text-[#B4603E]">
                   <MapPin size={16} />
-                </div>
-                <div className="font-mono text-xs text-[rgba(255,250,240,0.65)]">
-                  <div>LUCKNOW / NCR, INDIA</div>
-                  <div className="text-[10px] text-[#C96F4A]">OPEN TO REMOTE & RELOCATION WORLDWIDE</div>
-                </div>
+                </span>
+                <span className="font-mono text-xs text-[rgba(33,26,18,0.75)]">
+                  {profile.location}
+                  <span className="block text-[10px] text-[#B4603E]">Open to remote and relocation</span>
+                </span>
               </div>
 
-              <div>
-                <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#C96F4A] mb-3">
-                  NETWORK NODES
-                </p>
-                <div className="flex gap-2.5">
-                  {[
-                    { icon: GithubIcon, href: siteConfig.github, label: "GitHub" },
-                    { icon: LinkedinIcon, href: siteConfig.linkedin, label: "LinkedIn" },
-                    { icon: InstagramIcon, href: siteConfig.instagram, label: "Instagram" },
-                  ].map(({ icon: Icon, href, label }) => (
-                    <motion.a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="flex h-11 w-11 items-center justify-center rounded-xl border border-[rgba(255,250,240,0.12)] bg-[#161310] text-[rgba(255,250,240,0.7)] transition-all duration-300 hover:border-[#C96F4A] hover:text-[#FFD6A1] hover:scale-105"
-                      whileHover={{ scale: 1.08, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Icon size={16} />
-                    </motion.a>
-                  ))}
-                </div>
-              </div>
-            </div>
+              {profile.showPhone && profile.phone && (
+                <a
+                  href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`}
+                  className="group mb-6 flex items-center gap-3.5 rounded-xl border border-[rgba(33,26,18,0.14)] bg-[rgba(255,255,255,0.5)] p-3 transition-colors hover:border-[#C96F4A]"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#C96F4A]/15 text-[#B4603E]">
+                    <Phone size={16} />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-mono text-[10px] uppercase text-[rgba(33,26,18,0.5)]">Phone</span>
+                    <span className="block truncate font-mono text-xs font-semibold text-[#211A12]">{profile.phone}</span>
+                  </span>
+                </a>
+              )}
 
-            <div className="p-5 rounded-2xl border border-[rgba(255,250,240,0.1)] bg-[#12100D]/80">
-              <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#FFD6A1] mb-1">
-                <CheckCircle size={14} className="text-[#C96F4A]" />
-                <span>RESPONSE PROTOCOL // 24-HOUR GUARANTEE</span>
+              <div className="flex gap-2.5">
+                {[
+                  { icon: GithubIcon, href: profile.github, label: "GitHub" },
+                  { icon: LinkedinIcon, href: profile.linkedin, label: "LinkedIn" },
+                  { icon: InstagramIcon, href: profile.instagram, label: "Instagram" },
+                ].map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-[rgba(33,26,18,0.16)] bg-[rgba(255,255,255,0.5)] text-[#211A12] transition-colors hover:border-[#C96F4A] hover:text-[#B4603E]"
+                  >
+                    <Icon size={16} />
+                  </a>
+                ))}
               </div>
-              <p className="font-mono text-xs text-[rgba(255,250,240,0.5)]">
-                All developer opportunities, recruiters, and engineering inquiries receive personal review within one business day.
-              </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
-
-      <Footer />
     </section>
-  );
-}
-
-function ContactForm() {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [focused, setFocused] = useState<string | null>(null);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    window.location.href = `mailto:${siteConfig.email}?subject=Portfolio Contact from ${formState.name}&body=${encodeURIComponent(formState.message)}%0D%0A%0D%0AFrom: ${formState.name} (${formState.email})`;
-  };
-
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="court-card rounded-2xl p-7 sm:p-9 space-y-5 border border-[rgba(255,250,240,0.14)] bg-[#12100D]/95 backdrop-blur-md"
-    >
-      <div className="mb-2 flex items-center justify-between border-b border-[rgba(255,250,240,0.08)] pb-3 font-mono text-[10px] text-[#C96F4A] tracking-widest uppercase">
-        <span>TRANSMISSION ENVELOPE</span>
-        <span>SYS.MAIL</span>
-      </div>
-
-      {[
-        { name: "name", label: "YOUR FULL NAME", type: "text" },
-        { name: "email", label: "YOUR EMAIL ADDRESS", type: "email" },
-      ].map((field) => (
-        <div key={field.name} className="relative">
-          <input
-            type={field.type}
-            name={field.name}
-            value={formState[field.name as keyof typeof formState]}
-            onChange={handleChange}
-            onFocus={() => setFocused(field.name)}
-            onBlur={() => setFocused(null)}
-            required
-            className="peer w-full rounded-xl border border-[rgba(255,250,240,0.12)] bg-[#161310] px-4 pt-6 pb-2.5 font-mono text-sm text-[#F6F0E2] outline-none transition-all duration-300 focus:border-[#C96F4A] focus:bg-[#161310]/90"
-          />
-          <label
-            className={`pointer-events-none absolute left-4 font-mono transition-all duration-300 tracking-wider ${
-              focused === field.name || formState[field.name as keyof typeof formState]
-                ? "top-1.5 text-[9px] text-[#C96F4A]"
-                : "top-4 text-xs text-[rgba(255,250,240,0.4)]"
-            }`}
-          >
-            {field.label}
-          </label>
-        </div>
-      ))}
-
-      <div className="relative">
-        <textarea
-          name="message"
-          value={formState.message}
-          onChange={handleChange}
-          onFocus={() => setFocused("message")}
-          onBlur={() => setFocused(null)}
-          required
-          rows={4}
-          className="peer w-full resize-none rounded-xl border border-[rgba(255,250,240,0.12)] bg-[#161310] px-4 pt-6 pb-2.5 font-mono text-sm text-[#F6F0E2] outline-none transition-all duration-300 focus:border-[#C96F4A] focus:bg-[#161310]/90"
-        />
-        <label
-          className={`pointer-events-none absolute left-4 font-mono transition-all duration-300 tracking-wider ${
-            focused === "message" || formState.message
-              ? "top-1.5 text-[9px] text-[#C96F4A]"
-              : "top-4 text-xs text-[rgba(255,250,240,0.4)]"
-          }`}
-        >
-          PROJECT / INQUIRY DETAILS
-        </label>
-      </div>
-
-      <div className="pt-2">
-        <InfinityButton
-          type="submit"
-          variant="terra"
-          withArrow
-          className="w-full justify-center"
-        >
-          SEND TRANSMISSION
-        </InfinityButton>
-      </div>
-    </form>
   );
 }

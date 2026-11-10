@@ -1,126 +1,84 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { timeline } from "@/lib/data";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, motionDisabled } from "@/lib/gsap";
+import { useContent } from "@/components/providers/ContentProvider";
 
 export function Timeline() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { timeline } = useContent();
+  const rootRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
-  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion || !containerRef.current || !lineRef.current) return;
+    const root = rootRef.current;
+    const line = lineRef.current;
+    if (!root || !line) return;
+
+    if (motionDisabled()) {
+      line.style.transform = "scaleY(1)";
+      return;
+    }
 
     const ctx = gsap.context(() => {
-      gsap.to(lineRef.current, {
-        scaleY: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          scrub: 0.5,
-        },
+      // The line draws itself as you scroll through the list.
+      gsap.fromTo(
+        line,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: { trigger: root, start: "top 75%", end: "bottom 60%", scrub: 0.5 },
+        }
+      );
+
+      gsap.utils.toArray<HTMLElement>("[data-tl-item]").forEach((item) => {
+        gsap.from(item, {
+          opacity: 0,
+          y: 36,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: item, start: "top 88%", once: true },
+        });
       });
-    }, containerRef);
+    }, root);
 
     return () => ctx.revert();
-  }, [reducedMotion]);
+  }, []);
 
   return (
-    <section id="timeline" className="relative py-32 px-4">
-      <div className="mx-auto max-w-4xl" ref={containerRef}>
+    <section id="timeline" className="relative px-4 py-20 sm:px-6 sm:py-28">
+      <div className="mx-auto max-w-4xl">
         <SectionHeading
           eyebrow="Journey"
-          title="Development Timeline"
-          description="A verifiable trajectory from computer science fundamentals to production healthcare software and AI engineering."
+          title="From fundamentals to production"
+          description="Computer science basics first, then real systems in healthcare, IoT and AI."
         />
 
-        <div className="relative">
-          {/* Animated vertical line */}
-          <div className="absolute left-6 top-0 h-full w-px bg-white/10 md:left-1/2 md:-translate-x-px">
-            <div
-              ref={lineRef}
-              className="w-full origin-top bg-gradient-to-b from-accent-violet via-accent-cyan to-accent-violet"
-              style={{ transform: "scaleY(0)" }}
-            />
+        <div ref={rootRef} className="relative">
+          <div className="absolute bottom-0 left-4 top-0 w-px bg-[rgba(255,250,240,0.1)] md:left-1/2">
+            <div ref={lineRef} className="h-full w-full origin-top bg-[#C96F4A]" style={{ transform: "scaleY(0)" }} />
           </div>
 
-          {/* Timeline items */}
-          <div className="space-y-12">
-            {timeline.map((item, i) => (
-              <TimelineItem key={item.year + item.title} item={item} index={i} />
-            ))}
-          </div>
+          <ol className="space-y-12">
+            {timeline.map((item, i) => {
+              const left = i % 2 === 0;
+              return (
+                <li key={item.year + item.title} data-tl-item className="relative pl-12 md:pl-0">
+                  <span className="absolute left-4 top-6 z-10 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-[#C96F4A] bg-[#0B0A08] md:left-1/2" />
+                  <div className={`md:w-[calc(50%-2.5rem)] ${left ? "md:mr-auto md:pr-2" : "md:ml-auto md:pl-2"}`}>
+                    <div className="show-card p-6">
+                      <p className="font-display text-5xl leading-none text-[#C96F4A]">{item.year}</p>
+                      <h3 className="mt-3 font-display text-2xl uppercase leading-none text-[#F6F0E2]">{item.title}</h3>
+                      <p className="mt-2 text-xs leading-relaxed text-[rgba(255,250,240,0.65)]">{item.description}</p>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </section>
-  );
-}
-
-function TimelineItem({
-  item,
-  index,
-}: {
-  item: (typeof timeline)[number];
-  index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const isLeft = index % 2 === 0;
-
-  return (
-    <div
-      ref={ref}
-      className={`relative flex items-center ${
-        isLeft ? "md:flex-row" : "md:flex-row-reverse"
-      } flex-row`}
-    >
-      {/* Dot */}
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={isInView ? { scale: 1 } : {}}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        className="absolute left-6 z-10 -translate-x-1/2 md:left-1/2"
-      >
-        <div className="h-3.5 w-3.5 rounded-full border-2 border-accent-violet bg-[#030303]">
-          <div className="absolute inset-0 animate-ping rounded-full bg-accent-violet/30" />
-        </div>
-      </motion.div>
-
-      {/* Content */}
-      <motion.div
-        initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-        animate={isInView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className={`ml-14 md:ml-0 ${
-          isLeft
-            ? "md:w-[calc(50%-2rem)] md:pr-12"
-            : "md:w-[calc(50%-2rem)] md:pl-12 md:ml-auto"
-        }`}
-      >
-        <div className="premium-card glass rounded-2xl p-6 transition-all duration-300 border border-white/10 hover:border-accent-violet/30">
-          <span className="mb-2 inline-block rounded-full bg-accent-violet/10 px-3 py-1 font-display text-xs font-bold text-accent-violet">
-            {item.year}
-          </span>
-          <h3
-            className="mb-1 text-lg font-bold text-white"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {item.title}
-          </h3>
-          <p className="text-xs leading-relaxed text-white/60">
-            {item.description}
-          </p>
-        </div>
-      </motion.div>
-    </div>
   );
 }

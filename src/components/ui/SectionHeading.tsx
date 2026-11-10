@@ -1,62 +1,56 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { SplitReveal } from "@/components/motion/SplitReveal";
 
 interface SectionHeadingProps {
   eyebrow?: string;
   title: string;
   description?: string;
-  gradient?: boolean;
   align?: "left" | "center";
+  tone?: "dark" | "light";
+  className?: string;
 }
 
+/** Section opener: mono eyebrow, big condensed title that rises in line by line, optional description. */
 export function SectionHeading({
   eyebrow,
   title,
   description,
-  gradient = true,
-  align = "center",
+  align = "left",
+  tone = "dark",
+  className = "",
 }: SectionHeadingProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const centered = align === "center";
+  const light = tone === "light";
 
   return (
-    <div
-      ref={ref}
-      className={`mb-14 sm:mb-18 ${align === "center" ? "text-center" : "text-left"}`}
-    >
+    <div className={`mb-10 sm:mb-14 ${centered ? "text-center" : "text-left"} ${className}`.trim()}>
       {eyebrow && (
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(255,250,240,0.14)] bg-[#12100D] px-3.5 py-1 font-mono text-[10px] font-semibold tracking-[0.2em] text-[#C96F4A] uppercase"
+        <p
+          className={`mb-4 font-mono text-[11px] uppercase tracking-[0.26em] ${
+            light ? "text-[#B4603E]" : "text-[#C96F4A]"
+          }`}
         >
-          <span className="h-1 w-1 rounded-full bg-[#C96F4A]" />
-          {eyebrow}
-        </motion.span>
+          [ {eyebrow} ]
+        </p>
       )}
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className={`font-display text-3xl font-black uppercase tracking-tight sm:text-4xl md:text-5xl lg:text-6xl ${
-          gradient ? "text-gradient" : "text-[rgba(255,250,240,0.95)]"
+      <SplitReveal
+        as="h2"
+        by="lines"
+        className={`font-display text-[clamp(2.75rem,8vw,6.5rem)] uppercase leading-[0.9] ${
+          light ? "text-[#211A12]" : "text-[#F6F0E2]"
         }`}
-        style={{ fontFamily: "var(--font-display)" }}
       >
         {title}
-      </motion.h2>
+      </SplitReveal>
       {description && (
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[rgba(255,250,240,0.55)] sm:text-base font-normal"
+        <p
+          className={`mt-5 max-w-2xl text-sm leading-relaxed sm:text-base ${centered ? "mx-auto" : ""} ${
+            light ? "text-[rgba(33,26,18,0.7)]" : "text-[rgba(255,250,240,0.6)]"
+          }`}
         >
           {description}
-        </motion.p>
+        </p>
       )}
     </div>
   );

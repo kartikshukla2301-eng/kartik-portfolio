@@ -3,16 +3,20 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
-import { navLinks, siteConfig } from "@/lib/data";
+import { navLinks } from "@/lib/data";
+import { useContent } from "@/components/providers/ContentProvider";
 import { parseGoogleDriveUrl } from "@/lib/drive";
 import { InfinityButton } from "@/components/ui/InfinityButton";
+import { useMotion } from "@/components/providers/MotionProvider";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const { scrollTo } = useMotion();
+  const { profile } = useContent();
 
-  const parsedResume = parseGoogleDriveUrl(siteConfig.resumeUrl);
+  const parsedResume = parseGoogleDriveUrl(profile.resumeUrl);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,12 +57,11 @@ export function Navbar() {
       const el = document.getElementById(targetId);
       if (!el) return;
 
-      const y = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      scrollTo(el, { offset: -80 });
 
       if (mobileOpen) setMobileOpen(false);
     },
-    [mobileOpen]
+    [mobileOpen, scrollTo]
   );
 
   return (
@@ -69,7 +72,7 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.2 }}
         className={`fixed top-4 left-1/2 z-50 -translate-x-1/2 transition-all duration-500 ${
-          scrolled ? "w-[95%] max-w-4xl" : "w-[92%] max-w-5xl"
+          scrolled ? "w-[95%] max-w-5xl" : "w-[92%] max-w-6xl"
         }`}
       >
         <nav
@@ -81,7 +84,7 @@ export function Navbar() {
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center gap-2 text-sm font-bold tracking-tight text-[rgba(255,250,240,0.95)]"
+            className="flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-bold tracking-tight text-[rgba(255,250,240,0.95)]"
           >
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#C96F4A] text-xs font-black text-white">
               KS

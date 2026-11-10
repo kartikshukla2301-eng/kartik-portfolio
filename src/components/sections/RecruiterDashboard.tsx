@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { InfinityButton } from "@/components/ui/InfinityButton";
-import { siteConfig, experiences, projects, certifications, recruiterStats } from "@/lib/data";
+import { useContent } from "@/components/providers/ContentProvider";
 import { parseGoogleDriveUrl } from "@/lib/drive";
 
 const stackChips = [
@@ -31,21 +31,22 @@ const stackChips = [
 ];
 
 export function RecruiterDashboard() {
+  const { profile, experiences, projects, certifications } = useContent();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const parsedResume = parseGoogleDriveUrl(siteConfig.resumeUrl);
+  const parsedResume = parseGoogleDriveUrl(profile.resumeUrl);
 
   const quickStats = [
     { label: "Production Internships", value: `${experiences.length}` },
-    { label: "Featured Projects", value: `${projects.filter((p) => p.featured).length}` },
+    { label: "Featured Projects", value: `${projects.length}` },
     { label: "Verified Credentials", value: `${certifications.length}` },
-    { label: "DSA Problems Solved", value: recruiterStats.dsaSolved },
+    { label: "DSA Problems Solved", value: profile.dsaSolved },
   ];
 
   return (
-    <section className="relative py-32 px-4">
-      <div className="mx-auto max-w-5xl" ref={ref}>
+    <section className="relative px-4 py-20 sm:px-6 sm:py-28">
+      <div className="mx-auto max-w-6xl" ref={ref}>
         <SectionHeading
           eyebrow="Hiring Telemetry"
           title="Candidate Dossier & Fast Track"
@@ -83,12 +84,10 @@ export function RecruiterDashboard() {
                   <div className="relative shrink-0">
                     <div className="relative h-20 w-20 overflow-hidden rounded-xl border border-[rgba(255,250,240,0.16)] bg-[#161310] shadow-sm">
                       <Image
-                        src={siteConfig.portrait.src}
-                        alt={siteConfig.portrait.alt}
+                        src={profile.portrait.thumb}
+                        alt={profile.portrait.alt}
                         width={160}
                         height={200}
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYI4Q/SFhSRFJiX0pcU/9oADAMBAAIRAxEAPwD9P//Z"
                         className="h-full w-full object-cover object-top"
                       />
                     </div>
@@ -98,13 +97,13 @@ export function RecruiterDashboard() {
                       className="text-xl font-bold text-[#F6F0E2]"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
-                      {siteConfig.name}
+                      {profile.name}
                     </h3>
                     <p className="font-mono text-xs font-semibold text-[#FFD6A1]">
-                      {siteConfig.primaryTitle} | {siteConfig.secondaryTitle}
+                      {profile.primaryTitle} | {profile.secondaryTitle}
                     </p>
                     <p className="mt-1 font-mono text-xs text-[rgba(255,250,240,0.5)]">
-                      {siteConfig.education.college}
+                      {profile.education.college}
                     </p>
                   </div>
                 </div>
@@ -114,10 +113,10 @@ export function RecruiterDashboard() {
                   <div>
                     <p className="text-sm font-semibold text-[#F6F0E2]">Education</p>
                     <p className="text-xs text-[rgba(255,250,240,0.6)]">
-                      {siteConfig.education.degree} — {siteConfig.education.university}
+                      {profile.education.degree} — {profile.education.university}
                     </p>
                     <p className="font-mono text-xs text-[#FFD6A1] mt-0.5">
-                      CGPA: {siteConfig.education.cgpa} • Graduating {siteConfig.education.expectedGraduation} (Expected)
+                      CGPA: {profile.education.cgpa} • Graduating {profile.education.expectedGraduation} (Expected)
                     </p>
                   </div>
                 </div>
@@ -127,7 +126,7 @@ export function RecruiterDashboard() {
                   <div>
                     <p className="text-sm font-semibold text-[#F6F0E2]">Verified Internships</p>
                     <p className="text-xs text-[rgba(255,250,240,0.6)] leading-relaxed">
-                      Pristyn Care (HIS Full Stack), OnCare Cancer Centre (Developer Intern), Infosys Makers Lab (IoT), The Developers Arena (Python).
+                      {experiences.map((e) => `${e.company} (${e.role})`).join(", ")}.
                     </p>
                   </div>
                 </div>
@@ -164,7 +163,7 @@ export function RecruiterDashboard() {
                   <div>
                     <p className="text-sm font-semibold text-[#F6F0E2]">Leadership & Community</p>
                     <p className="text-xs text-[rgba(255,250,240,0.6)] leading-relaxed font-sans">
-                      {recruiterStats.leadership} — led digital outreach and event branding. Active open-source contributor and technical mentor.
+                      {profile.leadership}. Active open-source contributor and technical mentor.
                     </p>
                   </div>
                 </div>
@@ -234,12 +233,12 @@ export function RecruiterDashboard() {
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {[
-                      { label: "GitHub", href: siteConfig.github },
-                      { label: "LinkedIn", href: siteConfig.linkedin },
-                      { label: "LeetCode", href: siteConfig.leetcode },
-                      { label: "GeeksforGeeks", href: siteConfig.geeksforgeeks },
-                      { label: "Email Direct", href: `mailto:${siteConfig.email}` },
-                      { label: "Instagram", href: siteConfig.instagram },
+                      { label: "GitHub", href: profile.github },
+                      { label: "LinkedIn", href: profile.linkedin },
+                      { label: "LeetCode", href: profile.leetcode },
+                      { label: "GeeksforGeeks", href: profile.geeksforgeeks },
+                      { label: "Email Direct", href: `mailto:${profile.email}` },
+                      { label: "Instagram", href: profile.instagram },
                     ].map((link) => (
                       <a
                         key={link.label}

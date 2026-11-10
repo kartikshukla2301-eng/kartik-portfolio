@@ -1,57 +1,14 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
+// Single-page site: hash fragments are not separate URLs, so only the root is listed.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://kartik-portfolio-chi-eight.vercel.app";
-  const currentDate = new Date().toISOString();
-
   return [
     {
-      url: baseUrl,
-      lastModified: currentDate,
+      url: SITE_URL,
+      lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/#about`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#skills`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#experience`,
-      lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#projects`,
-      lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#certifications`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#timeline`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: currentDate,
-      changeFrequency: "yearly",
-      priority: 0.7,
+      priority: 1,
     },
   ];
 }
