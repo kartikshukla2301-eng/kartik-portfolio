@@ -468,6 +468,58 @@ body {
   pointer-events: none;
 }
 
+/* Infinity Socks Hero Editorial Stage Utilities */
+.hero-giant-bg {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 14vw, 12.5rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(246, 240, 226, 0.04);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-floor-strip {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%) perspective(300px) rotateX(65deg);
+  width: 130%;
+  height: 90px;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(201, 111, 74, 0.4) 0%,
+    rgba(18, 16, 13, 0.85) 55%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero__prod-card {
+  background: linear-gradient(145deg, rgba(22, 19, 16, 0.94) 0%, rgba(14, 12, 10, 0.98) 100%);
+  border: 1px solid rgba(255, 250, 240, 0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(16px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero__prod-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 111, 74, 0.45);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(201, 111, 74, 0.16);
+}
+
 /* Loader Block Grid Transition */
 .loader-block-grid {
   display: grid;

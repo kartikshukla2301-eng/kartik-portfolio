@@ -9,7 +9,12 @@ interface PageLoaderProps {
 }
 
 export function PageLoader({ onEnter }: PageLoaderProps) {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(() => {
+    if (typeof window !== "undefined" && window.location.search.includes("noloader")) {
+      return false;
+    }
+    return true;
+  });
   const [exiting, setExiting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [motionPaused, setMotionPaused] = useState(false);
@@ -25,6 +30,11 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
 
   // Smooth progress counter from 0 to 100
   useEffect(() => {
+    if (!visible) {
+      onEnter();
+      return;
+    }
+
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -41,7 +51,7 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
     }, 45);
 
     return () => clearInterval(interval);
-  }, [handleEnter]);
+  }, [handleEnter, onEnter, visible]);
 
   const toggleMotion = () => {
     setMotionPaused((prev) => {
