@@ -1,21 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { Bebas_Neue, Caveat, Geist, Geist_Mono } from "next/font/google";
+import { INTRO_BOOT_SCRIPT } from "@/lib/intro";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+// Display: heavy condensed caps. Body: Geist. HUD/labels: Geist Mono. Quotes: Caveat.
+const bebas = Bebas_Neue({
+  variable: "--font-bebas",
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
   display: "swap",
 });
 
-const CANONICAL_URL = "https://kartik-portfolio-chi-eight.vercel.app";
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  weight: ["600"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   themeColor: "#0B0A08",
@@ -24,79 +38,10 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Page-specific metadata lives in (site)/layout.tsx (reads the editable content) and admin/layout.tsx.
 export const metadata: Metadata = {
-  metadataBase: new URL(CANONICAL_URL),
-  title: {
-    default: "Kartik Shukla | Full Stack Developer & AI Engineer",
-    template: "%s | Kartik Shukla",
-  },
-  description:
-    "Portfolio of Kartik Shukla, Full Stack Developer and AI Engineer. Explore projects, production development experience, technical skills and AI-powered applications.",
-  keywords: [
-    "Kartik Shukla",
-    "Full Stack Developer",
-    "AI Engineer",
-    "Next.js Developer",
-    "React 19",
-    "TypeScript",
-    "Python",
-    "FastAPI",
-    "PostgreSQL",
-    "MongoDB",
-    "AWS",
-    "Docker",
-    "Healthcare Information System",
-    "AKTU CSE",
-  ],
-  authors: [{ name: "Kartik Shukla", url: CANONICAL_URL }],
-  creator: "Kartik Shukla",
-  publisher: "Kartik Shukla",
-  alternates: {
-    canonical: CANONICAL_URL,
-  },
-  openGraph: {
-    type: "profile",
-    firstName: "Kartik",
-    lastName: "Shukla",
-    username: "kartikshukla2301-eng",
-    gender: "male",
-    locale: "en_US",
-    url: CANONICAL_URL,
-    title: "Kartik Shukla | Full Stack Developer & AI Engineer",
-    description:
-      "Portfolio of Kartik Shukla, Full Stack Developer and AI Engineer. Explore projects, production development experience, technical skills and AI-powered applications.",
-    siteName: "Kartik Shukla Portfolio",
-    images: [
-      {
-        url: "/images/kartik-shukla.png",
-        width: 800,
-        height: 1000,
-        alt: "Kartik Shukla — Full Stack Developer & AI Engineer",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kartik Shukla | Full Stack Developer & AI Engineer",
-    description:
-      "Portfolio of Kartik Shukla, Full Stack Developer and AI Engineer. Explore projects, production development experience, technical skills and AI-powered applications.",
-    images: ["/images/kartik-shukla.png"],
-    creator: "@_ig_kartikk",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  metadataBase: new URL(SITE_URL),
+  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({
@@ -104,88 +49,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "@id": `${CANONICAL_URL}/#person`,
-        name: "Kartik Shukla",
-        jobTitle: "Full Stack Developer | AI Engineer",
-        description:
-          "Full Stack Developer and AI Engineer with hands-on experience building production-oriented healthcare systems, scalable web applications, REST APIs and AI-powered applications.",
-        url: CANONICAL_URL,
-        image: `${CANONICAL_URL}/images/kartik-shukla.png`,
-        email: "kartikshukla2301@gmail.com",
-        sameAs: [
-          "https://github.com/kartikshukla2301-eng",
-          "https://www.linkedin.com/in/kartik-shukla-cse",
-          "https://leetcode.com/u/cdlPAR9B41/",
-          "https://www.geeksforgeeks.org/profile/kartikshum7i0",
-          "https://www.instagram.com/_ig_kartikk/",
-        ],
-        alumniOf: {
-          "@type": "CollegeOrUniversity",
-          name: "Dr. APJ Abdul Kalam Technical University (AKTU)",
-          url: "https://aktu.ac.in",
-        },
-        knowsAbout: [
-          "Full Stack Development",
-          "Artificial Intelligence",
-          "Next.js",
-          "React",
-          "TypeScript",
-          "Python",
-          "FastAPI",
-          "Node.js",
-          "Express.js",
-          "PostgreSQL",
-          "MongoDB",
-          "AWS",
-          "Docker",
-        ],
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${CANONICAL_URL}/#website`,
-        url: CANONICAL_URL,
-        name: "Kartik Shukla Portfolio",
-        description: "Official Portfolio of Kartik Shukla — Full Stack Developer & AI Engineer",
-        publisher: {
-          "@id": `${CANONICAL_URL}/#person`,
-        },
-        inLanguage: "en-US",
-      },
-      {
-        "@type": "ProfilePage",
-        "@id": `${CANONICAL_URL}/#profilepage`,
-        url: CANONICAL_URL,
-        name: "Kartik Shukla | Full Stack Developer & AI Engineer",
-        isPartOf: {
-          "@id": `${CANONICAL_URL}/#website`,
-        },
-        mainEntity: {
-          "@id": `${CANONICAL_URL}/#person`,
-        },
-      },
-    ],
-  };
-
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${bebas.variable} ${geist.variable} ${geistMono.variable} ${caveat.variable} antialiased`}
+    >
       <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3587427941344024"
-          crossOrigin="anonymous"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT_SCRIPT }} />
       </head>
       <body className="min-h-screen bg-[#0B0A08] text-[rgba(255,250,240,0.88)]">
-        <SmoothScroll>{children}</SmoothScroll>
+        <noscript>
+          <style>{`[data-split]{opacity:1!important}.cf-line{--p:100!important}`}</style>
+        </noscript>
+        {children}
       </body>
     </html>
   );
