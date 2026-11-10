@@ -66,12 +66,24 @@ export interface LanguageStat {
   color: string | null;
 }
 
+export interface ContributionDay {
+  date: string;
+  count: number;
+  level: number;
+}
+
+export interface ContributionCalendar {
+  totalContributions: number;
+  days: ContributionDay[];
+}
+
 export interface GitHubData {
   profile: GitHubProfile;
   repos: GitHubRepo[];
   languages: LanguageStat[];
   totalStars: number;
   totalForks: number;
+  contributions: ContributionCalendar;
 }
 
 // ── Fallback Snapshot (in case rate limit is hit without token) ───
@@ -83,9 +95,9 @@ export const FALLBACK_DATA: GitHubData = {
     bio: "AI Engineer & Full Stack Developer | B.Tech CSE '27 | Building intelligent systems",
     avatar_url: "https://avatars.githubusercontent.com/u/153123847?v=4",
     html_url: "https://github.com/kartikshukla2301-eng",
-    followers: 12,
+    followers: 1,
     following: 15,
-    public_repos: 18,
+    public_repos: 37,
     location: "India",
     company: null,
     blog: "https://kartikshukla.dev",
@@ -140,7 +152,7 @@ export const FALLBACK_DATA: GitHubData = {
       id: 4,
       name: "Developer-AI",
       full_name: "kartikshukla2301-eng/Developer-AI",
-      html_url: "https://github.com/kartikshukla2301-eng",
+      html_url: "https://github.com/kartikshukla2301-eng/Developer-AI",
       description: "AI-powered terminal-first companion for developer workflows and autonomous defect patching.",
       homepage: null,
       stargazers_count: 2,
@@ -161,6 +173,21 @@ export const FALLBACK_DATA: GitHubData = {
   ],
   totalStars: 14,
   totalForks: 3,
+  contributions: {
+    totalContributions: 577,
+    days: Array.from({ length: 140 }, (_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() - (139 - i));
+      const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+      const count = isWeekend ? (i % 5 === 0 ? 3 : 0) : ((i * 3 + 1) % 7);
+      const level = count === 0 ? 0 : count > 5 ? 3 : count > 3 ? 2 : 1;
+      return {
+        date: d.toISOString().split("T")[0],
+        count,
+        level,
+      };
+    }),
+  },
 };
 
 // ── Fetchers ───────────────────────────────────────────
@@ -246,11 +273,40 @@ export async function fetchLanguages(
     .slice(0, 8);
 }
 
+export async function fetchContributions(): Promise<ContributionCalendar> {
+  try {
+    const res = await fetch(
+      `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`,
+      { next: { revalidate: 3600 } }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      const days: ContributionDay[] = (data.contributions || []).map(
+        (c: { date: string; count: number; level: number }) => ({
+          date: c.date,
+          count: c.count,
+          level: c.level,
+        })
+      );
+      const total =
+        typeof data.total?.lastYear === "number"
+          ? data.total.lastYear
+          : days.reduce((sum, d) => sum + d.count, 0);
+
+      return { totalContributions: total, days };
+    }
+  } catch (err) {
+    console.warn("Failed to fetch contribution calendar:", err);
+  }
+  return FALLBACK_DATA.contributions;
+}
+
 export async function fetchGitHubData(): Promise<GitHubData> {
   try {
-    const [profile, repos] = await Promise.all([
+    const [profile, repos, contributions] = await Promise.all([
       fetchProfile(),
       fetchRepos(),
+      fetchContributions(),
     ]);
 
     const languages = await fetchLanguages(repos);
@@ -258,7 +314,7 @@ export async function fetchGitHubData(): Promise<GitHubData> {
     const totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
     const totalForks = repos.reduce((sum, r) => sum + r.forks_count, 0);
 
-    return { profile, repos, languages, totalStars, totalForks };
+    return { profile, repos, languages, totalStars, totalForks, contributions };
   } catch (error) {
     console.warn("Using fallback GitHub data due to API error or rate limit:", error);
     return FALLBACK_DATA;

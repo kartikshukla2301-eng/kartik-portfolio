@@ -2,9 +2,11 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useCallback } from "react";
-import { ExternalLink, ArrowUpRight, Lock, Sparkles, Terminal } from "lucide-react";
+import { ArrowUpRight, Lock, Sparkles, Terminal } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { InfinityButton } from "@/components/ui/InfinityButton";
+import { ColorFillText } from "@/components/ui/ColorFillText";
 import { projects, secondaryProjects, ProjectItem, SecondaryProjectItem } from "@/lib/data";
 
 export function Projects() {
@@ -18,7 +20,7 @@ export function Projects() {
         />
 
         {/* Featured Projects Showcase */}
-        <div className="mb-20 space-y-12">
+        <div className="mb-20 space-y-14">
           {projects.map((project, i) => (
             <ProjectShowcase key={project.title} project={project} index={i} />
           ))}
@@ -99,18 +101,18 @@ function ProjectShowcase({
       />
 
       {/* Infinity Socks top browser frame simulation */}
-      <div className="flex items-center justify-between border-b border-[rgba(255,250,240,0.1)] bg-[#0B0A08]/80 px-6 py-3 font-mono text-[11px]">
+      <div className="flex items-center justify-between border-b border-[rgba(255,250,240,0.1)] bg-[#0B0A08]/85 px-6 py-3 font-mono text-[11px]">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[#C96F4A]/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#FFD6A1]/60" />
           <span className="h-2.5 w-2.5 rounded-full bg-[rgba(255,250,240,0.2)]" />
           <span className="ml-3 tracking-widest text-[rgba(255,250,240,0.45)]">
-            {`SPEC ${specNumber} // ${project.title.toUpperCase().replace(/\s+/g, "-")}.DEV`}
+            {`SPEC ${specNumber} // ${project.title.toUpperCase().replace(/\s+/g, "-")}.PROD`}
           </span>
         </div>
         <div className="hidden sm:flex items-center gap-2 text-[#FFD6A1]">
           <Terminal size={12} className="text-[#C96F4A]" />
-          <span className="tracking-widest">DEPLOYED: PRODUCTION</span>
+          <span className="tracking-widest">DEPLOYED // LIVE SERVICE</span>
         </div>
       </div>
 
@@ -129,12 +131,14 @@ function ProjectShowcase({
                 </span>
               )}
             </div>
-            <h3
-              className="text-2xl sm:text-4xl font-bold tracking-tight text-[#F6F0E2] transition-colors group-hover:text-[#FFD6A1]"
-              style={{ fontFamily: "var(--font-display)" }}
+
+            <ColorFillText
+              as="h3"
+              dataFill="ghost"
+              className="text-2xl sm:text-4xl font-bold tracking-tight text-[#F6F0E2]"
             >
               {project.title}
-            </h3>
+            </ColorFillText>
           </div>
 
           {project.live && (
@@ -167,39 +171,25 @@ function ProjectShowcase({
           ))}
         </div>
 
-        {/* CTA Actions */}
+        {/* Infinity Socks CTA Actions (Sliding 15deg hover + 3-arrow conveyor) */}
         <div className="flex flex-wrap items-center gap-4 border-t border-[rgba(255,250,240,0.08)] pt-6">
           {project.live && (
-            <motion.a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-infinity"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <ExternalLink size={14} />
-              <span>LAUNCH LIVE DEMO</span>
-              <span className="btn-infinity-arrow">→</span>
-            </motion.a>
+            <InfinityButton href={project.live} variant="terra" withArrow target="_blank">
+              LAUNCH LIVE DEMO
+            </InfinityButton>
           )}
 
           {project.repo ? (
-            <motion.a
-              href={project.repo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-infinity-secondary"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <GithubIcon width={14} height={14} />
-              <span>SOURCE REPO</span>
-            </motion.a>
+            <InfinityButton href={project.repo} variant="ghost" withArrow={false} target="_blank">
+              <span className="flex items-center gap-2">
+                <GithubIcon width={14} height={14} />
+                <span>SOURCE REPO</span>
+              </span>
+            </InfinityButton>
           ) : (
             <span className="flex items-center gap-2 rounded-full border border-[rgba(255,250,240,0.1)] bg-[#161310] px-4 py-2 font-mono text-xs text-[rgba(255,250,240,0.4)]">
               <Lock size={12} className="text-[#C96F4A]" />
-              PROPRIETARY / ENTERPRISE
+              ENTERPRISE REPOSITORY
             </span>
           )}
         </div>

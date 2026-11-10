@@ -9,13 +9,15 @@ interface PageLoaderProps {
 }
 
 export function PageLoader({ onEnter }: PageLoaderProps) {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(() => {
+    if (typeof window !== "undefined" && window.location.search.includes("noloader")) {
+      return false;
+    }
+    return true;
+  });
   const [exiting, setExiting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [motionPaused, setMotionPaused] = useState(false);
-
-  const name = siteConfig.name.toUpperCase();
-  const nameChars = name.split("");
 
   const handleEnter = useCallback(() => {
     if (exiting) return;
@@ -23,26 +25,34 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
     setTimeout(() => {
       setVisible(false);
       onEnter();
-    }, 600);
+    }, 750);
   }, [exiting, onEnter]);
 
   // Smooth progress counter from 0 to 100
   useEffect(() => {
+    if (!visible) {
+      onEnter();
+      return;
+    }
+
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
+          setTimeout(() => {
+            handleEnter();
+          }, 350);
           return 100;
         }
-        const next = prev + Math.floor(Math.random() * 8) + 4;
+        const step = Math.floor(Math.random() * 6) + 3;
+        const next = prev + step;
         return next > 100 ? 100 : next;
       });
-    }, 55);
+    }, 45);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [handleEnter, onEnter, visible]);
 
-  // Motion pause handler (mirrors Infinity Socks data-motion-toggle)
   const toggleMotion = () => {
     setMotionPaused((prev) => {
       const next = !prev;
@@ -62,21 +72,40 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
           key="infinity-loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          animate={
-            exiting
-              ? { opacity: 0, scale: 1.02, filter: "blur(10px)" }
-              : { opacity: 1, scale: 1, filter: "blur(0px)" }
-          }
-          transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
-          className="fixed inset-0 z-[200] flex flex-col justify-between overflow-hidden bg-[#0B0A08] p-6 sm:p-10 text-[rgba(255,250,240,0.85)] font-mono selection:bg-[#C96F4A]"
+          transition={{ duration: 0.6 }}
+          className="fixed inset-0 z-[200] overflow-hidden bg-[#0B0A08] text-[rgba(255,250,240,0.88)] font-mono selection:bg-[#C96F4A]"
         >
-          {/* Subtle warm court background glow */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(201,111,74,0.08)_0%,transparent_65%)]" />
+          {/* Staggered block curtain on exit */}
+          <div className="loader-block-grid pointer-events-none" aria-hidden="true">
+            {Array.from({ length: 16 }).map((_, i) => (
+              <div
+                key={i}
+                className={`loader-block-item ${exiting ? "is-exiting" : ""}`}
+                style={{
+                  transitionDelay: `${(i % 4) * 0.08 + Math.floor(i / 4) * 0.05}s`,
+                }}
+              />
+            ))}
+          </div>
 
-          {/* Top Bar: Brand + Controls */}
-          <div className="relative z-10 flex items-center justify-between text-xs tracking-wider uppercase">
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-[#C96F4A]">KS™</span>
+          {/* Background Ambient Court Glow */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(201,111,74,0.12)_0%,transparent_65%)]" />
+
+          {/* Huge Architectural Digit in Background */}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.04] select-none" aria-hidden="true">
+            <span
+              className="text-[35vw] font-black uppercase text-white leading-none"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {progress}
+            </span>
+          </div>
+
+          {/* Top Bar: Controls */}
+          <div className="relative z-10 flex items-center justify-between p-6 sm:p-10 text-xs tracking-wider uppercase">
+            <div className="flex items-center gap-2.5">
+              <span className="h-2 w-2 rounded-full bg-[#C96F4A]" />
+              <span className="font-bold text-[#FFD6A1]">KS™</span>
               <span className="text-[rgba(255,250,240,0.35)]">/</span>
               <span className="text-[rgba(255,250,240,0.6)]">DEVELOPER ATELIER</span>
             </div>
@@ -85,7 +114,7 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
               <button
                 type="button"
                 onClick={toggleMotion}
-                className="transition-colors hover:text-[#C96F4A] cursor-pointer"
+                className="rounded-full border border-[rgba(255,250,240,0.14)] px-3 py-1 text-[rgba(255,250,240,0.6)] transition-colors hover:border-[#C96F4A] hover:text-[#FFD6A1] cursor-pointer"
                 aria-pressed={motionPaused}
               >
                 [{motionPaused ? "RESUME MOTION" : "PAUSE MOTION"}]
@@ -94,7 +123,7 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
               <button
                 type="button"
                 onClick={handleEnter}
-                className="font-bold text-[#FFD6A1] transition-colors hover:text-white cursor-pointer"
+                className="rounded-full border border-[rgba(255,250,240,0.2)] bg-[#12100D] px-4 py-1 font-bold text-[#FFD6A1] transition-all hover:border-[#C96F4A] hover:bg-[#C96F4A] hover:text-[#0B0A08] cursor-pointer"
                 aria-label="Skip loader"
               >
                 [ SKIP ]
@@ -102,85 +131,46 @@ export function PageLoader({ onEnter }: PageLoaderProps) {
             </div>
           </div>
 
-          {/* Center Stage: Title + Progress HUD */}
-          <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center text-center">
-            {/* Monospace Subtitle Label */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(255,250,240,0.14)] bg-[#12100D] px-3.5 py-1 text-[10px] tracking-[0.2em] text-[#C96F4A]"
-            >
+          {/* Center Title Display */}
+          <div className="relative z-10 flex h-[60vh] flex-col items-center justify-center text-center px-4">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(255,250,240,0.14)] bg-[#12100D] px-4 py-1 text-[11px] tracking-[0.2em] text-[#C96F4A] uppercase">
               <span className="h-1.5 w-1.5 rounded-full bg-[#C96F4A] animate-pulse" />
-              FULL STACK DEVELOPER // AI ENGINEER
-            </motion.div>
-
-            {/* Giant Editorial Title */}
-            <div className="overflow-hidden mb-6">
-              <h1
-                className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-[rgba(255,250,240,0.95)]"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {nameChars.map((char, i) => (
-                  <motion.span
-                    key={i}
-                    className="inline-block"
-                    initial={{ y: "100%", opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 0.45,
-                      delay: 0.1 + i * 0.03,
-                      ease: [0.2, 0.8, 0.2, 1],
-                    }}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </h1>
+              <span>FULL STACK DEVELOPER & AI SYSTEMS ARCHITECT</span>
             </div>
 
-            {/* Loading Indicator & Percentage */}
-            <div className="w-full max-w-md">
-              <div className="mb-2 flex items-center justify-between text-xs text-[rgba(255,250,240,0.45)]">
-                <span>INITIALIZING HARDWOOD SYSTEMS</span>
-                <span className="font-bold text-[#FFD6A1]">{progress}%</span>
-              </div>
+            <h1
+              className="text-4xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-[#F6F0E2]"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {siteConfig.name}
+            </h1>
 
-              {/* Progress bar line */}
-              <div className="h-1 w-full overflow-hidden rounded-full bg-[rgba(255,250,240,0.08)]">
-                <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-[#C96F4A] via-[#FFD6A1] to-[#C96F4A]"
-                  style={{ width: `${progress}%` }}
-                  transition={{ ease: "easeOut" }}
-                />
-              </div>
-            </div>
-
-            {/* Enter Button (Enabled when loading finishes or available) */}
-            <div className="mt-8">
-              <motion.button
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: progress >= 60 ? 1 : 0.4, y: 0 }}
-                onClick={handleEnter}
-                className="btn-infinity text-xs font-semibold uppercase tracking-wider"
-              >
-                Enter Portfolio &rarr;
-              </motion.button>
-            </div>
+            <p className="mt-4 max-w-xl text-xs sm:text-sm text-[rgba(255,250,240,0.6)] leading-relaxed">
+              Tested on production healthcare platforms. Architected with high-throughput microservices and generative AI models.
+            </p>
           </div>
 
-          {/* Bottom Bar: Coordinates + Status */}
-          <div className="relative z-10 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-[11px] text-[rgba(255,250,240,0.4)]">
-            <div>
-              <span>AKTU CSE // 2023–2027</span>
-              <span className="mx-2 text-[rgba(255,250,240,0.2)]">•</span>
-              <span>CGPA: 7.9/10</span>
+          {/* Bottom Left Telemetry HUD matching Infinity Socks (.loader__ui) */}
+          <div className="absolute left-6 bottom-6 sm:left-10 sm:bottom-10 z-10 flex flex-col sm:flex-row items-baseline gap-4 sm:gap-6 text-xs text-[rgba(255,250,240,0.6)]">
+            <div className="flex items-center gap-3">
+              <span className="font-bold text-3xl sm:text-4xl text-[#FFFFFF] font-mono tracking-tight">
+                {progress}%
+              </span>
+              <span className="text-[10px] tracking-widest uppercase text-[#C96F4A]">
+                SYSTEMS BOOT
+              </span>
             </div>
 
-            <div className="text-right">
-              <span>LAT 26.8467° N, LONG 80.9462° E</span>
-              <span className="mx-2 text-[rgba(255,250,240,0.2)]">•</span>
-              <span className="text-[#C96F4A]">STATUS: READY</span>
+            {/* 1px Progress Bar matching Infinity Socks */}
+            <div className="relative h-px w-36 sm:w-56 bg-[rgba(255,250,240,0.18)] self-center">
+              <div
+                className="absolute left-0 top-0 h-full bg-[#C96F4A] transition-all duration-75"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className="text-[10px] tracking-widest text-[rgba(255,250,240,0.4)] uppercase">
+              IND // 28.61° N • TELEMETRY ACTIVE
             </div>
           </div>
         </motion.div>

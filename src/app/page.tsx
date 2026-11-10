@@ -19,8 +19,6 @@ import { PageLoader } from "@/components/ui/PageLoader";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { NebulaGlow } from "@/components/background/NebulaGlow";
-import { CyberGrid } from "@/components/background/CyberGrid";
-import { ConstellationCanvas } from "@/components/background/ConstellationCanvas";
 import { NoiseOverlay } from "@/components/background/NoiseOverlay";
 import { AdSenseBanner } from "@/components/ui/AdSenseBanner";
 
@@ -51,10 +49,8 @@ export default function Home() {
       {/* Welcome voice controls (mute/replay) */}
       <WelcomeVoiceControls />
 
-      {/* Premium Multi-Layered Background */}
+      {/* Premium Infinity Socks Court Background */}
       <NebulaGlow />
-      <CyberGrid />
-      <ConstellationCanvas />
       <NoiseOverlay />
 
       {/* Content */}

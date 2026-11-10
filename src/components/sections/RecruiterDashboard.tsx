@@ -4,7 +4,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import {
-  FileText,
   BookOpen,
   Target,
   Layers,
@@ -15,6 +14,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { InfinityButton } from "@/components/ui/InfinityButton";
 import { siteConfig, experiences, projects, certifications, recruiterStats } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
 
@@ -202,26 +202,27 @@ export function RecruiterDashboard() {
                     Access Kartik&apos;s latest PDF curriculum vitae with verified healthcare engineering metrics and production architecture summaries.
                   </p>
                   <div className="flex flex-wrap gap-2.5 pt-1">
-                    <a
+                    <InfinityButton
                       href={parsedResume.isValid && parsedResume.viewUrl ? parsedResume.viewUrl : "#certifications"}
                       target={parsedResume.isValid && parsedResume.viewUrl ? "_blank" : undefined}
-                      rel={parsedResume.isValid && parsedResume.viewUrl ? "noopener noreferrer" : undefined}
-                      className="btn-infinity flex-1 justify-center"
+                      variant="terra"
+                      withArrow
+                      className="flex-1 justify-center"
                     >
-                      <FileText size={14} />
-                      <span>OPEN RESUME (PDF)</span>
-                      <span className="btn-infinity-arrow">→</span>
-                    </a>
+                      OPEN RESUME (PDF)
+                    </InfinityButton>
                     {parsedResume.isValid && parsedResume.downloadUrl && (
-                      <a
+                      <InfinityButton
                         href={parsedResume.downloadUrl}
+                        variant="ghost"
+                        withArrow={false}
                         target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-infinity-secondary"
                       >
-                        <Download size={14} />
-                        <span>DOWNLOAD</span>
-                      </a>
+                        <span className="flex items-center gap-1.5">
+                          <Download size={14} />
+                          <span>DOWNLOAD</span>
+                        </span>
+                      </InfinityButton>
                     )}
                   </div>
                 </div>

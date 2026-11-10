@@ -2,9 +2,10 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
-import { Menu, X, ArrowUpRight, FileText } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
 import { parseGoogleDriveUrl } from "@/lib/drive";
+import { InfinityButton } from "@/components/ui/InfinityButton";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -118,27 +119,27 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Action / Resume Button (desktop) */}
+          {/* Action / Resume Button with Infinity Socks Arrow Conveyor (desktop) */}
           <div className="hidden sm:flex items-center gap-2">
             {parsedResume.isValid && parsedResume.viewUrl ? (
-              <a
+              <InfinityButton
                 href={parsedResume.viewUrl}
+                variant="terra"
+                withArrow
                 target="_blank"
-                rel="noopener noreferrer"
-                className="btn-infinity py-1.5 px-4 text-[11px]"
+                className="text-[10px]"
               >
-                <span>Resume</span>
-                <ArrowUpRight size={13} className="text-[#FFD6A1]" />
-              </a>
+                Resume
+              </InfinityButton>
             ) : (
-              <a
+              <InfinityButton
                 href="#certifications"
-                onClick={(e) => handleNavClick(e, "#certifications")}
-                className="btn-infinity py-1.5 px-4 text-[11px]"
+                variant="terra"
+                withArrow
+                className="text-[10px]"
               >
-                <span>Dossier</span>
-                <ArrowUpRight size={13} className="text-[#FFD6A1]" />
-              </a>
+                Dossier
+              </InfinityButton>
             )}
           </div>
 
@@ -202,24 +203,24 @@ export function Navbar() {
 
               <div className="pt-6 border-t border-[rgba(255,250,240,0.12)]">
                 {parsedResume.isValid && parsedResume.viewUrl ? (
-                  <a
+                  <InfinityButton
                     href={parsedResume.viewUrl}
+                    variant="terra"
+                    withArrow
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-infinity w-full text-xs font-semibold py-3"
+                    className="w-full justify-center"
                   >
-                    <FileText size={15} />
                     View Verified Resume
-                  </a>
+                  </InfinityButton>
                 ) : (
-                  <a
+                  <InfinityButton
                     href="#certifications"
-                    onClick={(e) => handleNavClick(e, "#certifications")}
-                    className="btn-infinity w-full text-xs font-semibold py-3"
+                    variant="terra"
+                    withArrow
+                    className="w-full justify-center"
                   >
-                    <FileText size={15} />
                     View Credentials
-                  </a>
+                  </InfinityButton>
                 )}
               </div>
             </motion.div>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Brain, Code2, Server, GraduationCap, ArrowUpRight } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ColorFillText } from "@/components/ui/ColorFillText";
 import { aboutCards, siteConfig } from "@/lib/data";
 
 const iconMap = {
@@ -22,11 +23,24 @@ export function About() {
   return (
     <section id="about" className="relative py-32 px-4">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading
-          eyebrow="Architectural Creed"
-          title="Engineering Reliable Systems & Scalable AI"
-          description="Full Stack Developer and AI Engineer building production-grade healthcare architectures, robust enterprise workflows, high-throughput REST APIs, and autonomous AI agents."
-        />
+        <div className="mb-14">
+          <SectionHeading
+            eyebrow="Architectural Creed"
+            title="Engineering Reliable Systems & Scalable AI"
+            description="Full Stack Developer and AI Engineer building production-grade healthcare architectures, robust enterprise workflows, high-throughput REST APIs, and autonomous AI agents."
+          />
+
+          <div className="mt-4">
+            <ColorFillText
+              as="h2"
+              dataFill="dim"
+              scrub
+              className="font-display text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F6F0E2]"
+            >
+              TRUSTED IN MISSION-CRITICAL HEALTHCARE & ENTERPRISE CODEBASES.
+            </ColorFillText>
+          </div>
+        </div>
 
         {/* Portrait + Editorial Pull-Quote Row */}
         <div className="mb-16 grid gap-8 md:grid-cols-[auto_1fr] md:items-center">
@@ -69,7 +83,7 @@ export function About() {
             className="court-card rounded-2xl p-8 sm:p-10 border border-[rgba(255,250,240,0.14)] bg-[#12100D]/90 backdrop-blur-md relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 h-28 w-28 bg-[#C96F4A]/10 blur-2xl pointer-events-none" />
-            
+
             <div className="mb-4 flex items-center gap-2 font-mono text-[11px] tracking-widest uppercase text-[#C96F4A]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#C96F4A]" />
               <span>Core Discipline & Philosophy</span>
